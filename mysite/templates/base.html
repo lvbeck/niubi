@@ -9,12 +9,13 @@
         <link rel="alternate" type="application/rss+xml" title="牛逼最新文章" href="/feeds/latest/" />
         <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
         <link rel="icon" href="/static/images/animated_favicon.gif" type="image/gif" />
-        <link href="/static/css/my_layout.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/my_layout.css" />
         <!--[if lte IE 7]>
-        <link href="/static/css/patches/patch_my_layout.css" rel="stylesheet" type="text/css" />
-        <![endif]-->
+        <link rel="stylesheet" type="text/css" href="/static/css/patches/patch_my_layout.css" />       
+        <![endif]-->       
         {% block css %}{% endblock %}
-        {% block js %}{% endblock %}        
+        {% block js %}{% endblock %}
+        <link rel="stylesheet" type="text/css" href="/static/css/SyntaxHighlighter.css" />          
     </head>
     <body class="yui-skin-sam">
         <div id="page_margins">
@@ -154,9 +155,23 @@
             pageTracker._initData();
             pageTracker._trackPageview();
         </script>
-        -->    
+        -->
         <script src="http://www.google.com/jsapi"></script>
-        <script>google.load("jquery", "1.2.6");</script>
+        <script>google.load("jquery", "1.2.6");</script>         
+        <script class="javascript" src="/static/js/shCore.js"></script>   
+        <script class="javascript" src="/static/js/shBrushPhp.js"></script>  
+        <script class="javascript" src="/static/js/shBrushJScript.js"></script>  
+        <script class="javascript" src="/static/js/shBrushJava.js"></script>   
+        <script class="javascript" src="/static/js/shBrushSql.js"></script>  
+        <script class="javascript" src="/static/js/shBrushXml.js"></script>    
+        <script class="javascript" src="/static/js/shBrushPython.js"></script>  
+        <script class="javascript" src="/static/js/shBrushCss.js"></script>
+        <script language="javascript">
+            jQuery("pre > br").each( function() { jQuery(this).replaceWith( "\n" ); } );
+            jQuery("textarea > br").each( function() { jQuery(this).replaceWith( "\n" ); } );
+            dp.SyntaxHighlighter.ClipboardSwf = '/static/flash/clipboard.swf';
+            dp.SyntaxHighlighter.HighlightAll('code');
+        </script>          
         <script src="/static/js/main.js"></script>
     </body>
 </html>
