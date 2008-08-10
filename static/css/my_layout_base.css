@@ -32,9 +32,8 @@ a:hover {
     text-decoration: underline;
 }
 
-.post_header {
-    padding-top: 20px;
-    height: 30px;
+.post_content {      
+    padding-top: 10px;
 }
 
 .post_footer {
@@ -64,8 +63,6 @@ a:hover {
 }
 
 .subtitle {
-    position: relative;
-    top: -18px;
     text-align: right;
 }
 
@@ -157,7 +154,7 @@ a.subscribe{
 
 span.tag {
     background: transparent url(../images/icons/16x16/tag_blue.png) no-repeat scroll left center;
-	padding-bottom:2px;
+    padding-bottom:2px;
 }
 
 span.category {
@@ -179,6 +176,10 @@ input[type=text]:hover{
 
 input[type=textarea]{
     width:100%;
+}
+
+#col3_content {
+    padding: 10px 10px 0 10px;
 }
 
 #header #toplogo a{

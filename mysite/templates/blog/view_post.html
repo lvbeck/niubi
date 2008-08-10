@@ -16,12 +16,12 @@
         <span class="tag icon">
             标签:
             {% for tag in post.tags %}
-                <a href="/tag/{{tag}}/"><b>{{tag}}</b></a>
+                <a href="/tag/{{tag}}/">{{tag}}</a>
             {%endfor%}
         </span>
         &nbsp;       
         <span class="category icon">
-            类别: <a href="/category/{{ post.category.key.id }}/"><b>{{ post.category.name }}</b></a>
+            类别: <a href="/category/{{ post.category.key.id }}/">{{ post.category.name }}</a>
         </span>
     </div>
     <hr/>
