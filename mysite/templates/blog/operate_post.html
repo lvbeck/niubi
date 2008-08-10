@@ -29,13 +29,68 @@
     YAHOO.log('Set state to off..', 'info', 'example');
     YAHOO.log('Create the Editor..', 'info', 'example');
     var myEditor = new YAHOO.widget.Editor('id_content',myConfig);
+
+    YAHOO.util.Event.onAvailable('codeInsert', function() {
+        YAHOO.util.Event.on('codeInsert', 'click', function(ev) {
+
+			var t = document.getElementById('codeType');
+			if(t.value) { type = t.value; }
+			var b = document.getElementById('codeBody');
+			if(b.value) { body = b.value; }
+
+            if (type && body) {
+                var _button = this.toolbar.getButtonByValue('insertcode');
+                _button._menu.hide();
+                myEditor.toolbar.fireEvent('insertcodeClick', { type: 'insertcodeClick', codeType: type, codeBody: body});
+            }
+            YAHOO.util.Event.stopEvent(ev);
+        }, myEditor, true);
+    });
+
+
     myEditor.on('toolbarLoaded', function() {
         var codeConfig = {
             type: 'push', label: 'Edit HTML Code', value: 'editcode'
         };
+        var syntaxHighlighter = {
+            type: 'push', 
+			label: 'Insert Syntax Highlighted Source Code', 
+			value: 'insertcode',
+            menu: function() {
+                //Create the Overlay instance we are going to use for the menu            
+                var menu = new YAHOO.widget.Overlay('inserticon', {
+                    width: '165px',
+                    height: '210px',
+                    visible: false
+                });
+				var type = ["css", "java","javascript","php", "python","sql"];
+                var str = 'Type: <select id="codeType" style="width:100px">';
+                for (var i = 0; i < type.length; i++) {
+					str += '<option value="'+type[i]+'" >'+type[i]+'</option>';
+                }
+				str += '</select>';
+				str += '<textarea id="codeBody" style="width:300px;height:200px;"></textarea>';
+				str += '<button id="codeInsert">Insert code</button>';
+                //Setting the body of the container to our list of images.
+                menu.setBody('<div id="codeMenu">' + str + '</div>');
+                menu.beforeShowEvent.subscribe(function() {
+                    //Set the context to the bottom left corner of the Insert Icon button  
+                    menu.cfg.setProperty('context', [
+                        myEditor.toolbar.getButtonByValue('insertcode').get('element'),
+                        'tl',
+                        'bl'
+                    ]);
+                });			
+                menu.render(document.body);
+                menu.element.style.visibility = 'hidden';
+                //return the Overlay instance here                
+                return menu;
+            }()
+        };
         YAHOO.log('Create the (editcode) Button', 'info', 'example');
         this.toolbar.addButtonToGroup(codeConfig, 'insertitem');
-        
+        this.toolbar.addButtonToGroup(syntaxHighlighter, 'insertitem');
+
         this.toolbar.on('editcodeClick', function() {
             var ta = this.get('element'),
                 iframe = this.get('iframe').get('element');
@@ -69,6 +124,20 @@
             }
             return false;
         }, this, true);
+
+		this.toolbar.on('insertcodeClick', function(ev) {
+            var type = '';
+			var body = '';
+            if (ev.codeType) {
+                type = ev.codeType;
+            }
+			if (ev.codeBody) {
+				body = ev.codeBody;
+			}
+            myEditor._focusWindow();
+			var str = '<pre name="code" class="'+type+'">'+body+'</pre>';
+			myEditor.execCommand('inserthtml', str);
+		});
 
         this.on('cleanHTML', function(ev) {
             YAHOO.log('cleanHTML callback fired..', 'info', 'example');

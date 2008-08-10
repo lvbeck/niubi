@@ -15,6 +15,16 @@ input[ type = text ] {
     background-position: 0 1px;
     left: 5px;
 }
+.yui-skin-sam .yui-toolbar-container .yui-toolbar-insertcode span.yui-toolbar-icon {
+    background-image: url(../images/icons/16x16/script_add.png);
+    background-position: 0 1px;
+    left: 5px;
+}
+.yui-skin-sam .yui-toolbar-container .yui-button-insertcode-selected span.yui-toolbar-icon {
+    background-image: url(../images/icons/16x16/script_add.png);
+    background-position: 0 1px;
+    left: 5px;
+}
 .editor-hidden {
     visibility: hidden;
     top: -9999px;

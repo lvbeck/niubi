@@ -87,6 +87,19 @@ a:hover {
     padding-top: 15px;   
 }
 
+span.icon, a.icon {
+	background: transparent url(../images/icons/16x16/link.png) no-repeat scroll left center;
+    padding-left: 20px;   
+}
+
+a.link {
+	background: transparent url(../images/icons/16x16/link.png) no-repeat scroll left center;
+}
+
+a.world_link {
+	background: transparent url(../images/icons/16x16/world_link.png) no-repeat scroll left center;
+}
+
 a.edit {
     background: transparent url(../images/icons/16x16/pencil.png) no-repeat scroll left center;
 }
@@ -142,10 +155,6 @@ a.subscribe{
     padding-bottom:2px;
 }
 
-span.icon, a.icon {
-    padding-left: 20px;   
-}
-
 span.tag {
     background: transparent url(../images/icons/16x16/tag_blue.png) no-repeat scroll left center;
 	padding-bottom:2px;
@@ -183,6 +192,21 @@ input[type=textarea]{
 
 #footer {
     border-top: lightgray solid 1px;   
+}
+
+#footer a.sitemap{
+    background: transparent url(../images/icons/16x16/chart_organisation.png) no-repeat scroll left center;
+}
+
+#footer a.sa{
+    background: transparent url(../images/icons/16x16/sa.png) no-repeat scroll left center;
+	padding-bottom:2px;
+}
+
+#footer a.world_link{
+    background: transparent url(../images/icons/16x16/world_link.png) no-repeat scroll left center;
+    padding-top:2px;
+    padding-bottom:2px;
 }
 
 #nav_main li {
