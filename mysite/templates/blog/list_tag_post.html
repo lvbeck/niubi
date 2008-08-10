@@ -1,0 +1,8 @@
+{% extends "blog/list_post_base.html" %}
+
+{% block title %}{{ tag.name }}{% endblock %}
+
+
+{% block navigator %}
+<p><a href="/">全部</a> &gt;标签：{{ tag.name }}
+{% endblock %}

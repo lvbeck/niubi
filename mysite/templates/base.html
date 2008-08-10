@@ -1,0 +1,162 @@
+{% load navigate %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>牛逼 - {% block title %}{% endblock %}</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta name="verify-v1" content="NneIN/MP9K2CgqHooCi8O0nahMrMU44LnP3Y+s7hB2Y=" />
+        {% block meta %}{% endblock %}
+        <link rel="alternate" type="application/rss+xml" title="牛逼最新文章" href="/feeds/latest/" />
+        <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="/static/images/animated_favicon.gif" type="image/gif" />
+        <link href="/static/css/my_layout.css" rel="stylesheet" type="text/css" />
+        <!--[if lte IE 7]>
+        <link href="/static/css/patches/patch_my_layout.css" rel="stylesheet" type="text/css" />
+        <![endif]-->
+        {% block css %}{% endblock %}
+        {% block js %}{% endblock %}        
+    </head>
+    <body class="yui-skin-sam">
+        <div id="page_margins">
+            <div id="border-top">
+                <div id="edge-tl"></div>
+                <div id="edge-tr"></div>
+            </div>
+            <div id="page">
+                <div id="header">
+                    <div id="toplogo">
+                        <a href="/">
+                            <b>NiuBi.de</b>
+                        <!--<img src="/static/images/logos/logo_blog.gif" style="padding-left:10px; border: solid 0px;"/>-->
+                        </a>
+                    </div>
+                    <div id="topnav">
+                        <!-- start: skip link navigation -->
+                        <a class="skip" title="skip link" href="#navigation">Skip to the navigation</a><span class="hideme">.</span>
+                        <a class="skip" title="skip link" href="#content">Skip to the content</a><span class="hideme">.</span>
+                        {% navigator %}|
+                        <a class="contact icon" href="mailto:admin@niubi.de">联系</a>
+                        <!-- end: skip link navigation -->                       
+                    </div>
+                </div>
+                <div id="nav">
+                    <!-- skiplink anchor: navigation -->
+                    <a id="navigation" name="navigation"></a>
+                    <div id="nav_main">
+                    <!-- main navigation: #nav_main -->
+                        <ul id="nav_ul">
+                          <li onclick="toggleNav(this)" id="current"><a href="/">首页</a></li>
+                          <li onclick="toggleNav(this)"><a href="#">日志</a></li>
+                          <li onclick="toggleNav(this)"><a href="#">影像</a></li>
+                          <li onclick="toggleNav(this)"><a href="#">下载</a></li>
+                          <li onclick="toggleNav(this);setContent('col3_content','/about/');"><a href="#">关于</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--<div id="teaser">
+                    NB是一种习惯，更是一种境界
+                </div>-->
+                <div id="main">
+                    <div id="col1">
+                        <div id="col1_content" class="clearfix">
+                            <!-- SiteSearch Google -->
+                            <div id="search_block">                              
+                                <form name="search" method=get action="/search/">
+                                    <input type=text name=q id=q maxlength=255 value="搜索关键字" onfocus="$('#q').val('')" />
+                                    <input type=hidden name=ie value=utf-8 />
+                                    <input type=hidden name=oe" value=utf-8 />
+                                    <input type=hidden name=hl" value=zh-CN />
+                                    <input type=submit name=btnL value="本地" />
+                                    <input type=submit name=btnG value="Google" onclick="search.action='http://www.google.com/search';" />
+                                    <input type=hidden name=domains value="niubi.de" />
+                                    <input type=hidden name=sitesearch value="niubi.de" />
+                                </form>                                
+                            </div>
+                            <!-- SiteSearch Google -->
+                            <div id="category_block" style="padding-left: 20px; padding-right: 20px;">
+                                <p style="border-bottom: 1px dotted; padding: 10px; text-align:center;">
+                                    <b>类别</b>                          
+                                </p>
+                                <ul class="category">
+                                {% for category in request.categories %}
+                                    <li class="category">
+                                        <a class="category" href="/category/{{ category.key.id }}/">{{ category.name }} ({{ category.post_count }})</a>
+                                    </li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                            <div id="tag_block" style="padding-left: 20px; padding-right: 20px;"">                            
+                                <p style="border-bottom: 1px dotted; padding: 10px; text-align:center;">
+                                    <b>标签</b>                          
+                                </p>
+                                <p class="tag">
+                                {% for tag in request.tags %}
+                                    <a class="tag" href="/tag/{{ tag.name }}/">{{ tag.name }} ({{ tag.post_count }})&nbsp;</a>
+                                {% endfor %}
+                                </p>
+                            </div>                            
+                            <div id="subscribe_block" style="padding-left: 20px; padding-right: 20px;"">
+                                 <p style="border-bottom: 1px dotted; padding: 10px; text-align:center;">
+                                    <!-- FEED自动发现标记开始 -->
+                                    <link title="RSS 2.0" type="application/rss+xml" href="http://feed.feedsky.com/niubi" rel="alternate" />
+                                    <!-- FEED自动发现标记结束 -->
+                                    <b>订阅</b>
+                                </p>
+                                <p class="subscribe" align="center">
+                                    <a class="subscribe icon" href="/feeds/latest/">最近文章</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="col3">
+                        <div id="col3_content" class="clearfix">
+                            {% block content %}{% endblock %}
+                        </div>
+                        <!-- IE Column Clearing -->
+                        <div id="ie_clearing"> &#160; </div>
+                    </div>
+                </div>
+                <!-- begin: #footer -->
+                <div id="footer">
+                      <table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+                          <tr>
+                              <td align="center" style="font-size:12;">
+                                  NiuBi.de &copy; <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons 署名-相同方式共享</a> | <a href="/sitemap/">本站地图</a> | 模板来源 <a href="http://www.yaml.de/">YAML</a>
+                              </td>
+                              <td align="right" width="1" style="padding-bottom: 2px; padding-right: 7px;">
+                                  <a href="http://forum.niubi.de/"><img src="/static/images/logos/logo.gif" border="0" alt="Powered by NiuBi.de"/></a>
+                              </td>						  
+                              <td align="right" width="1" style="padding-bottom: 3px; padding-right: 10px;">
+                                  <a href="http://www.python.org/"><img src="http://www.python.org/community/logos/python-powered-w-70x28.png" border="0" alt="Powered by Python." title="Powered by Python."/></a>
+                              </td>
+                              <td align="right" width="120" style="padding-bottom: 3px; padding-right: 3px;">
+                                  <a href="http://www.djangoproject.com/"><img src="http://media.djangoproject.com/img/badges/djangoproject120x25.gif" border="0" alt="A Django Project." title="A Django Project."/></a>
+                              </td>                        
+                              <td align="right" width="120" style="padding-bottom: 3px; padding-right: 0px;">
+                                  <a href="http://code.google.com/appengine/"><img src="http://code.google.com/appengine/images/appengine-noborder-120x30.gif" border="0" alt="Powered by Google App Engine"/></a>
+                              </td>
+                          </tr>
+                      </table>
+                </div>
+            </div>
+            <div id="border-bottom">
+                <div id="edge-bl"></div>
+                <div id="edge-br"></div>
+            </div>
+        </div>
+        <!--                
+        <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript">
+            var pageTracker = _gat._getTracker("UA-4751909-2");
+            pageTracker._initData();
+            pageTracker._trackPageview();
+        </script>
+        -->    
+        <script src="http://www.google.com/jsapi"></script>
+        <script>google.load("jquery", "1.2.6");</script>
+        <script src="/static/js/main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+<div class="default_font">
+    <table width="100%" align="right">
+        <tr>
+            <td align="right">
+                <div>
+                    {% if has_previous %}<a href="?{% if paginator_param %}{{paginator_param}}&{%endif%}page={{ previous }}">&laquo; 上一页</a>
+                    &nbsp;
+                    {% endif %}
+                    {% for page_number in page_numbers %}
+                    {% ifnotequal page page_number %}<a href="?{% if paginator_param %}{{paginator_param}}&{%endif%}page={{ page_number }}">{{page_number}}</a>
+                    {% else %}<span class="thisPage">{{page_number}}</span>
+                    {% endifnotequal %}
+                    {% endfor %}
+                    {% if has_next %}<a href="?{% if paginator_param %}{{paginator_param}}&{%endif%}page={{ next }}">下一页 &raquo;</a>
+                    {% endif %}
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

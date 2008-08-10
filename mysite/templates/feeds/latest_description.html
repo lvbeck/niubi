@@ -1,0 +1,5 @@
+{% load markup %}
+
+{{ obj.content|markdown }}
+
+<p><a href="/post/{{ obj.key.id }}/">共{{ obj.comment_count }}条评论</a> <a href="/post/{{ obj.key.id }}/">我要评论</a></p>

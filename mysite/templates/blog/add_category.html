@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}添加类别{% endblock %}
+{% block content %}
+<h1>新类别</h1>
+<form name="mainForm" method="post" action="">
+    <input name="name" id="name" type="text" value="例如：日志" onfocus="$('#name').val('')" />
+    <input type="submit" value="添加"/>
+</form>
+{% endblock %}
