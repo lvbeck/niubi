@@ -1,6 +1,7 @@
 ﻿.dp-highlighter
 {
-	font-family: "Consolas", "Courier New", Courier, mono, serif;
+	__font-family: "Consolas", "Courier New", Courier, mono, serif;
+	font-family: Verdana;
 	font-size: 11px;
 	background-color: #E7E5DC;
 	width: 99%;

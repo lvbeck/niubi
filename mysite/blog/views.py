@@ -184,6 +184,11 @@ def about(request):
     return HttpResponse(str, content_type='text/plain')
     #return render_to_response('about.html', context_instance=RequestContext(request))
 
+def download(request):
+    str = (u'<br/><p><a href="http://code.google.com/p/niubi/" target="_blank">http://code.google.com/p/niubi</a></p>').encode('utf8')
+    return HttpResponse(str, content_type='text/plain')
+    #return render_to_response('download.html', context_instance=RequestContext(request))
+
 def list_category_post(request, category_id):
     category = Category.get_by_id(int(category_id))
     if not category:
