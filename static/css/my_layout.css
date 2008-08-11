@@ -9,11 +9,11 @@
  */
 
 /* import core styles | Basis-Stylesheets einbinden */
-@import url(../yaml/core/base.css);
+@import url(core/base.css);
 
 /* import screen layout | Screen-Layout einbinden */
-@import url(../yaml/navigation/nav_shinybuttons.css);
+@import url(navigation/nav_shinybuttons.css);
 @import url(screen/basemod_shinybuttons.css);
 @import url(screen/content.css);
 /* import print layout | Druck-Layout einbinden */
-/* @import url(../yaml/print/print_003_draft.css); */
+/* @import url(print/print_003_draft.css); */
