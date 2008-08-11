@@ -33,15 +33,16 @@
   /* (en) reset monospaced elements to font size 16px in Gecko browsers */
   /* (de) Schriftgröße von monospaced Elemente auf 16 Pixel setzen */
   textarea, pre, tt, code {
-	font-family:"Courier New", Courier, monospace;  	
+    font-family:"Courier New", Courier, monospace;  	
   }
 
   /* (en) base layout gets standard font size 12px */
   /* (de) Basis-Layout erhält Standardschriftgröße von 12 Pixeln */
   body {
-    font-family: 'Trebuchet MS', Verdana, Helvetica, Arial, sans-serif;
+    font-family: Tahoma,"Lucida Grande",Arial,Verdana,sans-serif;
     font-size: 75.00%; 
-    color: #444;  
+    color: #444;
+    min-height: 380px;
   }
 
   h1,h2,h3,h4,h5,h6 { 
@@ -58,6 +59,8 @@
   h5 { font-size: 116.67% }                     /* 14px */
   h6 { font-size: 116.67%; font-style:italic }  /* 14px */
 
+  #header{ background-image:url(../../images/bg/metal2.png); }
+
   #header h1 {
     font-size:2.5em;
     letter-spacing:-2px;
@@ -69,25 +72,52 @@
     color:#999;
   }
 
+  #header #toplogo a{
+    position:absolute;
+    top: 5px;
+    left: 5px;
+    font-family:inherit;
+    font-size:32px;
+    color:white;
+  }
+  
+  #col3_content { padding: 10px 10px 0 10px; }
+
+  #main {
+    margin: 0 0;
+    background: #fff;
+    background-image:url(../../images/bg/metal6.png);
+  }
+
+  #search_block {
+    padding-top: 20px;
+    padding-left: 5px;
+    text-align: center;
+  }
+
+  #q { background-color: #999999; width: 43%; }  
+  
+  #footer { border-top: lightgray solid 1px; }  
+
   p { line-height: 1.5em; margin: 0 0 1em 0; }
 
   /* ### Lists | Listen  #### */
 
   ul, ol, dl { line-height: 1.5em; margin: 0 0 1em 1em }
   li { margin-left: 1.5em; line-height: 1.5em }
-
+  #nav_main li { width: 80px; text-align: center; }
   dt { font-weight: bold }
   dd { margin: 0 0 1em 2em }
 
   /* ### text formatting | Textauszeichnung ### */
 
-  cite, blockquote { font-style:italic }
-  blockquote { margin: 0 0 1em 1.5em }
+  cite { font-style:italic }
+  blockquote { background-image:url(../../images/bg/metal4.png); color:black; border:gray solid 1px; padding: 10px; }
 
   strong,b { font-weight: bold }
   em,i { font-style:italic }
 
-  pre, code { font-family: monospace; font-size: 1.1em; }
+  pre, code { font-family: monospace; font-size: 1.1em; background-color: #FAFAFA; border: 1px solid #BBBBBB; padding: 0px 10px; }
 
   acronym, abbr {
     letter-spacing: .07em;
@@ -110,29 +140,35 @@
   .float_left { float: left; display:inline; margin-right: 1em; margin-bottom: 0.15em;  }
   .float_right { float: right; display:inline; margin-left: 1em; margin-bottom: 0.15em;  }
   .center { text-align:center; margin: 0.5em auto }
-
+  .post_content { padding-top: 10px; }
+  .post_footer { border-top: gray solid 2px; margin-bottom: 30px; }
+  .action { text-align: right; position:relative; top:-12px; }
+  .comment_header { padding-top: 20px; height: 15px; }
+  .subtitle { text-align: right; }
+  .small_font { font-size: 11px; }
+  .title > a{ font-size: 1.5em; font-weight: bold; font-family: "Trebuchet MS",Verdana,Arial,sans-serif; padding-top: 15px; }
   /**
-   * External Links
+   * Hyperlinks
    *
    * (en) Formatting of hyperlinks
    * (de) Gestaltung von Hyperlinks
    *
    */
 
-  a {color: #4D87C7; text-decoration:none;}
+  a {color: black; text-decoration:none;}
   a:focus,
   a:hover,
   a:active {color:#182E7A; text-decoration:underline;}
   
-  #topnav a { color: #999; font-weight: normal; __background:transparent; text-decoration:none; }
+  #topnav a { color: white; font-weight: normal; }
   #topnav a:focus, 
   #topnav a:hover,
-  #topnav a:active { text-decoration:underline; __background-color: transparent;}
+  #topnav a:active { text-decoration:underline; }
   
-  #footer a { color: #999; background:transparent; font-weight: bold;}
+  #footer a { color: #999; font-weight: bold;}
   #footer a:focus, 
   #footer a:hover,
-  #footer a:active {color: #4D87C7; background-color: transparent; text-decoration:underline;}
+  #footer a:active {color: #4D87C7; text-decoration:underline;}
 
   /**
    * (en) Emphasizing external Hyperlinks via CSS
@@ -141,17 +177,36 @@
    * @section             content-external-links
    * @app-yaml-default    disabled
    */
-
-  /*
-  #main a[href^="http://www.my-domain.com"],
-  #main a[href^="https://www.my-domain.com"]
-  {
-    padding-left: 12px;
-    background-image: url('your_image.gif');
-    background-repeat: no-repeat;
-    background-position: 0 0.45em;
+  #main a[href^="http:"], a[href^="https:"] {
+    color: #444;
+    font-weight:bold;
+    background: transparent url(../../images/icons/16x16/world_link.png) no-repeat scroll left center;
+    padding: 2px 0 2px 18px;
   }
-  */
+  
+  /**
+   * (en) Classified Hyperlinks via CSS
+   * (de) klassifiziert Hyperlinks mit CSS
+   *
+   * @section             classifiedlinks
+   * @app-yaml-default    disabled
+   */
+  a.link { background: transparent url(../../images/icons/16x16/link.png) no-repeat scroll left center; }
+  a.edit { background: transparent url(../../images/icons/16x16/pencil.png) no-repeat scroll left center; }
+  a.comment { background: transparent url(../../images/icons/16x16/comments.png) no-repeat scroll left center; padding-bottom:2px; }
+  a.read { background: transparent url(../../images/icons/16x16/page_white_magnify.png) no-repeat scroll left center;padding-bottom:2px; }
+  a.delete { background: transparent url(../../images/icons/16x16/delete.png) no-repeat scroll left center; }
+  a.reply { background: transparent url(../../images/icons/16x16/comment.png) no-repeat scroll left center; }
+  a.account { background: transparent url(../../images/icons/16x16/user_m.png) no-repeat scroll left center; padding-bottom:1px; }
+  a.post_add { background: transparent url(../../images/icons/16x16/page_add.png) no-repeat scroll left center; padding-bottom:1px; }
+  a.category_add { background: transparent url(../../images/icons/16x16/folder_add.png) no-repeat scroll left center; padding-bottom:1px; }
+  a.login { background: transparent url(../../images/icons/16x16/key.png) no-repeat scroll left center; }
+  a.logout { background: transparent url(../../images/icons/16x16/key_go.png) no-repeat scroll left center; }
+  a.contact { background: transparent url(../../images/icons/16x16/email.png) no-repeat scroll left center; }
+  a.subscribe{ background: transparent url(../../images/icons/16x16/feed.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px; }  
+  a.world_link{ background: transparent url(../../images/icons/16x16/world_link.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px; }
+  a.sitemap{ background: transparent url(../../images/icons/16x16/chart_organisation.png) no-repeat scroll left center; padding-bottom:1px; } 
+  a.sa{ background: transparent url(../../images/icons/16x16/sa.png) no-repeat scroll left center; padding-bottom:2px; } 
 
   /**
    * Tables | Tabellen
@@ -184,5 +239,12 @@
     border:0;
     border-bottom: 1px #eee solid;
   }
+  
+  div.comment { border-style: solid; border-width: 2px; margin-right: 30px; margin: 5px; border-color: gray; background-image:url(../../images/bg/metal4.png); }  
+  span.icon, a.icon { padding-left: 20px; }
+  span.tag { background: transparent url(../../images/icons/16x16/tag_blue.png) no-repeat scroll left center; padding-bottom:2px; }
+  span.category { background: transparent url(../../images/icons/16x16/folder.png) no-repeat scroll left center; }
+  input[type=text]{ height:18px; width:100%; }
+  input[type=text]:hover{ background-color: #FFFADB; }
+  input[type=textarea]{ width:100%; }  
 }
-

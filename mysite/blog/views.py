@@ -134,7 +134,7 @@ def view_post(request, post_id):
 
 %s
  
-点击这个链接回复: http://chui.niubi.de/post/%s/''' %(comment.author.nickname(), post.title, comment.content, post.key().id())).encode('utf8')
+点击这个链接回复: http://www.niubi.de/post/%s/''' %(comment.author.nickname(), post.title, comment.content, post.key().id())).encode('utf8')
                        )
         
         comments = Comment.all().filter('post', post)
@@ -148,7 +148,7 @@ def view_post(request, post_id):
 
 %s
  
-点击这个链接回复: http://chui.niubi.de/post/%s/''' %(comment.author.nickname(), post.title, comment.content, post.key().id())).encode('utf8')
+点击这个链接回复: http://www.niubi.de/post/%s/''' %(comment.author.nickname(), post.title, comment.content, post.key().id())).encode('utf8')
                        )
                 sent_users.append(c.author)
         
@@ -220,7 +220,7 @@ def sitemap(request):
             <?xml-stylesheet type="text/xsl" href="/static/xsl/sitemap.xsl"?>
             <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
                <url>
-                  <loc>http://chui.niubi.de/</loc>
+                  <loc>http://www.niubi.de/</loc>
                   <changefreq>weekly</changefreq>
                   <priority>0.9</priority>
                </url>
@@ -229,7 +229,7 @@ def sitemap(request):
     posts = Post.all().filter('is_published', True)
     for post in posts:
         str += '''<url>
-                      <loc>http://chui.niubi.de/post/%s/</loc>
+                      <loc>http://www.niubi.de/post/%s/</loc>
                       <changefreq>weekly</changefreq>
                       <priority>0.8</priority>
                    </url>
@@ -238,7 +238,7 @@ def sitemap(request):
     categories = Category.all().order('-post_count')
     for category in categories:
         str += '''<url>
-                      <loc>http://chui.niubi.de/category/%s/</loc>
+                      <loc>http://www.niubi.de/category/%s/</loc>
                       <changefreq>monthly</changefreq>
                       <priority>0.8</priority>
                    </url>
@@ -246,13 +246,13 @@ def sitemap(request):
     tags = Tag.all().order('-post_count')
     for tag in tags:
         str += '''<url>
-                      <loc>http://chui.niubi.de/tag/%s/</loc>
+                      <loc>http://www.niubi.de/tag/%s/</loc>
                       <changefreq>weekly</changefreq>
                       <priority>0.8</priority>
                    </url>
                 '''%tag.name
     str +=      '''<url>
-                  <loc>http://chui.niubi.de/about/</loc>
+                  <loc>http://www.niubi.de/about/</loc>
                   <changefreq>yearly</changefreq>
                   <priority>0.8</priority>
                </url>'''            
