@@ -9,13 +9,12 @@
         <link rel="alternate" type="application/rss+xml" title="牛逼最新文章" href="/feeds/latest/" />
         <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
         <link rel="icon" href="/static/images/animated_favicon.gif" type="image/gif" />
-        <link rel="stylesheet" type="text/css" href="/static/css/my_layout.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/main.css" />
         <link rel="alternate" type="application/rss+xml" href="http://feed.feedsky.com/niubi" title="RSS 2.0" />
         <!--[if lte IE 7]>
         <link rel="stylesheet" type="text/css" href="/static/css/patches/patch_my_layout.css" />       
         <![endif]-->       
-        {% block css %}{% endblock %}
-        {% block js %}{% endblock %}        
+        {% block css %}{% endblock %}       
     </head>
     <body class="yui-skin-sam">
         <div id="page_margins">
@@ -156,21 +155,8 @@
         </script>
         -->
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-        <script type="text/javascript">google.load("jquery", "1.2.6");</script>         
-        <script type="text/javascript" src="/static/js/shCore.js"></script>   
-        <script type="text/javascript" src="/static/js/shBrushPhp.js"></script>  
-        <script type="text/javascript" src="/static/js/shBrushJScript.js"></script>  
-        <script type="text/javascript" src="/static/js/shBrushJava.js"></script>   
-        <script type="text/javascript" src="/static/js/shBrushSql.js"></script>  
-        <script type="text/javascript" src="/static/js/shBrushXml.js"></script>    
-        <script type="text/javascript" src="/static/js/shBrushPython.js"></script>  
-        <script type="text/javascript" src="/static/js/shBrushCss.js"></script>
-        <script type="text/javascript">
-            jQuery("pre > br").each( function() { jQuery(this).replaceWith( "\n" ); } );
-            jQuery("textarea > br").each( function() { jQuery(this).replaceWith( "\n" ); } );
-            dp.SyntaxHighlighter.ClipboardSwf = '/static/flash/clipboard.swf';
-            dp.SyntaxHighlighter.HighlightAll('code');
-        </script>          
+        <script type="text/javascript">google.load("jquery", "1.2.6");</script>          
         <script type="text/javascript" src="/static/js/main.js"></script>
+        {% block js %}{% endblock %} 
     </body>
 </html>
