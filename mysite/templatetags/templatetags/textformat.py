@@ -20,7 +20,7 @@ def plaintext2html(text, autoescape=None):
                 esc = lambda x: x
             return esc(c['htmlchars'])
         if c['lineend']:
-            return '<br>'
+            return '<br/>'
         elif c['space']:
             t = m.group().replace('\t', '&nbsp;'*tabstop)
             t = t.replace(' ', '&nbsp;')
@@ -36,7 +36,7 @@ def plaintext2html(text, autoescape=None):
                 prefix = ''
             last = m.groups()[-1]
             if last in ['\n', '\r', '\r\n']:
-                last = '<br>'
+                last = '<br/>'
             #if len(url)>settings.LINK_MAX_LENGTH:
              #   link_text = '%s...' % url[:settings.LINK_MAX_LENGTH]
             #else:

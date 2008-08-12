@@ -10,6 +10,7 @@
         <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
         <link rel="icon" href="/static/images/animated_favicon.gif" type="image/gif" />
         <link rel="stylesheet" type="text/css" href="/static/css/my_layout.css" />
+        <link rel="alternate" type="application/rss+xml" href="http://feed.feedsky.com/niubi" title="RSS 2.0" />
         <!--[if lte IE 7]>
         <link rel="stylesheet" type="text/css" href="/static/css/patches/patch_my_layout.css" />       
         <![endif]-->       
@@ -61,15 +62,15 @@
                         <div id="col1_content" class="clearfix">
                             <!-- SiteSearch Google -->
                             <div id="search_block">                              
-                                <form name="search" method=get action="/search/">
-                                    <input type=text name=q id=q maxlength=255 value="搜索关键字" onfocus="$('#q').val('')" />
-                                    <input type=hidden name=ie value=utf-8 />
-                                    <input type=hidden name=oe" value=utf-8 />
-                                    <input type=hidden name=hl" value=zh-CN />
-                                    <input type=submit name=btnL value="本地" />
-                                    <input type=submit name=btnG value="Google" onclick="search.action='http://www.google.com/search';" />
-                                    <input type=hidden name=domains value="niubi.de" />
-                                    <input type=hidden name=sitesearch value="niubi.de" />
+                                <form name="search" method="get" action="/search/">
+                                    <input type="text" name="q" id="q" maxlength="255" value="搜索关键字" onfocus="$('#q').val('')" />
+                                    <input type="hidden" name="ie" value="utf-8" />
+                                    <input type="hidden" name="oe" value="utf-8" />
+                                    <input type="hidden" name="hl" value="zh-CN" />
+                                    <input type="submit" name="btnL" value="本地" />
+                                    <input type="submit" name="btnG" value="Google" onclick="search.action='http://www.google.com/search';" />
+                                    <input type="hidden" name="domains" value="niubi.de" />
+                                    <input type="hidden" name="sitesearch" value="niubi.de" />
                                 </form>                                
                             </div>
                             <!-- SiteSearch Google -->
@@ -85,7 +86,7 @@
                                 {% endfor %}
                                 </ul>
                             </div>
-                            <div id="tag_block" style="padding-left: 20px; padding-right: 20px;"">                            
+                            <div id="tag_block" style="padding-left: 20px; padding-right: 20px;">                            
                                 <p style="border-bottom: 1px dotted; padding: 10px; text-align:center;">
                                     <b>标签</b>                          
                                 </p>
@@ -95,10 +96,9 @@
                                 {% endfor %}
                                 </p>
                             </div>                            
-                            <div id="subscribe_block" style="padding-left: 20px; padding-right: 20px;"">
+                            <div id="subscribe_block" style="padding-left: 20px; padding-right: 20px;">
                                  <p style="border-bottom: 1px dotted; padding: 10px; text-align:center;">
                                     <!-- FEED自动发现标记开始 -->
-                                    <link title="RSS 2.0" type="application/rss+xml" href="http://feed.feedsky.com/niubi" rel="alternate" />
                                     <!-- FEED自动发现标记结束 -->
                                     <b>订阅</b>
                                 </p>
@@ -155,22 +155,22 @@
             pageTracker._trackPageview();
         </script>
         -->
-        <script src="http://www.google.com/jsapi"></script>
-        <script>google.load("jquery", "1.2.6");</script>         
-        <script class="javascript" src="/static/js/shCore.js"></script>   
-        <script class="javascript" src="/static/js/shBrushPhp.js"></script>  
-        <script class="javascript" src="/static/js/shBrushJScript.js"></script>  
-        <script class="javascript" src="/static/js/shBrushJava.js"></script>   
-        <script class="javascript" src="/static/js/shBrushSql.js"></script>  
-        <script class="javascript" src="/static/js/shBrushXml.js"></script>    
-        <script class="javascript" src="/static/js/shBrushPython.js"></script>  
-        <script class="javascript" src="/static/js/shBrushCss.js"></script>
-        <script language="javascript">
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript">google.load("jquery", "1.2.6");</script>         
+        <script type="text/javascript" src="/static/js/shCore.js"></script>   
+        <script type="text/javascript" src="/static/js/shBrushPhp.js"></script>  
+        <script type="text/javascript" src="/static/js/shBrushJScript.js"></script>  
+        <script type="text/javascript" src="/static/js/shBrushJava.js"></script>   
+        <script type="text/javascript" src="/static/js/shBrushSql.js"></script>  
+        <script type="text/javascript" src="/static/js/shBrushXml.js"></script>    
+        <script type="text/javascript" src="/static/js/shBrushPython.js"></script>  
+        <script type="text/javascript" src="/static/js/shBrushCss.js"></script>
+        <script type="text/javascript">
             jQuery("pre > br").each( function() { jQuery(this).replaceWith( "\n" ); } );
             jQuery("textarea > br").each( function() { jQuery(this).replaceWith( "\n" ); } );
             dp.SyntaxHighlighter.ClipboardSwf = '/static/flash/clipboard.swf';
             dp.SyntaxHighlighter.HighlightAll('code');
         </script>          
-        <script src="/static/js/main.js"></script>
+        <script type="text/javascript" src="/static/js/main.js"></script>
     </body>
 </html>
