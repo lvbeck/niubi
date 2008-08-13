@@ -244,7 +244,7 @@
   span.icon, a.icon { padding-left: 20px; }
   span.tag { background: transparent url(../../images/icons/16x16/tag_blue.png) no-repeat scroll left center; padding-bottom:2px; }
   span.category { background: transparent url(../../images/icons/16x16/folder.png) no-repeat scroll left center; }
-  input[type=text]{ height:18px; width:100%; }
-  input[type=text]:hover{ background-color: #FFFADB; }
-  input[type=textarea]{ width:100%; }  
+  input[type="text"]{ height:18px; width:100%; }
+  input[type="text"]:hover{ background-color: #FFFADB; }
+  input[type="textarea"]{ width:100%; }  
 }
