@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load markup %}
+{% load textformat %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block meta %}
+<meta name="keyword" content={{ post.tags}}>
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/dp.SyntaxHighlighter.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/core/print_base.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/print/print_003_draft.css" />
+{% endblock %}
+{% block content%}
+<div class="post_header">
+    <div class="title">
+        <a href="/post/{{post.key.id}}">
+            {{ post.title }}{% if post.is_published %}{%else%}(未发布){%endif%}
+        </a>    
+    </div>
+	<p/>
+    <div class="subtitle">
+        <span>
+            标签:
+            {% for tag in post.tags %}
+                <a href="/tag/{{tag}}/">{{tag}}</a>
+            {%endfor%}
+        </span>
+        &nbsp;       
+        <span>
+            类别: <a href="/category/{{ post.category.key.id }}/">{{ post.category.name }}</a>
+        </span>
+    </div>
+    <hr/>
+</div>   
+<div>
+    {{ post.content|markdown }}
+</div>
+<div class="post_footer" style="margin-top: 30px;">
+    <div class="info">
+        {{ post.author.nickname }} 写于 {{ post.create_time|date:"Y-M-d H:i" }}
+    </div>              
+</div>
+<div>
+    <p>
+        <b>总共 {{ post.comment_count }} 条评论</b>
+    </p>
+    {% for comment in post.comments %}
+    <div class="comment_header">
+        <div class="info">
+            [{{comment.floor}}楼] {{ comment.author.nickname }} 写于 {{ comment.create_time|date:"Y-M-d H:i" }}
+        </div>
+    </div>
+    <div class="comment" style="padding: 10px; margin-bottom: 10px;">
+        {% if comment.parent_comment.key.id %}
+            回复{{comment.parent_comment_floor}}楼：<br/>   
+        {% endif %}
+        {{ comment.content|plaintext2html }}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="/static/js/dp.SyntaxHighlighter.js"></script> 
+<script type="text/javascript">
+	jQuery("pre > br").each( function() { jQuery(this).replaceWith( "\n" ); } );
+    jQuery("textarea > br").each( function() { jQuery(this).replaceWith( "\n" ); } );
+    dp.SyntaxHighlighter.ClipboardSwf = '/static/flash/clipboard.swf';
+    dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+{% endblock %}

@@ -15,6 +15,7 @@
             {{ post.title }}{% if post.is_published %}{%else%}(未发布){%endif%}
         </a>    
     </div>
+	<p/>
     <div class="subtitle">
         <span class="tag icon">
             标签:
@@ -27,7 +28,6 @@
             类别: <a href="/category/{{ post.category.key.id }}/">{{ post.category.name }}</a>
         </span>
     </div>
-    <hr/>
 </div>   
 <div class="post_content">
     {{ post.content|markdown }}
@@ -37,15 +37,21 @@
         {{ post.author.nickname }} 写于 {{ post.create_time|date:"Y-M-d H:i" }}
     </div>              
     <div class="action">
+		<a class="printer icon" href="/post/{{ post.key.id }}/print/" onclick="window.open('/post/{{ post.key.id }}/print/')">打印</a>
     {% if is_admin %}                  
         <a class="edit icon" href="/post/{{ post.key.id }}/edit/">编辑</a>                         
         <a class="delete icon" href="/psot/{{ post.key.id }}/delete/">删除</a>
-    {% endif %}                  
+    {% endif %}
+		<script type="text/javascript" src="http://w.sharethis.com/widget/?tabs=web%2Cpost%2Cemail&amp;charset=utf-8&amp;services=%2Cdelicious%2Cdigg%2Cfacebook%2Cmyspace%2Ctechnorati%2Cstumbleupon%2Cgoogle_bmarks%2Cyahoo_bmarks%2Cyahoo_myweb%2Cwindows_live%2Cpropeller%2Creddit%2Cfriendfeed%2Cnewsvine%2Cn4g%2Cmixx%2Cblinklist%2Cfurl%2Cmagnolia%2Cmister_wong%2Cblogmarks%2Cfaves%2Ccurrent%2Csimpy%2Cslashdot%2Cmeneame%2Cyigg%2Coknotizie%2Cfresqui%2Cdiigo%2Ccare2%2Cfunp%2Ckirtsy%2Chugg%2Csphinn&amp;style=default&amp;publisher=ecfc0e2b-255a-40d2-9375-c4926109c57d&amp;linkfg=%23444444">
+		</script>	
     </div>
 </div>
 <div>
     <p>
-        <b>总共 {{ post.comment_count }} 条评论</b>
+        <b>总共 {{ post.comment_count }} 条评论{% if user.is_authenticated %}		
+		, <a class="comment_add icon" href="#" onclick="$('#comment_add').show();$('#add_button').hide();">点击添加</a>
+		{% endif %}
+		</b>
     </p>
     {% for comment in post.comments %}
     <div class="comment_header">
@@ -67,7 +73,6 @@
     {% endfor %}
     <br/>
     {% if user.is_authenticated %}
-    <button id="add_button" type="button" onclick="$('#comment_add').show();$('#add_button').hide();">添加评论</button>
     <form id="comment_add" style="display:none;" method="post" action="">
         <textarea rows="10" name="comment" style="width:100%;background-color:#FFFF80;"></textarea>
         <p>

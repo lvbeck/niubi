@@ -42,6 +42,7 @@ urlpatterns += patterns('mysite.blog.views',
     (r'^post/list_all/$', 'list_all_post'),
     (r'^post/(?P<post_id>\d+)/$', 'view_post'),
     (r'^post/(?P<post_id>\d+)/edit/$', 'edit_post'),
+    (r'^post/(?P<post_id>\d+)/print/$', 'print_post'),
     
     (r'^category/add/$', 'add_category'),
     (r'^category/(?P<category_id>\d+)/$', 'list_category_post'),

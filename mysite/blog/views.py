@@ -73,8 +73,7 @@ def add_category(request):
 def edit_post(request, post_id):
     post = Post.get_by_id(int(post_id))
     if not post:
-        raise Http404
-    
+        raise Http404   
     if request.method == 'GET':
         form = PostForm({'title': post.title, 
                          'content': post.content, 
@@ -104,16 +103,24 @@ def edit_post(request, post_id):
     
     return render_to_response('blog/operate_post.html', {'form': form, 'id':post.key().id, 'tags': tags}, context_instance=RequestContext(request))
 
+def print_post (request, post_id):
+    post = Post.get_by_id(int(post_id))
+    post.getComments()    	
+    if not post:
+        raise Http404    
+    if not is_admin() and not post.is_published:
+        raise Http404
+    return render_to_response('blog/print_post.html', 
+                              {'post':post}, context_instance=RequestContext(request))
+			      
 def view_post(request, post_id):
     post = Post.get_by_id(int(post_id))
     request.categories = Category.all().order('-post_count')
     request.tags = Tag.all().order('-post_count')
     if not post:
-        raise Http404
-    
+        raise Http404    
     if not is_admin() and not post.is_published:
-        raise Http404
-    
+        raise Http404  
     if request.method == 'POST':
         comment = Comment()
         comment.content = request.POST['comment']

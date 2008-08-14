@@ -16,7 +16,7 @@
  */
 
 /* import print base styles | Basisformatierung für Drucklayout einbinden */
-@import url(../core/print_base.css);
+/* @import url(../core/print_base.css); */
 
 /* #col1 - 0
 ** #col2 - 0
@@ -27,6 +27,7 @@
 {
   #col1 { display:none; }
   #col2 { display:none; }
+  #header { display:none; }
   
   #col3, #col3_content { width: 100%; margin:0; padding: 0; border:0; }
 }
