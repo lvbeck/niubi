@@ -45,6 +45,8 @@
     min-height: 380px;
   }
 
+  p { line-height: 1.5em; margin: 0 0 1em 0; }
+
   h1,h2,h3,h4,h5,h6 { 
   	font-family:"times new roman",times,serif; 
   	font-weight:bold; 
@@ -94,12 +96,20 @@
     padding-left: 5px;
     text-align: center;
   }
-
-  #q { background-color: #999999; width: 43%; }  
   
-  #footer { border-top: lightgray solid 1px; }  
-
-  p { line-height: 1.5em; margin: 0 0 1em 0; }
+  #footer { border-top: lightgray solid 1px; }
+  
+  #q {  
+	width: 50%; 
+	background: #fff;
+	border: 1px solid #5A5A5A;
+	color: #888;
+	-moz-border-radius-bottomleft: 3px;
+	-moz-border-radius-bottomright: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	float: left;
+  }
 
   /* ### Lists | Listen  #### */
 
@@ -245,7 +255,21 @@
   span.icon, a.icon { padding-left: 22px; }
   span.tag { background: transparent url(../../images/icons/16x16/tag_blue.png) no-repeat scroll left center; padding-bottom:2px; }
   span.category { background: transparent url(../../images/icons/16x16/folder.png) no-repeat scroll left center; }
+
   input[type="text"]{ height:18px; width:100%; }
   input[type="text"]:hover{ background-color: #FFFADB; }
-  input[type="textarea"]{ width:100%; }  
+  input[type="textarea"]{ width:100%; } 
+  button, input[type="button"], input[type="submit"]{ 
+	background-image:url(../../images/bg/metal5.png);
+	border: 1px solid #5A5A5A;
+	-moz-border-radius-bottomleft: 3px;
+	-moz-border-radius-bottomright: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	float: center;
+  }
+
+  button:hover, input[type="button"]:hover, input[type="submit"]:hover { 
+	background-image:url(../../images/bg/metal3.png);
+  }  
 }
