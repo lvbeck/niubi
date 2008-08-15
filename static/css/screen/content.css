@@ -100,7 +100,7 @@
   #footer { border-top: lightgray solid 1px; }
   
   #q {  
-	width: 50%; 
+	width: 55%; 
 	background: #fff;
 	border: 1px solid #5A5A5A;
 	color: #888;
@@ -169,10 +169,10 @@
   a:hover,
   a:active {color:#182E7A; text-decoration:underline;}
   
-  #topnav a { color: white; font-weight: normal; }
+  #topnav a { color: #ddd; font-weight: normal; }
   #topnav a:focus, 
   #topnav a:hover,
-  #topnav a:active { text-decoration:underline; }
+  #topnav a:active { color: white; text-decoration:underline; }
   
   #footer a { color: #999; font-weight: bold;}
   #footer a:focus, 
@@ -213,7 +213,7 @@
   a.category_add { background: transparent url(../../images/icons/16x16/folder_add.png) no-repeat scroll left center; padding-bottom:1px; }
   a.login { background: transparent url(../../images/icons/16x16/key.png) no-repeat scroll left center; }
   a.logout { background: transparent url(../../images/icons/16x16/key_go.png) no-repeat scroll left center; }
-  a.contact { background: transparent url(../../images/icons/16x16/email.png) no-repeat scroll left center; }
+  a.contact { background: transparent url(../../images/icons/16x16/email.png) no-repeat scroll left center; padding-bottom:2px; }
   a.subscribe{ background: transparent url(../../images/icons/16x16/feed.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px; }  
   a.world_link{ background: transparent url(../../images/icons/16x16/world_link.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px; }
   a.sitemap{ background: transparent url(../../images/icons/16x16/chart_organisation.png) no-repeat scroll left center; padding-bottom:1px; } 
