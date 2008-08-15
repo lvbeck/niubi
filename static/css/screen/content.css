@@ -256,12 +256,14 @@
   span.tag { background: transparent url(../../images/icons/16x16/tag_blue.png) no-repeat scroll left center; padding-bottom:2px; }
   span.category { background: transparent url(../../images/icons/16x16/folder.png) no-repeat scroll left center; }
 
-  input[type="text"]{ height:18px; width:100%; }
+  input[type="text"]{ height:16px; width:100%; padding:3px 0pt 0pt 5px; }
   input[type="text"]:hover{ background-color: #FFFADB; }
   input[type="textarea"]{ width:100%; } 
   button, input[type="button"], input[type="submit"]{ 
 	background-image:url(../../images/bg/metal5.png);
 	border: 1px solid #5A5A5A;
+	height: 21px;
+	padding: 2px;
 	-moz-border-radius-bottomleft: 3px;
 	-moz-border-radius-bottomright: 3px;
 	-moz-border-radius-topleft: 3px;
