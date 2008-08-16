@@ -50,7 +50,7 @@ class Post(search.SearchableModel):
         return '/post/%s/'%self.key().id()
     
     # redundant data since GAE do not support m:n relations     
-    def putTags(self, str):
+    def putTags(self, str, oTags):
         twords = str.split(' ')        
         if twords is not None:
             for word in twords:
@@ -58,7 +58,14 @@ class Post(search.SearchableModel):
                 tag.name = word
                 tag.getPosts()
                 tag.countPosts()
-                tag.put()    
+                tag.put()
+        if oTags is not None:       
+            for oTag in oTags:
+                tag = Tag.get_by_key_name(oTag)
+                tag.countPosts()
+                tag.put() # update old tags post count
+                if tag.post_count == 0:
+                    tag.delete()    
     
 class Comment(db.Model):
     author = db.UserProperty()

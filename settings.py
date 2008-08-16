@@ -102,4 +102,4 @@ INSTALLED_APPS = (
 #    'django.contrib.sites',
 )
 
-POST_LIST_PAGE_SIZE = 10
+POST_LIST_PAGE_SIZE = 5

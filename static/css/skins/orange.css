@@ -24,7 +24,7 @@
 	background: url("../../images/glossy/orange/nav_hover.png") repeat center right;
   }
 
-  #nav_main ul li#current {
+  #nav_main ul li.current {
     /* (en) Repeat the main color from the image */
     /* (de) Wiederholung der Hauptfarbe aus der Bilddatei */
     background: #FDB24C;

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 import settings
+import copy
 
 from django.http import HttpResponseRedirect, Http404
 from django.http import HttpResponse
@@ -31,7 +32,7 @@ def add_post(request):
             post.category.put()
             post.getTags(request.POST['tags'])             
             post.put()
-            post.putTags(request.POST['tags'])            
+            post.putTags(request.POST['tags'], None)            
             return HttpResponseRedirect('/')
 
     return render_to_response('blog/operate_post.html', {'form': form}, context_instance=RequestContext(request))  
@@ -94,11 +95,12 @@ def edit_post(request, post_id):
             post.title = modified_post.title
             post.category = modified_post.category
             # post.tag = modified_post.tag
+            oTags = copy.deepcopy(post.tags) # backup old tags
             post.getTags(request.POST['tags'])                     
             post.content = modified_post.content
             post.is_published = modified_post.is_published
             post.put()
-            post.putTags(request.POST['tags'])
+            post.putTags(request.POST['tags'], oTags)
             return HttpResponseRedirect('/post/%s/'%post.key().id())  
     
     return render_to_response('blog/operate_post.html', {'form': form, 'id':post.key().id, 'tags': tags}, context_instance=RequestContext(request))

@@ -61,7 +61,7 @@
   h5 { font-size: 116.67% }                     /* 14px */
   h6 { font-size: 116.67%; font-style:italic }  /* 14px */
 
-  #header{ background-image:url(../../images/bg/metal2.png); }
+  #header{ background:url(../../images/bg/metal2.png); }
 
   #header h1 {
     font-size:2.5em;
@@ -112,7 +112,6 @@
   #paginator {
     text-align: right;
     padding: 5px;
-    background:url(../../images/bg/metal6.png); 
   }
 
   #footer { border-top: lightgray solid 1px; }
@@ -138,6 +137,8 @@
   ul, ol, dl { line-height: 1.5em; margin: 0 0 1em 1em }
   li { margin-left: 1.5em; line-height: 1.5em }
   #nav_main li { width: 80px; text-align: center; }
+  #switches li img { border: transparent solid 1px; }
+  #switches li.current img { border: gray solid 1px; }
   dt { font-weight: bold }
   dd { margin: 0 0 1em 2em }
 
