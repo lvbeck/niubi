@@ -48,10 +48,10 @@
   p { line-height: 1.5em; margin: 0 0 1em 0; }
 
   h1,h2,h3,h4,h5,h6 { 
-  	font-family:"times new roman",times,serif; 
-  	font-weight:bold; 
-  	color:#666;
-  	margin: 0 0 0.25em 0; 
+    font-family:"times new roman",times,serif; 
+    font-weight:bold; 
+    color:#666;
+    margin: 0 0 0.25em 0; 
   }
 
   h1 { font-size: 200% }                        /* 24px */
@@ -92,19 +92,15 @@
   }
 
   #switches {
-	padding: 0px;
-	margin: 10px 0 10px 0;
-	text-align: center;
+    padding: 0px;
+    margin: 10px 0 10px 0;
+    text-align: center;
   }
 
   #switches li {
-	display: inline;
-	margin: 1px;
-	list-style-type: none;
-  }
-
-  #switches img {
-	border: solid red 1px;
+    display: inline;
+    margin: 1px;
+    list-style-type: none;
   }
 
   #search_block {
@@ -115,26 +111,26 @@
 
   #paginator {
     text-align: right;
-	padding: 5px;
-	background:url(../../images/bg/metal6.png); 
+    padding: 5px;
+    background:url(../../images/bg/metal6.png); 
   }
 
   #footer { border-top: lightgray solid 1px; }
   
   #q {  
-	width: 45%; 
-	background: #fff;
-	border: 1px solid #ddd;
-	color: #666;
-	-moz-border-radius-bottomleft: 3px;
-	-moz-border-radius-bottomright: 3px;
-	-moz-border-radius-topleft: 3px;
-	-moz-border-radius-topright: 3px;
-	float: left;
+    width: 45%; 
+    background: #fff;
+    border: 1px solid #ddd;
+    color: #666;
+    -moz-border-radius-bottomleft: 3px;
+    -moz-border-radius-bottomright: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    float: left;
   }
 
   #q:hover {
-	border: 1px solid #999;	
+    border: 1px solid #999;	
   }
 
   /* ### Lists | Listen  #### */
@@ -286,13 +282,13 @@
   input[type="text"]:hover{ background-color: #FFFADB; }
   input[type="textarea"]{ width:100%; } 
   button, input[type="button"], input[type="submit"]{ 
-	border: 1px solid #5A5A5A;
-	height: 21px;
-	padding: 2px;
-	font-weight: bold;
-	-moz-border-radius-bottomleft: 3px;
-	-moz-border-radius-bottomright: 3px;
-	-moz-border-radius-topleft: 3px;
-	-moz-border-radius-topright: 3px;
+    border: 1px solid #5A5A5A;
+    height: 21px;
+    padding: 2px;
+    font-weight: bold;
+    -moz-border-radius-bottomleft: 3px;
+    -moz-border-radius-bottomright: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
   }  
 }
