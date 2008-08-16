@@ -15,6 +15,13 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/navigation/nav_shinybuttons.css" />
 	<link rel="stylesheet" type="text/css" href="/static/css/screen/basemod_shinybuttons.css" />
 	<link rel="stylesheet" type="text/css" href="/static/css/screen/content.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/skins/lime.css" title="lime" />
+	<link rel="alternate stylesheet" type="text/css" href="/static/css/skins/black.css" title="black" />
+	<link rel="alternate stylesheet" type="text/css" href="/static/css/skins/silver.css" title="silver" />
+	<link rel="alternate stylesheet" type="text/css" href="/static/css/skins/blue.css" title="blue" />
+	<link rel="alternate stylesheet" type="text/css" href="/static/css/skins/orange.css" title="orange" />
+	<link rel="alternate stylesheet" type="text/css" href="/static/css/skins/red.css" title="red" />
+	<link rel="alternate stylesheet" type="text/css" href="/static/css/skins/purple.css" title="purple" />
         <!--[if lte IE 7]>
         <link rel="stylesheet" type="text/css" href="/static/css/patches/patch_my_layout.css" />       
         <![endif]-->       
@@ -63,6 +70,17 @@
                 <div id="main">
                     <div id="col1">
                         <div id="col1_content" class="clearfix">
+                            <div id="switches">
+                                <ul>
+                                    <li><a href="#" onclick="setActiveStyleSheet('black'); return false;" title="Black"><img src="/static/images/icons/22x21/black.jpg" style="border: medium none ;" alt="Black"></a></li>
+                                    <li><a href="#" onclick="setActiveStyleSheet('silver'); return false;" title="Silver"><img src="/static/images/icons/22x21/silver.jpg" style="border: medium none ;" alt="Silver"></a></li>
+                                    <li><a href="#" onclick="setActiveStyleSheet('lime'); return false;" title="Lime"><img src="/static/images/icons/22x21/lime.bmp" style="border: medium none ;" alt="Lime"></a></li>
+                                    <li><a href="#" onclick="setActiveStyleSheet('orange'); return false;" title="Orange"><img src="/static/images/icons/22x21/orange.jpg" style="border: medium none ;" alt="Orange"></a></li>
+                                    <li><a href="#" onclick="setActiveStyleSheet('blue'); return false;" title="Blue"><img src="/static/images/icons/22x21/blue.jpg" style="border: medium none ;" alt="Blue"></a></li>
+                                    <li><a href="#" onclick="setActiveStyleSheet('red'); return false;" title="Red"><img src="/static/images/icons/22x21/red.jpg" style="border: medium none ;" alt="Red"></a></li>
+                                    <li><a href="#" onclick="setActiveStyleSheet('purple'); return false;" title="Purple"><img src="/static/images/icons/22x21/purple.bmp" style="border: medium none ;" alt="Purple"></a></li>
+                                </ul>
+                            </div>
                             <!-- SiteSearch Google -->
                             <div id="search_block">                              
                                 <form name="search" method="get" action="/search/">
@@ -161,7 +179,7 @@
         </script>
         -->
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-        <script type="text/javascript">google.load("jquery", "1.2.6");</script>          
+        <script type="text/javascript">google.load("jquery", "1.2.6");</script>
         <script type="text/javascript" src="/static/js/main.js"></script>
         {% block js %}{% endblock %} 
     </body>

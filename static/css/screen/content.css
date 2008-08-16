@@ -91,24 +91,50 @@
     background-image:url(../../images/bg/metal6.png);
   }
 
+  #switches {
+	padding: 0px;
+	margin: 10px 0 10px 0;
+	text-align: center;
+  }
+
+  #switches li {
+	display: inline;
+	margin: 1px;
+	list-style-type: none;
+  }
+
+  #switches img {
+	border: solid red 1px;
+  }
+
   #search_block {
     padding-top: 20px;
     padding-left: 5px;
     text-align: center;
   }
-  
+
+  #paginator {
+    text-align: right;
+	padding: 5px;
+	background:url(../../images/bg/metal6.png); 
+  }
+
   #footer { border-top: lightgray solid 1px; }
   
   #q {  
-	width: 55%; 
+	width: 45%; 
 	background: #fff;
-	border: 1px solid #5A5A5A;
-	color: #888;
+	border: 1px solid #ddd;
+	color: #666;
 	-moz-border-radius-bottomleft: 3px;
 	-moz-border-radius-bottomright: 3px;
 	-moz-border-radius-topleft: 3px;
 	-moz-border-radius-topright: 3px;
 	float: left;
+  }
+
+  #q:hover {
+	border: 1px solid #999;	
   }
 
   /* ### Lists | Listen  #### */
@@ -151,7 +177,7 @@
   .float_right { float: right; display:inline; margin-left: 1em; margin-bottom: 0.15em;  }
   .center { text-align:center; margin: 0.5em auto }
   .post_content { padding-top: 10px; }
-  .post_footer { border-top: gray solid 2px; margin-bottom: 30px; }
+  .post_footer { border-top: #ccc solid 2px; margin-bottom: 30px; }
   .action { text-align: right; position:relative; top:-12px; }
   .comment_header { padding-top: 20px; height: 15px; }
   .small_font { font-size: 11px; }
@@ -260,17 +286,13 @@
   input[type="text"]:hover{ background-color: #FFFADB; }
   input[type="textarea"]{ width:100%; } 
   button, input[type="button"], input[type="submit"]{ 
-	background-image:url(../../images/bg/metal5.png);
 	border: 1px solid #5A5A5A;
 	height: 21px;
 	padding: 2px;
+	font-weight: bold;
 	-moz-border-radius-bottomleft: 3px;
 	-moz-border-radius-bottomright: 3px;
 	-moz-border-radius-topleft: 3px;
 	-moz-border-radius-topright: 3px;
-  }
-
-  button:hover, input[type="button"]:hover, input[type="submit"]:hover { 
-	background-image:url(../../images/bg/metal3.png);
   }  
 }
