@@ -1,0 +1,29 @@
+@charset "UTF-8";
+@media screen, projection
+{
+  #header, #page_margins, #body { background: #444; }
+
+  #nav_main { background: #c0c0c0 url("../../../images/glossy/black/nav.png") repeat-x center right; }
+
+  #nav_main ul li {
+    border-left: 1px #555 solid;
+    border-right: 1px #555 solid;
+  }
+
+  #nav_main ul li a, #nav_main ul li strong { color: #999; }
+
+  #nav_main ul li:hover  { background: #555; }
+
+  #nav_main ul li a:hover  { color: #fff; }
+
+  #nav_main ul li.current { background: #555; }
+
+  button, input[type="button"], input[type="submit"]{ 
+    background-image:url("../../../images/glossy/black/button.png") ;
+    color: #fff;
+  }
+
+  button:hover, input[type="button"]:hover, input[type="submit"]:hover { 
+    background-image:url("../../../images/glossy/black/button_hover.png");
+  }
+}

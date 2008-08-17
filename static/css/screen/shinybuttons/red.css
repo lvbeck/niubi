@@ -1,18 +1,20 @@
 @charset "UTF-8";
-@media all
+@media screen, projection
 {
+  #header, #page_margins { background: #BB1515; }
+  
   #nav_main {
-    background: #c0c0c0 url("../../images/glossy/blue/nav.png") repeat-x center right;
+    background: #c0c0c0 url("../../../images/glossy/red/nav.png") repeat center right;
   }
 
   #nav_main ul {
-    border-left: 1px #aaa solid;
+    border-left: 1px #FB5042 solid;
     border-right: 1px #fff solid;
   }
 
   #nav_main ul li {
     border-left: 1px #fff solid;
-    border-right: 1px #aaa solid;
+    border-right: 1px #FB5042 solid;
   }
 
   #nav_main ul li a,
@@ -20,22 +22,26 @@
     color: #fff;
   }
 
+  #nav_main ul li a:hover {
+    color: #fff;
+  }
+
   #nav_main ul li:hover  {
-    background: url("../../images/glossy/blue/nav_hover.png") repeat center right;
+    background: #FB5042;
   }
 
   #nav_main ul li.current {
     /* (en) Repeat the main color from the image */
     /* (de) Wiederholung der Hauptfarbe aus der Bilddatei */
-    background-image:url("../../images/glossy/blue/nav_hover.png");
+    background: #FB5042;
   }
 
   button, input[type="button"], input[type="submit"]{ 
-    background-image:url("../../images/glossy/blue/button.png");
+    background-image:url("../../../images/glossy/red/button.png");
     color: #fff;
   }
 
   button:hover, input[type="button"]:hover, input[type="submit"]:hover { 
-    background-image:url("../../images/glossy/blue/button_hover.png");
+    background-image:url("../../../images/glossy/red/button_hover.png");
   }
 }

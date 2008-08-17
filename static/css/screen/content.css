@@ -61,8 +61,6 @@
   h5 { font-size: 116.67% }                     /* 14px */
   h6 { font-size: 116.67%; font-style:italic }  /* 14px */
 
-  #header{ background:url(../../images/bg/metal2.png); }
-
   #header h1 {
     font-size:2.5em;
     letter-spacing:-2px;
@@ -85,22 +83,12 @@
   
   #col3_content { padding: 10px 10px 0 10px; }
 
-  #main {
-    margin: 0 0;
-    background: #fff;
-    background-image:url(../../images/bg/metal6.png);
-  }
+  #main { margin: 0 0; }
 
   #switches {
     padding: 0px;
     margin: 10px 0 10px 0;
     text-align: center;
-  }
-
-  #switches li {
-    display: inline;
-    margin: 1px;
-    list-style-type: none;
   }
 
   #search_block {
@@ -136,7 +124,8 @@
 
   ul, ol, dl { line-height: 1.5em; margin: 0 0 1em 1em }
   li { margin-left: 1.5em; line-height: 1.5em }
-  #nav_main li { width: 80px; text-align: center; }
+  #switches ul { margin: 0 0 1em 0; }
+  #switches li { display: inline; margin: 1px; list-style-type: none; }
   #switches li img { border: transparent solid 1px; }
   #switches li.current img { border: gray solid 1px; }
   dt { font-weight: bold }
