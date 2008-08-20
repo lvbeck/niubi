@@ -4,11 +4,8 @@
   #header, #page_margins, #body { background: #444; }
 
   #nav_main { background: #c0c0c0 url("../../../images/glossy/black/nav.png") repeat-x center right; }
-
-  #nav_main ul li {
-    border-left: 1px #555 solid;
-    border-right: 1px #555 solid;
-  }
+  
+  #nav_main li { border-right: 1px #444 solid; }
 
   #nav_main ul li a, #nav_main ul li strong { color: #999; }
 

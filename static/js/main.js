@@ -1,5 +1,5 @@
 function setCurrent(elem){
-    var siblings=elem.parentNode.childNodes;
+    var siblings = elem.parentNode.childNodes;
     var i = 0;
     while(siblings[i]){
         siblings[i].className = "";

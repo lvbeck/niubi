@@ -4,25 +4,24 @@
   #header, #page_margins { background: url("../../../images/bg/metal2.png"); } 
   #nav { background: #c0c0c0 url("../../../images/glossy/silver/nav.gif") repeat-x center right; }
   #main { background:transparent url("../../../images/bg/metal6.png") }
-  #nav_main ul {
-    border-left: 1px #aaa solid;
-    border-right: 1px #fff solid;
-  }
 
-  #nav_main ul li {
-    border-left: 1px #fff solid;
-    border-right: 1px #aaa solid;
-  }
+  #nav_main ul li { border-right: 1px #aaa solid; }
 
   #nav_main ul li:hover  {
-    background: url("../../../images/glossy/silver/nav_hover.gif") repeat center right;
+    background: url("../../../images/bg/metal6.png") repeat center right;
   }
 
   #nav_main ul li.current {
-    background: url("../../../images/glossy/silver/nav_active.gif") repeat-x center right;
-    border-left: 1px #444 solid;
+    background: url("../../../images/bg/metal6.png") repeat-x center right;
+    border-left: 0px #444 solid;
     border-right: 1px #888 solid;
   }
+
+  #nav_main ul li.current strong,
+  #nav_main ul li.current a,
+  #nav_main ul li.current a:focus,
+  #nav_main ul li.current a:hover,
+  #nav_main ul li.current a:active { background: transparent; color: #333; text-decoration: none; }
 
   button, input[type="button"], input[type="submit"]{ 
     background-image:url("../../../images/glossy/silver/button.png");

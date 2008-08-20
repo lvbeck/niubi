@@ -7,15 +7,7 @@
     background: #c0c0c0 url("../../../images/glossy/red/nav.png") repeat center right;
   }
 
-  #nav_main ul {
-    border-left: 1px #FB5042 solid;
-    border-right: 1px #fff solid;
-  }
-
-  #nav_main ul li {
-    border-left: 1px #fff solid;
-    border-right: 1px #FB5042 solid;
-  }
+  #nav_main ul li { border-right: 1px #FB5042 solid; }
 
   #nav_main ul li a,
   #nav_main ul li strong {
