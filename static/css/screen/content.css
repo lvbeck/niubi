@@ -220,7 +220,7 @@
   a.read { background: transparent url(../../images/icons/16x16/page_white_magnify.png) no-repeat scroll left center;padding-bottom:2px; }
   a.delete { background: transparent url(../../images/icons/16x16/delete.png) no-repeat scroll left center; }
   a.reply { background: transparent url(../../images/icons/16x16/comment.png) no-repeat scroll left center; }
-  a.account { background: transparent url(../../images/icons/16x16/user_m.png) no-repeat scroll left center; padding-bottom:3px; }
+  a.account { background: transparent url(../../images/icons/16x16/status_online.png) no-repeat scroll left center; padding-bottom:3px; }
   a.post_add { background: transparent url(../../images/icons/16x16/page_add.png) no-repeat scroll left center; padding-bottom:1px; }
   a.category_add { background: transparent url(../../images/icons/16x16/folder_add.png) no-repeat scroll left center; padding-bottom:1px; }
   a.login { background: transparent url(../../images/icons/16x16/key.png) no-repeat scroll left center; }
