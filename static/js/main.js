@@ -1,9 +1,7 @@
 function setCurrent(elem){
-    var siblings = elem.parentNode.childNodes;
-    var i = 0;
-    while(siblings[i]){
-        siblings[i].className = "";
-        i++;
+    var i, a;
+    for(i=0; (a = elem.parentNode.childNodes[i]); i++){
+        a.className = "";
     }
     elem.className="current";     
 }
@@ -23,12 +21,14 @@ function setActiveStyleSheet(title) {
             if(a.getAttribute("title") == title) a.disabled = false;
         }
     }
-    for(i=0; (a = document.getElementsByName("skin")[i]); i++ ) {
-        if(a.getAttribute("title")==title) {
-            a.className = "current";
-        } else {
-            a.className = "";
-        }
+    for(i=0; (a = document.getElementsByTagName("li")[i]); i++) {
+		if(a.getAttribute("title")) {
+			if(a.getAttribute("title")==title) {
+				a.className = "current";
+			} else {
+				a.className = "";
+			}
+		}
     }
 }
 
