@@ -72,7 +72,7 @@
     color:#999;
   }
 
-  #header #toplogo a{
+  #header #logo a {
     position:absolute;
     top: 5px;
     left: 5px;
@@ -81,6 +81,12 @@
     color:white;
   }
   
+  #header #teaser {
+    position:absolute;
+    top: 28px;
+    right: -15px;
+    color:#ddd;
+  } 
   #col3_content { padding: 10px 10px 0 10px; }
 
   #main { margin: 0 0; }
