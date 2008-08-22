@@ -189,12 +189,12 @@ def update(request):
 #    return HttpResponse('OK')
 
 def about(request):
-    str = (u'<br/><p>此站点基于学习及娱乐目的, 联系方式：admin 在 niubi.de, 无事勿扰, 谢谢合作</p>').encode('utf8')
+    str = (u'<br/><p>&nbsp;&nbsp;此站点基于学习及娱乐目的, 联系方式：admin 在 niubi.de, 无事勿扰, 谢谢合作</p>').encode('utf8')
     return HttpResponse(str, content_type='text/plain')
     #return render_to_response('about.html', context_instance=RequestContext(request))
 
 def download(request):
-    str = (u'<br/><p>项目源代码：<a href="http://code.google.com/p/niubi/" target="_blank">http://code.google.com/p/niubi</a></p>').encode('utf8')
+    str = (u'<br/><p>&nbsp;&nbsp;项目源代码：<a href="http://code.google.com/p/niubi/" target="_blank">http://code.google.com/p/niubi</a></p>').encode('utf8')
     return HttpResponse(str, content_type='text/plain')
     #return render_to_response('download.html', context_instance=RequestContext(request))
 

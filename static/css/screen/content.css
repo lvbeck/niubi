@@ -87,7 +87,8 @@
     right: -15px;
     color:#ddd;
   } 
-  #col3_content { padding: 10px 10px 0 10px; }
+  
+  #col3_content { padding: 10px 0 0 0; }
 
   #main { margin: 0 0; }
 
@@ -96,13 +97,12 @@
     margin: 10px 0 10px 0;
     text-align: center;
   }
-
+  
   #search_block {
-    padding-top: 20px;
-    padding-left: 5px;
+    padding: 0 15px 0 15px;
     text-align: center;
   }
-
+  
   #paginator {
     text-align: right;
     padding: 5px;
@@ -168,8 +168,6 @@
   .float_left { float: left; display:inline; margin-right: 1em; margin-bottom: 0.15em;  }
   .float_right { float: right; display:inline; margin-left: 1em; margin-bottom: 0.15em;  }
   .center { text-align:center; margin: 0.5em auto }
-  .post_content { padding-top: 10px; }
-  .post_footer { border-top: #ccc solid 2px; margin-bottom: 30px; }
   .action { text-align: right; position:relative; top:-12px; }
   .comment_header { padding-top: 20px; height: 15px; }
   .small_font { font-size: 11px; }
@@ -269,11 +267,12 @@
     border-bottom: 1px #eee solid;
   }
   
+  div.post, div.block { border: #ddd solid 1px; margin:15px; padding: 10px; background: white;}
   div.comment { border-style: solid; border-width: 2px; margin-right: 30px; margin: 5px; border-color: gray; background-image:url(../../images/bg/metal4.png); }  
   span.icon, a.icon { padding-left: 22px; }
   span.tag { background: transparent url(../../images/icons/16x16/tag_blue.png) no-repeat scroll left center; padding-bottom:2px; }
   span.category { background: transparent url(../../images/icons/16x16/folder.png) no-repeat scroll left center; }
-
+  p.subscribe { text-align: center; }
   input[type="text"]{ height:16px; width:100%; padding:3px 0pt 0pt 5px; }
   input[type="text"]:hover{ background-color: #FFFADB; }
   input[type="textarea"]{ width:100%; } 
