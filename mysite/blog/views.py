@@ -128,7 +128,7 @@ def view_post(request, post_id):
         comment.content = request.POST['comment']
         comment.author = users.get_current_user()
         comment.post = post
-        if request.POST['parent_comment'] is not None:
+        if request.POST['parent_comment'] != "":
             parent_comment = Comment.get_by_id(int(request.POST['parent_comment']))
             comment.parent_comment = parent_comment
         comment.put()

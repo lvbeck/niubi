@@ -9,81 +9,83 @@
 <link rel="stylesheet" type="text/css" href="/static/css/dp.SyntaxHighlighter.css" />  
 {% endblock %}
 {% block content%}
-<div class="post_header">
-    <div class="title">
-        <a href="/post/{{post.key.id}}">
-            {{ post.title }}{% if post.is_published %}{%else%}(未发布){%endif%}
-        </a>    
-    </div>
-	<p/>
-    <div class="subtitle">
-        <span class="tag icon">
-            标签:
-            {% for tag in post.tags %}
-                <a href="/tag/{{tag}}/">{{tag}}</a>
-            {%endfor%}
-        </span>
-        &nbsp;       
-        <span class="category icon">
-            类别: <a href="/category/{{ post.category.key.id }}/">{{ post.category.name }}</a>
-        </span>
-    </div>
-</div>   
-<div class="post_content">
-    {{ post.content|markdown }}
-</div>
-<div class="post_footer" style="margin-top: 30px;">
-    <div class="info">
-        {{ post.author.nickname }} 写于 {{ post.create_time|date:"Y-M-d H:i" }}
-    </div>              
-    <div class="action">
-		<a class="printer icon" href="#" onclick="window.open('/post/{{ post.key.id }}/print/','_blank','toolbar=yes, location=no, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=800, height=600')">打印</a>
-    {% if is_admin %}                  
-        <a class="edit icon" href="/post/{{ post.key.id }}/edit/">编辑</a>                         
-        <a class="delete icon" href="/psot/{{ post.key.id }}/delete/">删除</a>
-    {% endif %}
-		<script type="text/javascript" src="http://w.sharethis.com/widget/?tabs=web%2Cpost%2Cemail&amp;charset=utf-8&amp;services=%2Cdelicious%2Cdigg%2Cfacebook%2Cmyspace%2Ctechnorati%2Cstumbleupon%2Cgoogle_bmarks%2Cyahoo_bmarks%2Cyahoo_myweb%2Cwindows_live%2Cpropeller%2Creddit%2Cfriendfeed%2Cnewsvine%2Cn4g%2Cmixx%2Cblinklist%2Cfurl%2Cmagnolia%2Cmister_wong%2Cblogmarks%2Cfaves%2Ccurrent%2Csimpy%2Cslashdot%2Cmeneame%2Cyigg%2Coknotizie%2Cfresqui%2Cdiigo%2Ccare2%2Cfunp%2Ckirtsy%2Chugg%2Csphinn&amp;style=default&amp;publisher=ecfc0e2b-255a-40d2-9375-c4926109c57d&amp;linkfg=%23444444">
-		</script>	
-    </div>
-</div>
-<div id="comments">
-    <p>
-        <b>总共 {{ post.comment_count }} 条评论{% if user.is_authenticated %}		
-		, <a class="comment_add icon" href="#comment_add" onclick="$('#comment_add').show();$('#add_button').hide();">点击添加</a>
+<div class="post">
+	<div class="post_header">
+		<div class="title">
+			<a href="/post/{{post.key.id}}">
+				{{ post.title }}{% if post.is_published %}{%else%}(未发布){%endif%}
+			</a>    
+		</div>
+		<p/>
+		<div class="subtitle">
+			<span class="tag icon">
+				标签:
+				{% for tag in post.tags %}
+					<a href="/tag/{{tag}}/">{{tag}}</a>
+				{%endfor%}
+			</span>
+			&nbsp;       
+			<span class="category icon">
+				类别: <a href="/category/{{ post.category.key.id }}/">{{ post.category.name }}</a>
+			</span>
+		</div>
+	</div>   
+	<div class="post_content">
+		{{ post.content|markdown }}
+	</div>
+	<div class="post_footer" style="margin-top: 30px;">
+		<div class="info">
+			{{ post.author.nickname }} 写于 {{ post.create_time|date:"Y-M-d H:i" }}
+		</div>              
+		<div class="action">
+			<a class="printer icon" href="#" onclick="window.open('/post/{{ post.key.id }}/print/','_blank','toolbar=yes, location=no, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=800, height=600')">打印</a>
+		{% if is_admin %}                  
+			<a class="edit icon" href="/post/{{ post.key.id }}/edit/">编辑</a>                         
+			<a class="delete icon" href="/psot/{{ post.key.id }}/delete/">删除</a>
 		{% endif %}
-		</b>
-    </p>
-    {% for comment in post.comments %}
-    <div class="comment_header">
-        <div class="info">
-            [{{comment.floor}}楼] {{ comment.author.nickname }} 写于 {{ comment.create_time|date:"Y-M-d H:i" }}
-        </div>
-        {% if user.is_authenticated %}
-        <div class="action">
-            <a class="reply icon" href="#comment_add" onclick="$('#comment_add').show();$('#parent_comment').val({{comment.key.id}});">回复</a>
-        </div>
-        {% endif %}
-    </div>
-    <div class="comment" style="padding: 10px; margin-bottom: 10px;">
-        {% if comment.parent_comment.key.id %}
-            回复{{comment.parent_comment_floor}}楼：<br/>   
-        {% endif %}
-        {{ comment.content|plaintext2html }}
-    </div>
-    {% endfor %}
-    <br/>
-    {% if user.is_authenticated %}
-    <form id="comment_add" style="display:none;" method="post" action="">
-        <textarea rows="10" name="comment" style="width:100%;background-color:#FFFF80;"></textarea>
-        <p>
-            <input name="parent_comment" id="parent_comment" type="hidden" value="">
-            <input type="submit" value="提交">
-        </p>
-    </form>
-    {% else %}
-    <p>请<a href="/login?next=/post/{{post.key.id}}">用Google帐号登录</a>发表你的评论 </p>
-    {% endif %}
-    <p></p>
+			<script type="text/javascript" src="http://w.sharethis.com/widget/?tabs=web%2Cpost%2Cemail&amp;charset=utf-8&amp;services=%2Cdelicious%2Cdigg%2Cfacebook%2Cmyspace%2Ctechnorati%2Cstumbleupon%2Cgoogle_bmarks%2Cyahoo_bmarks%2Cyahoo_myweb%2Cwindows_live%2Cpropeller%2Creddit%2Cfriendfeed%2Cnewsvine%2Cn4g%2Cmixx%2Cblinklist%2Cfurl%2Cmagnolia%2Cmister_wong%2Cblogmarks%2Cfaves%2Ccurrent%2Csimpy%2Cslashdot%2Cmeneame%2Cyigg%2Coknotizie%2Cfresqui%2Cdiigo%2Ccare2%2Cfunp%2Ckirtsy%2Chugg%2Csphinn&amp;style=default&amp;publisher=ecfc0e2b-255a-40d2-9375-c4926109c57d&amp;linkfg=%23444444">
+			</script>	
+		</div>
+	</div>
+	<div id="comments">
+		<p>
+			<b>总共 {{ post.comment_count }} 条评论{% if user.is_authenticated %}		
+			, <a class="comment_add icon" href="#comment_add" onclick="$('#comment_add').show();$('#add_button').hide();">点击添加</a>
+			{% endif %}
+			</b>
+		</p>
+		{% for comment in post.comments %}
+		<div class="comment_header">
+			<div class="info">
+				[{{comment.floor}}楼] {{ comment.author.nickname }} 写于 {{ comment.create_time|date:"Y-M-d H:i" }}
+			</div>
+			{% if user.is_authenticated %}
+			<div class="action">
+				<a class="reply icon" href="#comment_add" onclick="$('#comment_add').show();$('#parent_comment').val({{comment.key.id}});">回复</a>
+			</div>
+			{% endif %}
+		</div>
+		<blockquote class="comment" style="padding: 10px; margin-bottom: 10px;">
+			{% if comment.parent_comment.key.id %}
+				回复{{comment.parent_comment_floor}}楼：<br/>   
+			{% endif %}
+			{{ comment.content|plaintext2html }}
+		</blockquote>
+		{% endfor %}
+		<br/>
+		{% if user.is_authenticated %}
+		<form id="comment_add" style="display:none;" method="post" action="">
+			<textarea rows="10" name="comment" style="width:100%;background-color:#FFFF80;"></textarea>
+			<p>
+				<input name="parent_comment" id="parent_comment" type="hidden" value="">
+				<input type="submit" value="提交">
+			</p>
+		</form>
+		{% else %}
+		<p>请<a href="/login?next=/post/{{post.key.id}}">用Google帐号登录</a>发表你的评论 </p>
+		{% endif %}
+		<p></p>
+	</div>
 </div>
 {% endblock %}
 {% block js %}

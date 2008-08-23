@@ -269,7 +269,7 @@
   
   div.post, div.block { border: #ddd solid 1px; margin:15px; padding: 10px; background: white;}
   div.post_content { padding-top: 10px; }
-  div.comment { border-style: solid; border-width: 2px; margin-right: 30px; margin: 5px; border-color: gray; background-image:url(../../images/bg/metal4.png); }  
+  blockquote.comment { margin-right: 30px; margin: 5px; }  
   span.icon, a.icon { padding-left: 22px; }
   span.tag { background: transparent url(../../images/icons/16x16/tag_blue.png) no-repeat scroll left center; padding-bottom:2px; }
   span.category { background: transparent url(../../images/icons/16x16/folder.png) no-repeat scroll left center; }
