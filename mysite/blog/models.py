@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from google.appengine.ext import db
 from google.appengine.ext import search
-# from mysite.appengine.ext import db
 
 class Category(db.Model):
     name = db.StringProperty()
@@ -14,11 +13,6 @@ class Category(db.Model):
 class Post(search.SearchableModel):
     author = db.UserProperty()
     title = db.TextProperty(required=True, verbose_name=u'标题')
-    # tag = db.StringProperty(verbose_name=u'标签')
-    # tags = db.StringListProperty(verbose_name=u'标签')
-    tags = db.ListProperty(item_type=db.Category, verbose_name=u'标签') # redudant way
-    # tags = db.ReferenceListProperty(verbose_name=u'标签') # do not use many-to-many
-
     content = db.TextProperty(required=True, verbose_name=u'内容')
     create_time = db.DateTimeProperty(auto_now_add=True)
     update_time = db.DateTimeProperty(auto_now=True)
@@ -36,36 +30,31 @@ class Post(search.SearchableModel):
                 comment.parent_comment_floor = c[comment.parent_comment.key().id()].floor
             c[comment.key().id()] = comment
             f += 1
-        self.comments = sorted(c.values(),cmp=lambda x,y: cmp(x.key().id(), y.key().id()))
-            
-    def getTags(self, str):
-        self.tags = []    
-        twords = str.split(' ')        
-        if twords is not None: 
-            for word in twords:
-                tag = db.Category(word)
-                self.tags.append(tag)
-                
+        self.comments = sorted(c.values(),cmp=lambda x,y: cmp(x.key().id(), y.key().id()))           
+    
+    def getTags(self, min_relevance=0.00):                        
+        return [entry.tag for entry in PostTag.all().filter('post =',self).filter('relevance > ',min_relevance).order('-relevance').order('-create_time')]
+
     def get_absolute_url(self) :
         return '/post/%s/'%self.key().id()
     
-    # redundant data since GAE do not support m:n relations     
-    def putTags(self, str, oTags):
+    def deleteTags(self):
+        for relation in PostTag.all().filter('post =',self):
+            relation.delete()
+        Tag.clean()
+               
+    def putTags(self, str):
+        self.deleteTags()
         twords = str.split(' ')        
         if twords is not None:
             for word in twords:
-                tag = Tag.get_or_insert(word)
+                tag = Tag.get_or_insert(word)                                
                 tag.name = word
-                tag.getPosts()
-                tag.countPosts()
                 tag.put()
-        if oTags is not None:       
-            for oTag in oTags:
-                tag = Tag.get_by_key_name(oTag)
-                tag.countPosts()
-                tag.put() # update old tags post count
-                if tag.post_count == 0:
-                    tag.delete()    
+                relation = PostTag(post=self,tag=tag)
+                relation.put()
+                tag.post_count = tag.countPosts()
+                tag.put()
     
 class Comment(db.Model):
     author = db.UserProperty()
@@ -75,25 +64,41 @@ class Comment(db.Model):
     create_time = db.DateTimeProperty(auto_now_add=True)
   
 class Tag(db.Model):
-    name = db.StringProperty()
-    post_count = db.IntegerProperty(default=1)
+    name = db.StringProperty()     
+    post_count = db.IntegerProperty(default=0)
     
     def countPosts(self):
-        self.post_count = 0
-        posts = Post.all() # Datastore  do not support 'in' filter in query
-        if posts is not None:
-            for post in posts:
-                if post.tags is not None:
-                    for tag in post.tags:
-                        if tag == self.name:
-                            self.post_count += 1
-    def getPosts(self):
-        self.posts = []
-        posts = Post.all() # Datastore  do not support 'in' filter in query
-        if posts is not None:
-            for post in posts:
-                if post.tags is not None:
-                    for tag in post.tags:
-                        if tag == self.name:
-                            self.posts.append(post)
+        return PostTag.all().filter('tag =', self).count()
+    
+    def hasPost(self):
+        return True if PostTag.all().filter('tag =', self).get() else False    
         
+    def getRelation(self, post):
+        return PostTag.all().filter('tag =', self).filter('post =', post).get()
+    
+    def getPosts(self, min_relevance=0.00):                 
+        return [entry.post for entry in PostTag.all().filter('tag =',self).filter('relevance > ',min_relevance).order('-relevance').order('-create_time')]         
+    
+    @staticmethod
+    def clean():
+        for tag in Tag.all():
+            if tag.hasPost() is not True:
+                tag.delete()
+                
+class PostTag(db.Model):
+    post = db.ReferenceProperty(Post, required=True, collection_name='tags', verbose_name=u'标签')
+    tag = db.ReferenceProperty(Tag, required=True, collection_name='posts', verbose_name=u'文章')
+    create_time = db.DateTimeProperty(auto_now_add=True)
+    relevance = db.FloatProperty(default=1.00)
+    
+    @staticmethod
+    def getTags(post, min_relevance=0.00):
+        if not post: return []                 
+        return [entry.tag for entry in PostTag.all().filter('post =',post).filter('relevance > ',min_relevance).order('-relevance').order('-create_time')]
+    
+    @staticmethod
+    def getPosts(tag, min_relevance=0.00):
+        if not tag: return []       
+        return [entry.post for entry in PostTag.all().filter('tag =',tag).filter('relevance > ',min_relevance).order('-relevance').order('-create_time')]    
+    
+  

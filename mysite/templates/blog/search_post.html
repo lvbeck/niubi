@@ -1,11 +1,6 @@
 {% extends 'blog/list_post_base.html' %}
 {% load markup %}
-
+{% block title %}搜索 > {{ keywords }}{% endblock %}
 {% block navigator %}
-    <h1>搜索 > {{ keywords }}</h1>
-	{% for post in object_list %}
-	    <p style="font-size: 150%;"><b><a href="/post/{{ post.key.id }}/">{{ post.title }}</a></b></p>
-        <p>{{ post.content|markdown }}</p>
-        <br/>
-	{% endfor %}
+    &nbsp;搜索 > {{ keywords }}
 {% endblock %}

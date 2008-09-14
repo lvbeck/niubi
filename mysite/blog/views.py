@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 import logging
 import settings
-import copy
 
 from django.http import HttpResponseRedirect, Http404
 from django.http import HttpResponse
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
 
-from google.appengine.ext.db import GqlQuery
 from google.appengine.api import users
 from google.appengine.api import mail
 
@@ -29,10 +27,9 @@ def add_post(request):
             post.author = users.get_current_user()
             post.category.put()            
             post.category.post_count += 1
-            post.category.put()
-            post.getTags(request.POST['tags'])             
+            post.category.put()           
+            post.putTags(request.POST['tags'])
             post.put()
-            post.putTags(request.POST['tags'], None)            
             return HttpResponseRedirect('/')
 
     return render_to_response('blog/operate_post.html', {'form': form}, context_instance=RequestContext(request))  
@@ -41,7 +38,7 @@ def add_post(request):
 def list_all_post(request):
     posts = Post.all().order('-create_time');
     request.categories = Category.all().order('-post_count')
-    request.tags = Tag.all().order('-post_count')    
+    request.tags = Tag.all().order('-post_count')
     return object_list(request, queryset=posts, allow_empty=True,
             template_name='blog/list_post.html', extra_context={'is_admin': is_admin()},
             paginate_by=settings.POST_LIST_PAGE_SIZE)      
@@ -60,7 +57,7 @@ def list_post(request):
 @login_required
 def add_category(request):
     request.categories = Category.all().order('-post_count')
-    request.tags = Tag.all().order('-post_count')    
+    request.tags = Tag.all().order('-post_count')
     if request.method == 'POST':
         category = Category()
         category.name = request.POST['name']
@@ -81,8 +78,7 @@ def edit_post(request, post_id):
                          # 'tags': post.tags, 
                          'category': post.category.key(), 
                          'is_published': post.is_published})
-        sep = ' '
-        tags = sep.join(post.tags)
+        tags = ' '.join(map(lambda x:x.name, post.getTags()))
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
@@ -93,14 +89,11 @@ def edit_post(request, post_id):
                 modified_post.category.post_count += 1
                 modified_post.category.put()
             post.title = modified_post.title
-            post.category = modified_post.category
-            # post.tag = modified_post.tag
-            oTags = copy.deepcopy(post.tags) # backup old tags
-            post.getTags(request.POST['tags'])                     
+            post.category = modified_post.category                    
             post.content = modified_post.content
             post.is_published = modified_post.is_published
+            post.putTags(request.POST['tags'])
             post.put()
-            post.putTags(request.POST['tags'], oTags)
             return HttpResponseRedirect('/post/%s/'%post.key().id())  
     
     return render_to_response('blog/operate_post.html', {'form': form, 'id':post.key().id, 'tags': tags}, context_instance=RequestContext(request))
@@ -112,13 +105,13 @@ def print_post (request, post_id):
         raise Http404    
     if not is_admin() and not post.is_published:
         raise Http404
-    return render_to_response('blog/print_post.html', 
-                              {'post':post}, context_instance=RequestContext(request))
+    return render_to_response('blog/print_post.html', {'post':post}, context_instance=RequestContext(request))
 			      
 def view_post(request, post_id):
     post = Post.get_by_id(int(post_id))
     request.categories = Category.all().order('-post_count')
-    request.tags = Tag.all().order('-post_count')
+    request.tags = post.getTags()
+    
     if not post:
         raise Http404    
     if not is_admin() and not post.is_published:
@@ -212,8 +205,9 @@ def list_tag_post(request,tag_name):
     tag = Tag.get_by_key_name(tag_name)
     if not tag:
         raise Http404  
-    tag.getPosts()
-    return object_list(request, queryset=tag.posts, allow_empty=True,
+    # tag.getPosts().order('-create_time')
+    tag.post_list = tag.getPosts()
+    return object_list(request, queryset=tag.post_list, allow_empty=True,
             template_name='blog/list_tag_post.html', extra_context={'is_admin': is_admin(), 'tag': tag},
             paginate_by=settings.POST_LIST_PAGE_SIZE)     
     

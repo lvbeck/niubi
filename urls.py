@@ -14,9 +14,11 @@
 
 from django.conf.urls.defaults import *
 from mysite.feeds.models import LatestEntries
+from mysite.feeds.models import HottestEntries
 
 feeds = {
     'latest': LatestEntries,
+    'hottest': HottestEntries,
 }
 
 urlpatterns = patterns('',
@@ -27,6 +29,7 @@ urlpatterns = patterns('',
 
     (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
     (r'^rss/latest/$', 'mysite.feeds.views.latest_feed_proxy'),
+    (r'^rss/hottest/$', 'mysite.feeds.views.hottest_feed_proxy'),
     
     
 )

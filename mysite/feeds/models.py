@@ -9,3 +9,11 @@ class LatestEntries(Feed):
 
     def items(self):
         return Post.all().filter("is_published", True).order('-create_time')[: 10]
+
+class HottestEntries(Feed):
+    title = u'牛逼最热文章'
+    link = '/feeds/hottest/'
+    description = u'牛逼最热文章'
+
+    def items(self):
+        return Post.all().filter("is_published", True).order('-create_time').order('-read_count')[: 10]
