@@ -39,6 +39,7 @@ def list_all_post(request):
     posts = Post.all().order('-create_time');
     request.categories = Category.all().order('-post_count')
     request.tags = Tag.all().order('-post_count')
+    request.archive = Post.getArchives()
     return object_list(request, queryset=posts, allow_empty=True,
             template_name='blog/list_post.html', extra_context={'is_admin': is_admin()},
             paginate_by=settings.POST_LIST_PAGE_SIZE)      
@@ -47,6 +48,7 @@ def list_post(request):
     posts = Post.all().order('-create_time')
     request.categories = Category.all().order('-post_count')
     request.tags = Tag.all().order('-post_count')
+    request.archive = Post.getArchives()
     if (not is_admin()):
         posts = posts.filter("is_published", True)
     
@@ -111,7 +113,7 @@ def view_post(request, post_id):
     post = Post.get_by_id(int(post_id))
     request.categories = Category.all().order('-post_count')
     request.tags = post.getTags()
-    
+    request.archive = Post.getArchives()
     if not post:
         raise Http404    
     if not is_admin() and not post.is_published:
@@ -197,6 +199,7 @@ def list_category_post(request, category_id):
         raise Http404
     
     posts = Post.all().filter('category', category).order('-create_time')
+    request.archive = Post.getArchives()
     return object_list(request, queryset=posts, allow_empty=True,
             template_name='blog/list_category_post.html', extra_context={'is_admin': is_admin(), 'category': category},
             paginate_by=settings.POST_LIST_PAGE_SIZE) 
@@ -207,6 +210,7 @@ def list_tag_post(request,tag_name):
         raise Http404  
     # tag.getPosts().order('-create_time')
     tag.post_list = tag.getPosts()
+    request.archive = Post.getArchives()
     return object_list(request, queryset=tag.post_list, allow_empty=True,
             template_name='blog/list_tag_post.html', extra_context={'is_admin': is_admin(), 'tag': tag},
             paginate_by=settings.POST_LIST_PAGE_SIZE)     
@@ -266,3 +270,13 @@ def sitemap(request):
                </url>'''            
     str += '</urlset>'
     return HttpResponse(str, content_type='text/xml')
+
+def archives(request, year, month):
+    #if month is not int:
+        #raise Http404
+    #return HttpResponse(month, content_type='text/plain')
+    posts = Post.getByYM(year, month)
+    return object_list(request, queryset=posts, allow_empty=True,
+            template_name='blog/list_archives_post.html', extra_context={'is_admin': is_admin(), 'year': year, 'month': month},
+            paginate_by=settings.POST_LIST_PAGE_SIZE)    
+    

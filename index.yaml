@@ -10,46 +10,52 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
-# Used 41 times in query history.
+# Used 26 times in query history.
 - kind: Category
   properties:
   - name: post_count
     direction: desc
 
-# Used 16 times in query history.
+# Unused in query history -- copied from input.
 - kind: Comment
   properties:
   - name: post
   - name: create_time
 
-# Used once in query history.
+# Unused in query history -- copied from input.
 - kind: Post
   properties:
   - name: __searchable_text_index
   - name: create_time
     direction: desc
 
-# Used 16 times in query history.
+# Unused in query history -- copied from input.
 - kind: Post
   properties:
   - name: category
   - name: create_time
     direction: desc
 
-# Used 26 times in query history.
+# Unused in query history -- copied from input.
 - kind: Post
   properties:
   - name: create_time
     direction: desc
 
-# Used 20 times in query history.
+# Used 32 times in query history.
+- kind: Post
+  properties:
+  - name: is_published
+  - name: create_time
+
+# Used 52 times in query history.
 - kind: Post
   properties:
   - name: is_published
   - name: create_time
     direction: desc
 
-# Used 5 times in query history.
+# Unused in query history -- copied from input.
 - kind: Post
   properties:
   - name: is_published
@@ -58,7 +64,7 @@ indexes:
   - name: read_count
     direction: desc
 
-# Used 24 times in query history.
+# Unused in query history -- copied from input.
 - kind: PostTag
   properties:
   - name: post
@@ -67,7 +73,7 @@ indexes:
   - name: create_time
     direction: desc
 
-# Used 10 times in query history.
+# Unused in query history -- copied from input.
 - kind: PostTag
   properties:
   - name: tag
@@ -76,7 +82,7 @@ indexes:
   - name: create_time
     direction: desc
 
-# Used 25 times in query history.
+# Used 26 times in query history.
 - kind: Tag
   properties:
   - name: post_count

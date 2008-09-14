@@ -202,7 +202,7 @@
    * @section             content-external-links
    * @app-yaml-default    disabled
    */
-  #main a[href^="http:"], a[href^="https:"] {
+  #main_x a[href^="http:"], a[href^="https:"] {
     color: #444;
     font-weight:bold;
     background: transparent url(../../images/icons/16x16/world_link.png) no-repeat scroll left center;
@@ -234,7 +234,6 @@
   a.world_link{ background: transparent url(../../images/icons/16x16/world_link.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px; }
   a.sitemap{ background: transparent url(../../images/icons/16x16/chart_organisation.png) no-repeat scroll left center; padding-bottom:1px; } 
   a.sa{ background: transparent url(../../images/icons/16x16/sa.png) no-repeat scroll left center; padding-bottom:2px; } 
-
   /**
    * Tables | Tabellen
    * (en) Generic classes for table-width and design definition
@@ -269,6 +268,7 @@
   
   div.post, div.block { border: #ddd solid 1px; margin:15px; padding: 10px; background: white;}
   div.post_content { padding-top: 10px; }
+  div.friendfeed.widget { border: 0;}
   blockquote.comment { margin-right: 30px; margin: 5px; }  
   span.icon, a.icon { padding-left: 22px; }
   span.tag { background: transparent url(../../images/icons/16x16/tag_blue.png) no-repeat scroll left center; padding-bottom:2px; }

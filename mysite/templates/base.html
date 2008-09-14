@@ -135,7 +135,20 @@
                                 <p style="border-bottom: solid #ddd 1px; padding-bottom: 10px; text-align:center;">
                                     <b>存档</b>
                                 </p>
-                            </div>                                    
+                                <ul class="archive">
+                                {% for archive in request.archive %}
+                                    <li class="archive">
+                                        <a class="archive" href="/archives/{{ archive.year }}/{{ archive.month }}">{{ archive.year }}年{{ archive.month }}月</a>
+                                    </li>
+                                {% endfor %}
+                                </ul>                            
+                            </div>
+                            <div class="block" id="share_block">
+                                <p style="border-bottom: solid #ddd 1px; padding-bottom: 10px; text-align:center;">
+                                    <b>分享</b>
+                                </p>
+                                <script type="text/javascript" src="http://friendfeed.com/embed/widget/lvbeck?v=2&amp;hide_logo=1&amp;hide_subscribe=1"></script>                            
+                            </div>                                         
                         </div>
                     </div>
                     <div id="col3">

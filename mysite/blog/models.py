@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from google.appengine.ext import db
 from google.appengine.ext import search
 
@@ -55,6 +56,27 @@ class Post(search.SearchableModel):
                 relation.put()
                 tag.post_count = tag.countPosts()
                 tag.put()
+    
+    @staticmethod
+    def getNextMonth(d):
+        return datetime(d.year + 1, 1, 1) if d.month == 12 else datetime(d.year, d.month + 1, 1)
+    
+    @staticmethod
+    def getByYM(year, month):
+        begin = datetime.strptime(year+'-'+month+'-01','%Y-%m-%d')
+        end = Post.getNextMonth(begin)
+        return Post.all().filter('is_published', True).filter('create_time >= ', begin).filter('create_time <= ', end)    
+        
+    @staticmethod
+    def getArchives():
+        l = []
+        archive = Post.all().order('create_time').get().create_time       
+        while archive < datetime.today():
+            archive = Post.getNextMonth(archive)
+            l.append(archive)
+        l.reverse()
+        return l
+        
     
 class Comment(db.Model):
     author = db.UserProperty()

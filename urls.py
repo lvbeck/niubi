@@ -29,9 +29,7 @@ urlpatterns = patterns('',
 
     (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
     (r'^rss/latest/$', 'mysite.feeds.views.latest_feed_proxy'),
-    (r'^rss/hottest/$', 'mysite.feeds.views.hottest_feed_proxy'),
-    
-    
+    (r'^rss/hottest/$', 'mysite.feeds.views.hottest_feed_proxy'),    
 )
 
 urlpatterns += patterns('mysite.account.views',    
@@ -45,12 +43,11 @@ urlpatterns += patterns('mysite.blog.views',
     (r'^post/list_all/$', 'list_all_post'),
     (r'^post/(?P<post_id>\d+)/$', 'view_post'),
     (r'^post/(?P<post_id>\d+)/edit/$', 'edit_post'),
-    (r'^post/(?P<post_id>\d+)/print/$', 'print_post'),
-    
+    (r'^post/(?P<post_id>\d+)/print/$', 'print_post'),  
+    (r'^archives/(?P<year>\d+)/(?P<month>\d+)/$', 'archives'), 
     (r'^category/add/$', 'add_category'),
     (r'^category/(?P<category_id>\d+)/$', 'list_category_post'),
     (r'^tag/(?P<tag_name>\w+)/$', 'list_tag_post'),
-    (r'^search/$', 'search'),
-    
+    (r'^search/$', 'search'),  
     (r'^sitemap/$', 'sitemap'),
 )
