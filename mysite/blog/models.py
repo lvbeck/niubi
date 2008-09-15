@@ -65,15 +65,15 @@ class Post(search.SearchableModel):
     def getByYM(year, month):
         begin = datetime.strptime(year+'-'+month+'-01','%Y-%m-%d')
         end = Post.getNextMonth(begin)
-        return Post.all().filter('is_published', True).filter('create_time >= ', begin).filter('create_time <= ', end)    
+        return Post.all().filter('is_published', True).filter('create_time >= ', begin).filter('create_time <= ', end).order('-create_time')    
         
     @staticmethod
     def getArchives():
         l = []
         archive = Post.all().order('create_time').get().create_time       
-        while archive < datetime.today():
-            archive = Post.getNextMonth(archive)
+        while archive < datetime.today():            
             l.append(archive)
+            archive = Post.getNextMonth(archive)
         l.reverse()
         return l
         
@@ -89,6 +89,9 @@ class Tag(db.Model):
     name = db.StringProperty()     
     post_count = db.IntegerProperty(default=0)
     
+    def __str__(self):
+        return self.name
+       
     def countPosts(self):
         return PostTag.all().filter('tag =', self).count()
     
