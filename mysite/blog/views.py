@@ -37,18 +37,14 @@ def add_post(request):
 @admin_required
 def list_all_post(request):
     posts = Post.all().order('-create_time');
-    request.categories = Category.all().order('-post_count')
-    request.tags = Tag.all().order('-post_count')
-    request.archive = Post.getArchives()
+    get_widgets(request)
     return object_list(request, queryset=posts, allow_empty=True,
             template_name='blog/list_post.html', extra_context={'is_admin': is_admin()},
             paginate_by=settings.POST_LIST_PAGE_SIZE)      
     
 def list_post(request):
     posts = Post.all().order('-create_time')
-    request.categories = Category.all().order('-post_count')
-    request.tags = Tag.all().order('-post_count')
-    request.archive = Post.getArchives()
+    get_widgets(request)
     if (not is_admin()):
         posts = posts.filter("is_published", True)
     
@@ -58,8 +54,7 @@ def list_post(request):
     
 @login_required
 def add_category(request):
-    request.categories = Category.all().order('-post_count')
-    request.tags = Tag.all().order('-post_count')
+    get_widgets(request)
     if request.method == 'POST':
         category = Category()
         category.name = request.POST['name']
@@ -97,7 +92,7 @@ def edit_post(request, post_id):
             post.putTags(request.POST['tags'])
             post.put()
             return HttpResponseRedirect('/post/%s/'%post.key().id())  
-    
+    get_widgets(request)
     return render_to_response('blog/operate_post.html', {'form': form, 'id':post.key().id, 'tags': tags}, context_instance=RequestContext(request))
 
 def print_post (request, post_id):
@@ -111,9 +106,7 @@ def print_post (request, post_id):
 			      
 def view_post(request, post_id):
     post = Post.get_by_id(int(post_id))
-    request.categories = Category.all().order('-post_count')
-    request.tags = post.getTags()
-    request.archive = Post.getArchives()
+    get_widgets(request)
     if not post:
         raise Http404    
     if not is_admin() and not post.is_published:
@@ -173,15 +166,16 @@ def contains_user(users, user):
 
 def update(request):
     pass
-#    posts = Post.all()
+#    posts = Post.all().order('-create_time')
 #    for post in posts:
+#        delattr(post, "tags")
+#        post.put()
 #        if not post.category.post_count:
 #            post.category.post_count = 1
 #        else:
 #            post.category.post_count = post.category.post_count + 1
-#        post.category.put()
-#        
-#    return HttpResponse('OK')
+#        post.category.put()       
+    return HttpResponse('OK')
 
 def about(request):
     str = (u'<br/><p>&nbsp;&nbsp;此站点基于学习及娱乐目的, 联系方式：admin 在 niubi.de, 无事勿扰, 谢谢合作</p>').encode('utf8')
@@ -199,7 +193,7 @@ def list_category_post(request, category_id):
         raise Http404
     
     posts = Post.all().filter('category', category).order('-create_time')
-    request.archive = Post.getArchives()
+    get_widgets(request)
     return object_list(request, queryset=posts, allow_empty=True,
             template_name='blog/list_category_post.html', extra_context={'is_admin': is_admin(), 'category': category},
             paginate_by=settings.POST_LIST_PAGE_SIZE) 
@@ -210,12 +204,13 @@ def list_tag_post(request,tag_name):
         raise Http404  
     # tag.getPosts().order('-create_time')
     tag.post_list = tag.getPosts()
-    request.archive = Post.getArchives()
+    get_widgets(request)
     return object_list(request, queryset=tag.post_list, allow_empty=True,
             template_name='blog/list_tag_post.html', extra_context={'is_admin': is_admin(), 'tag': tag},
             paginate_by=settings.POST_LIST_PAGE_SIZE)     
     
 def search(request):
+    get_widgets(request)
     if request.REQUEST.has_key('q'):
         keywords = request.GET['q']
         logging.getLogger().info(keywords)
@@ -276,7 +271,13 @@ def archives(request, year, month):
         #raise Http404
     #return HttpResponse(month, content_type='text/plain')
     posts = Post.getByYM(year, month)
+    get_widgets(request)
     return object_list(request, queryset=posts, allow_empty=True,
             template_name='blog/list_archives_post.html', extra_context={'is_admin': is_admin(), 'year': year, 'month': month},
-            paginate_by=settings.POST_LIST_PAGE_SIZE)    
+            paginate_by=settings.POST_LIST_PAGE_SIZE)
+
+def get_widgets(request):
+    request.categories = Category.all().order('-post_count')
+    request.tags = Tag.all().order('-post_count')
+    request.archive = Post.getArchives()
     
