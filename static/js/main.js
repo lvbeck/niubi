@@ -90,7 +90,7 @@ $(document).ready(function(){
     $(".ui-accordion-container").accordion({
         header: ".ui-accordion-header",
         autoHeight: false,
-	    clearStyle: true,
+	clearStyle: true,
         alwaysOpen: false
     });
 

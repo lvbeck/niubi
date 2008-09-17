@@ -8,6 +8,5 @@ register = Library()
 
 @register.inclusion_tag('navigator.html', takes_context=True)
 def navigator(context):
-    context['is_admin'] = is_admin()
-    
+    context['is_admin'] = is_admin()  
     return context

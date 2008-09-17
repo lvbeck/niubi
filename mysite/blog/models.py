@@ -56,6 +56,7 @@ class Post(search.SearchableModel):
                 relation.put()
                 tag.post_count = tag.countPosts()
                 tag.put()
+        Tag.generateCloud()
     
     @staticmethod
     def getNextMonth(d):
@@ -88,7 +89,8 @@ class Comment(db.Model):
 class Tag(db.Model):
     name = db.StringProperty()     
     post_count = db.IntegerProperty(default=0)
-    
+    font_size = db.IntegerProperty(default=0)
+
     def __str__(self):
         return self.name
        
@@ -104,6 +106,32 @@ class Tag(db.Model):
     def getPosts(self, min_relevance=0.00):                 
         return [entry.post for entry in PostTag.all().filter('tag =',self).filter('relevance > ',min_relevance).order('-relevance').order('-create_time')]         
     
+    def __cmp__(self, other):
+        return cmp(self.post_count, other.post_count)  
+    
+    @staticmethod
+    def generateCloud():
+        tag_list = Tag.all().order('-post_count')
+        nbr_of_buckets = 8
+        base_font_size = 11
+        tresholds = []
+        max_tag = max(tag_list)
+        min_tag = min(tag_list)
+        delta = (float(max_tag.post_count) - float(min_tag.post_count)) / (float(nbr_of_buckets))
+        # set a treshold for all buckets
+        for i in range(nbr_of_buckets):
+            tresh_value =  float(min_tag.post_count) + (i+1) * delta
+            tresholds.append(tresh_value)
+        # set font size for tags (per bucket)
+        for tag in tag_list:
+            font_set_flag = False
+            for bucket in range(nbr_of_buckets):
+                if font_set_flag == False:
+                    if (tag.post_count <= tresholds[bucket]):
+                        tag.font_size = base_font_size + bucket * 2
+                        tag.save()
+                        font_set_flag = True
+        
     @staticmethod
     def clean():
         for tag in Tag.all():

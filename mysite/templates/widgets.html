@@ -1,0 +1,108 @@
+<div id="widgets" class="ui-accordion-container">
+    <div id="profile" class="block">
+        <p class="ui-accordion-header">
+            <a href="#profile">档案</a>                          
+        </p>
+        <pre name="code" class="python">
+            id = 'Alex'
+            male = True
+            made_in = 中国
+            version = 2.7
+            platform = Deutschland
+            os = Google
+            career = Coder and OTAKU
+            interests = [ Java,
+                Jxta,
+                Python,
+                Django,
+                GAE,
+                Symfony,
+                Drupal,
+                ORM,
+                jQuery,
+                Spaghetti
+            ] 
+        </pre>                                    
+    </div>    
+    <div class="block ui-accordion-group">
+        <p class="ui-accordion-header">
+            <a href="#meta">登录</a>                          
+        </p>
+        <div class="ui-accordion-content">                                   
+            {% if user.is_authenticated %}
+            <p class="account">
+                <a class="account icon" href="https://www.google.com/accounts/ManageAccount" target="_blank">管理</a>
+            </p>                                    
+            <p class="logout">
+                <a class="logout icon" href="/logout/">退出</a>
+            </p>
+            {% else %}
+            <p class="login">
+                <a class="login icon" href="/login/">登录</a>
+            </p>
+            {% endif %}
+            <p class="XFN">
+                <a class="heart icon" href="http://coral33389.spaces.live.com/" rel="sweetheart">XFN</a>
+            </p>
+        </div>
+    </div>                            
+    <div class="block ui-accordion-group">
+        <p class="ui-accordion-header">
+            <a href="#category">类别</a>                          
+        </p>
+        <ul class="category ui-accordion-content">
+        {% for category in categories %}
+            <li class="category">
+                <a class="category" href="/category/{{ category.key.id }}/">{{ category.name }} ({{ category.post_count }})</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="block ui-accordion-group">                            
+        <p class="ui-accordion-header">
+            <a href="#tag">标签</a>                          
+        </p>
+        <div class="tag ui-accordion-content">
+        {% for tag in tags %}
+            <span style="font-size: {{ tag.font_size }}px;">
+                <a class="tag" href="/tag/{{ tag.name }}/">{{ tag.name }}</a>
+            </span>
+        {% endfor %}
+        </div>
+    </div>                            
+    <div class="block ui-accordion-group">
+        <p class="ui-accordion-header">
+            <!-- FEED自动发现标记开始 -->
+            <!-- FEED自动发现标记结束 -->
+            <a href="#subscribe">订阅</a>
+        </p>
+        <div class="ui-accordion-content">
+            <p class="subscribe">
+                <a class="subscribe icon" href="/feeds/latest/">最近文章</a>
+            </p>
+            <p class="subscribe">
+                <a class="subscribe icon" href="/feeds/hottest/">最热文章</a>
+            </p>
+        </div>
+    </div>
+    <div class="block ui-accordion-group" id="share_block">
+        <p class="ui-accordion-header">
+            <a href="#share">分享</a>
+        </p>
+        <div class="share ui-accordion-content">
+            <script type="text/javascript" src="http://friendfeed.com/embed/widget/lvbeck?v=2&amp;hide_logo=1&amp;hide_subscribe=1"></script>                           
+        </div>
+    </div>        
+    <div class="block ui-accordion-group" id="archive_block">
+        <p class="ui-accordion-header">
+            <a href="#archive">存档</a>
+        </p>
+        <ul class="archive ui-accordion-content">
+        {% for archive in archives %}
+            <li class="archive">
+                <a class="archive" href="/archives/{{ archive.year }}/{{ archive.month }}">{{ archive.year }}年{{ archive.month }}月</a>
+            </li>
+        {% endfor %}
+        </ul>                            
+    </div>
+</div>

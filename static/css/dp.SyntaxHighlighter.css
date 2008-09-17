@@ -140,6 +140,8 @@
 	border-left: 3px solid #6CE26C;
 }
 
+#profile .dp-highlighter .tools { display: none;}
+
 .dp-highlighter.nogutter .tools
 {
 	border-left: 0;

@@ -450,7 +450,9 @@ table.ui-datepicker .ui-datepicker-title-row td a {
 	width: 193px;
 	height: 200px;
 }
-
+table.ui-datepicker td.ui-datepicker-today a {
+	border: 1px solid #999;
+}
 
 
 

@@ -17,8 +17,7 @@ from forms import PostForm, CommentForm
 @admin_required
 def add_post(request):
     if request.method == 'GET':
-        form = PostForm()
-    
+        form = PostForm() 
     if request.method == 'POST':
         form = PostForm(request.POST)
         logging.getLogger().debug(form)
@@ -31,37 +30,30 @@ def add_post(request):
             post.putTags(request.POST['tags'])
             post.put()
             return HttpResponseRedirect('/')
-
     return render_to_response('blog/operate_post.html', {'form': form}, context_instance=RequestContext(request))  
 
 @admin_required
 def list_all_post(request):
     posts = Post.all().order('-create_time');
-    get_widgets(request)
     return object_list(request, queryset=posts, allow_empty=True,
             template_name='blog/list_post.html', extra_context={'is_admin': is_admin()},
             paginate_by=settings.POST_LIST_PAGE_SIZE)      
     
 def list_post(request):
     posts = Post.all().order('-create_time')
-    get_widgets(request)
     if (not is_admin()):
-        posts = posts.filter("is_published", True)
-    
+        posts = posts.filter("is_published", True)  
     return object_list(request, queryset=posts, allow_empty=True,
             template_name='blog/list_post.html', extra_context={'is_admin': is_admin()},
             paginate_by=settings.POST_LIST_PAGE_SIZE)  
     
 @login_required
 def add_category(request):
-    get_widgets(request)
     if request.method == 'POST':
         category = Category()
         category.name = request.POST['name']
-        category.put();
-    
-        return HttpResponseRedirect('/category/add')
-    
+        category.put();   
+        return HttpResponseRedirect('/category/add')  
     return render_to_response('blog/add_category.html', context_instance=RequestContext(request))
 
 @admin_required
@@ -92,7 +84,6 @@ def edit_post(request, post_id):
             post.putTags(request.POST['tags'])
             post.put()
             return HttpResponseRedirect('/post/%s/'%post.key().id())  
-    get_widgets(request)
     return render_to_response('blog/operate_post.html', {'form': form, 'id':post.key().id, 'tags': tags}, context_instance=RequestContext(request))
 
 def print_post (request, post_id):
@@ -103,10 +94,9 @@ def print_post (request, post_id):
     if not is_admin() and not post.is_published:
         raise Http404
     return render_to_response('blog/print_post.html', {'post':post}, context_instance=RequestContext(request))
-			      
+
 def view_post(request, post_id):
     post = Post.get_by_id(int(post_id))
-    get_widgets(request)
     if not post:
         raise Http404    
     if not is_admin() and not post.is_published:
@@ -119,11 +109,9 @@ def view_post(request, post_id):
         if request.POST['parent_comment'] != "":
             parent_comment = Comment.get_by_id(int(request.POST['parent_comment']))
             comment.parent_comment = parent_comment
-        comment.put()
-        
+        comment.put()      
         post.comment_count = post.comment_count + 1
-        post.put()
-        
+        post.put()        
         mail.send_mail(sender="no-reply@niubi.de",
                        to=post.author.email(),
                        subject=(u'牛逼 - 你的文章%s有了新评论'%post.title).encode('utf8'),
@@ -132,8 +120,7 @@ def view_post(request, post_id):
 %s
  
 点击这个链接回复: http://www.niubi.de/post/%s/''' %(comment.author.nickname(), post.title, comment.content, post.key().id())).encode('utf8')
-                       )
-        
+                       )     
         comments = Comment.all().filter('post', post)
         sent_users = []
         for c in comments:
@@ -153,8 +140,7 @@ def view_post(request, post_id):
     
     post.read_count = post.read_count + 1
     post.put()
-    post.getComments()    
-        
+    post.getComments()       
     return render_to_response('blog/view_post.html', 
                               {'post':post}, context_instance=RequestContext(request))
     
@@ -190,10 +176,9 @@ def download(request):
 def list_category_post(request, category_id):
     category = Category.get_by_id(int(category_id))
     if not category:
-        raise Http404
-    
+        raise Http404  
     posts = Post.all().filter('category', category).order('-create_time')
-    get_widgets(request)
+
     return object_list(request, queryset=posts, allow_empty=True,
             template_name='blog/list_category_post.html', extra_context={'is_admin': is_admin(), 'category': category},
             paginate_by=settings.POST_LIST_PAGE_SIZE) 
@@ -204,18 +189,15 @@ def list_tag_post(request,tag_name):
         raise Http404  
     # tag.getPosts().order('-create_time')
     tag.post_list = tag.getPosts()
-    get_widgets(request)
     return object_list(request, queryset=tag.post_list, allow_empty=True,
             template_name='blog/list_tag_post.html', extra_context={'is_admin': is_admin(), 'tag': tag},
             paginate_by=settings.POST_LIST_PAGE_SIZE)     
     
 def search(request):
-    get_widgets(request)
     if request.REQUEST.has_key('q'):
         keywords = request.GET['q']
         logging.getLogger().info(keywords)
         posts = Post.all().search(keywords).order('-create_time')
-
         return object_list(request, queryset=posts, allow_empty=True,
                 template_name='blog/search_post.html', extra_context={'keywords': keywords},
                 paginate_by=settings.POST_LIST_PAGE_SIZE)
@@ -231,8 +213,7 @@ def sitemap(request):
                   <changefreq>weekly</changefreq>
                   <priority>0.9</priority>
                </url>
-        '''
-        
+        '''      
     posts = Post.all().filter('is_published', True)
     for post in posts:
         str += '''<url>
@@ -271,13 +252,7 @@ def archives(request, year, month):
         #raise Http404
     #return HttpResponse(month, content_type='text/plain')
     posts = Post.getByYM(year, month)
-    get_widgets(request)
     return object_list(request, queryset=posts, allow_empty=True,
             template_name='blog/list_archives_post.html', extra_context={'is_admin': is_admin(), 'year': year, 'month': month},
             paginate_by=settings.POST_LIST_PAGE_SIZE)
-
-def get_widgets(request):
-    request.categories = Category.all().order('-post_count')
-    request.tags = Tag.all().order('-post_count')
-    request.archive = Post.getArchives()
     
