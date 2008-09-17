@@ -5,7 +5,7 @@
 	background-color: #E7E5DC;
 	width: 99%;
 	overflow: auto;
-	margin: 18px 0 18px 0 !important;
+	margin: 0px 0 18px 0 !important;
 	padding-top: 1px; /* adds a little border on top when controls are hidden */
 }
 
@@ -30,7 +30,7 @@
 
 .dp-highlighter .bar
 {
-	padding-left: 45px;
+	padding-left: 30px;
 }
 
 .dp-highlighter.collapsed .bar,
@@ -43,7 +43,7 @@
 {
 	list-style: decimal; /* for ie */
 	background-color: #fff;
-	margin: 0px 0px 1px 45px !important; /* 1px bottom margin seems to fix occasional Firefox scrolling */
+	margin: 0px 0px 1px 30px !important; /* 1px bottom margin seems to fix occasional Firefox scrolling */
 	padding: 0px;
 	color: #5C5C5C;
 }
@@ -180,6 +180,8 @@
 /* Language specific styles */
 
 .dp-highlighter .comment, .dp-highlighter .comments { color: #008200; background-color: inherit; }
-.dp-highlighter .string { color: blue; background-color: inherit; }
+.dp-highlighter .string { color: green; background-color: inherit; }
 .dp-highlighter .keyword { color: #069; font-weight: bold; background-color: inherit; }
 .dp-highlighter .preprocessor { color: gray; background-color: inherit; }
+.dp-highlighter .special { color: blue; background-color: inherit; }
+.dp-highlighter .number { color: orange; background-color: inherit; }

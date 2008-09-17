@@ -84,7 +84,7 @@
   #header #teaser {
     position:absolute;
     top: 28px;
-    right: -15px;
+    right: 0px;
     color:#ddd;
   } 
   
@@ -98,7 +98,7 @@
     text-align: center;
   }
   
-  #search_block {
+  #searchbox {
     padding: 0 15px 0 15px;
     text-align: center;
   }
@@ -202,7 +202,7 @@
    * @section             content-external-links
    * @app-yaml-default    disabled
    */
-  #main_x a[href^="http:"], a[href^="https:"] {
+  #main_x a[href^="http:"], #main_x a[href^="https:"] {
     color: #444;
     font-weight:bold;
     background: transparent url(../../images/icons/16x16/world_link.png) no-repeat scroll left center;
@@ -227,13 +227,14 @@
   a.account { background: transparent url(../../images/icons/16x16/status_online.png) no-repeat scroll left center; padding-bottom:3px; }
   a.post_add { background: transparent url(../../images/icons/16x16/page_add.png) no-repeat scroll left center; padding-bottom:1px; }
   a.category_add { background: transparent url(../../images/icons/16x16/folder_add.png) no-repeat scroll left center; padding-bottom:1px; }
-  a.login { background: transparent url(../../images/icons/16x16/key.png) no-repeat scroll left center; }
-  a.logout { background: transparent url(../../images/icons/16x16/key_go.png) no-repeat scroll left center; }
+  a.login { background: transparent url(../../images/icons/16x16/key.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px; }
+  a.logout { background: transparent url(../../images/icons/16x16/key_go.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px;}
   a.contact { background: transparent url(../../images/icons/16x16/email.png) no-repeat scroll left center; padding-bottom:2px; }
   a.subscribe{ background: transparent url(../../images/icons/16x16/feed.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px; }  
   a.world_link{ background: transparent url(../../images/icons/16x16/world_link.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px; }
-  a.sitemap{ background: transparent url(../../images/icons/16x16/chart_organisation.png) no-repeat scroll left center; padding-bottom:1px; } 
+  a.sitemap{ background: transparent url(../../images/icons/16x16/sitemap_color.png) no-repeat scroll left center; padding-top:1px; padding-bottom:1px; } 
   a.sa{ background: transparent url(../../images/icons/16x16/sa.png) no-repeat scroll left center; padding-bottom:2px; } 
+  a.heart{ background: transparent url(../../images/icons/16x16/heart.png) no-repeat scroll left center; }
   /**
    * Tables | Tabellen
    * (en) Generic classes for table-width and design definition
@@ -266,14 +267,17 @@
     border-bottom: 1px #eee solid;
   }
   
-  div.post, div.block { border: #ddd solid 1px; margin:15px; padding: 10px; background: white;}
+  div.post { padding:10px; }
+  div.post, div.block { border: #ddd solid 1px; margin:15px; background: white;}
+  div.block p.ui-accordion-header { border-bottom: solid #ddd 1px; text-align:center; }
+  div.block pre.profile { text-align:left; }
   div.post_content { padding-top: 10px; }
   div.friendfeed.widget { border: 0;}
   blockquote.comment { margin-right: 30px; margin: 5px; }  
   span.icon, a.icon { padding-left: 22px; }
   span.tag { background: transparent url(../../images/icons/16x16/tag_blue.png) no-repeat scroll left center; padding-bottom:2px; }
   span.category { background: transparent url(../../images/icons/16x16/folder.png) no-repeat scroll left center; }
-  p.subscribe { text-align: center; }
+  div.block p { text-align: center; }
   input[type="text"]{ height:16px; width:100%; padding:3px 0pt 0pt 5px; }
   input[type="text"]:hover{ background-color: #FFFADB; }
   input[type="textarea"]{ width:100%; } 

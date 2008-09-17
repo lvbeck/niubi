@@ -1,7 +1,7 @@
 {% load navigate %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
+    <head profile="http://gmpg.org/xfn/11">
         <title>牛逼 - {% block title %}{% endblock %}</title>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <meta name="verify-v1" content="NneIN/MP9K2CgqHooCi8O0nahMrMU44LnP3Y+s7hB2Y=" />
@@ -22,6 +22,7 @@
 	<link rel="alternate stylesheet" type="text/css" href="/static/css/screen/shinybuttons/orange.css" title="Orange" />
 	<link rel="alternate stylesheet" type="text/css" href="/static/css/screen/shinybuttons/red.css" title="Red" />
 	<link rel="alternate stylesheet" type="text/css" href="/static/css/screen/shinybuttons/purple.css" title="Purple" />
+        <link rel="stylesheet" type="text/css" href="/static/css/screen/jquery-ui-themeroller.css" />
         <!--[if lte IE 7]>
         <link rel="stylesheet" type="text/css" href="/static/css/patches/patch_my_layout.css" />       
         <![endif]-->       
@@ -45,7 +46,7 @@
                         <!-- start: skip link navigation -->
                         <a class="skip" title="skip link" href="#navigation">Skip to the navigation</a><span class="hideme">.</span>
                         <a class="skip" title="skip link" href="#content">Skip to the content</a><span class="hideme">.</span>
-                        {% navigator %}|
+                        {% navigator %}
                         <a class="contact icon" href="mailto:admin@niubi.de">联系</a>
                         <!-- end: skip link navigation -->                       
                     </div>
@@ -71,7 +72,7 @@
                 <div id="main">
                     <div id="col1">
                         <div id="col1_content" class="clearfix">
-                            <div id="switches">
+                            <div id="switches" class="box">
                                 <ul>
                                     <li onclick="setCurrent(this); setActiveStyleSheet('Black'); return false;" title="Black"><img src="/static/images/icons/22x21/black.jpg" alt="Black" /></li>
                                     <li onclick="setCurrent(this); setActiveStyleSheet('Silver'); return false;" title="Silver"><img src="/static/images/icons/22x21/silver.jpg" alt="Silver" /></li>
@@ -83,7 +84,7 @@
                                 </ul>
                             </div>
                             <!-- SiteSearch Google -->
-                            <div id="search_block">                              
+                            <div id="searchbox" class="box">                              
                                 <form name="search" method="get" action="/search/">
                                     <input type="text" name="q" id="q" maxlength="255" value="搜索关键字" onfocus="$('#q').val('')" />
                                     <input type="hidden" name="ie" value="utf-8" />
@@ -96,59 +97,113 @@
                                 </form>                                
                             </div>
                             <!-- SiteSearch Google -->
-                            <div class="block">
-                                <p style="border-bottom: solid #ddd 1px; padding-bottom: 10px; text-align:center;">
-                                    <b>类别</b>                          
-                                </p>
-                                <ul class="category">
-                                {% for category in request.categories %}
-                                    <li class="category">
-                                        <a class="category" href="/category/{{ category.key.id }}/">{{ category.name }} ({{ category.post_count }})</a>
-                                    </li>
-                                {% endfor %}
-                                </ul>
-                            </div>
-                            <div class="block">                            
-                                <p style="border-bottom: solid #ddd 1px; padding-bottom: 10px; text-align:center;">
-                                    <b>标签</b>                          
-                                </p>
-                                <p class="tag">
-                                {% for tag in request.tags %}
-                                    <a class="tag" href="/tag/{{ tag.name }}/">{{ tag.name }} ({{ tag.post_count }})&nbsp;</a>
-                                {% endfor %}
-                                </p>
-                            </div>                            
-                            <div class="block">
-                                 <p style="border-bottom: solid #ddd 1px; padding-bottom: 10px; text-align:center;">
-                                    <!-- FEED自动发现标记开始 -->
-                                    <!-- FEED自动发现标记结束 -->
-                                    <b>订阅</b>
-                                </p>
-                                <p class="subscribe">
-                                    <a class="subscribe icon" href="/feeds/latest/">最近文章</a>
-                                </p>
-                                <p class="subscribe">
-                                    <a class="subscribe icon" href="/feeds/hottest/">最热文章</a>
-                                </p>                                 
-                            </div>
-                            <div class="block" id="share_block">
-                                <p style="border-bottom: solid #ddd 1px; padding-bottom: 10px; text-align:center;">
-                                    <b>分享</b>
-                                </p>
-                                <script type="text/javascript" src="http://friendfeed.com/embed/widget/lvbeck?v=2&amp;hide_logo=1&amp;hide_subscribe=1"></script>                            
-                            </div>                                  
-                            <div class="block" id="archive_block">
-                                <p style="border-bottom: solid #ddd 1px; padding-bottom: 10px; text-align:center;">
-                                    <b>存档</b>
-                                </p>
-                                <ul class="archive">
-                                {% for archive in request.archive %}
-                                    <li class="archive">
-                                        <a class="archive" href="/archives/{{ archive.year }}/{{ archive.month }}">{{ archive.year }}年{{ archive.month }}月</a>
-                                    </li>
-                                {% endfor %}
-                                </ul>                            
-                            </div>                                        
+                            <div id="ui-datepicker" class="clearfix block"></div>
+                            <div class="ui-accordion-container">
+                                <div id="profile" class="block">
+                                    <p class="ui-accordion-header">
+                                        <a href="#profile">档案</a>                          
+                                    </p>
+                                    <pre name="code" class="python">
+                                        id = 'Alex'
+                                        male = True
+                                        made_in = 中国
+                                        version = 2.7
+                                        platform = Deutschland
+                                        os = Google
+                                        career = Coder and OTAKU
+                                        interests = [ Java,
+                                            Jxta,
+                                            Python,
+                                            Django,
+                                            GAE,
+                                            Symfony,
+                                            Drupal,
+                                            ORM,
+                                            jQuery,
+                                            Spaghetti
+                                        ] 
+                                    </pre>                                    
+                                </div>                                
+                                <div class="block ui-accordion-group">
+                                    <p class="ui-accordion-header">
+                                        <a href="#meta">登录</a>                          
+                                    </p>
+                                    <div class="ui-accordion-content">                                   
+                                        {% if user.is_authenticated %}
+                                        <p class="account">
+                                            <a class="account icon" href="https://www.google.com/accounts/ManageAccount" target="_blank">管理</a>
+                                        </p>                                    
+                                        <p class="logout">
+                                            <a class="logout icon" href="/logout/">退出</a>
+                                        </p>
+                                        {% else %}
+                                        <p class="login">
+                                            <a class="login icon" href="/login/">登录</a>
+                                        </p>
+                                        {% endif %}
+                                        <p class="XFN">
+                                            <a class="heart icon" href="http://coral33389.spaces.live.com/" rel="sweetheart">XFN</a>
+                                        </p>
+                                    </div>
+                                </div>                            
+                                <div class="block ui-accordion-group">
+                                    <p class="ui-accordion-header">
+                                        <a href="#category">类别</a>                          
+                                    </p>
+                                    <ul class="category ui-accordion-content">
+                                    {% for category in request.categories %}
+                                        <li class="category">
+                                            <a class="category" href="/category/{{ category.key.id }}/">{{ category.name }} ({{ category.post_count }})</a>
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="block ui-accordion-group">                            
+                                    <p class="ui-accordion-header">
+                                        <a href="#tag">标签</a>                          
+                                    </p>
+                                    <div class="tag ui-accordion-content">
+                                    {% for tag in request.tags %}
+                                        <a class="tag" href="/tag/{{ tag.name }}/">{{ tag.name }} ({{ tag.post_count }})&nbsp;</a>
+                                    {% endfor %}
+                                    </div>
+                                </div>                            
+                                <div class="block ui-accordion-group">
+                                    <p class="ui-accordion-header">
+                                        <!-- FEED自动发现标记开始 -->
+                                        <!-- FEED自动发现标记结束 -->
+                                        <a href="#subscribe">订阅</a>
+                                    </p>
+                                    <div class="ui-accordion-content">
+                                        <p class="subscribe">
+                                            <a class="subscribe icon" href="/feeds/latest/">最近文章</a>
+                                        </p>
+                                        <p class="subscribe">
+                                            <a class="subscribe icon" href="/feeds/hottest/">最热文章</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="block ui-accordion-group" id="share_block">
+                                    <p class="ui-accordion-header">
+                                        <a href="#share">分享</a>
+                                    </p>
+                                    <div class="share ui-accordion-content">
+                                        <script type="text/javascript" src="http://friendfeed.com/embed/widget/lvbeck?v=2&amp;hide_logo=1&amp;hide_subscribe=1"></script>                           
+                                    </div>
+                                </div>        
+                                <div class="block ui-accordion-group" id="archive_block">
+                                    <p class="ui-accordion-header">
+                                        <a href="#archive">存档</a>
+                                    </p>
+                                    <ul class="archive ui-accordion-content">
+                                    {% for archive in request.archive %}
+                                        <li class="archive">
+                                            <a class="archive" href="/archives/{{ archive.year }}/{{ archive.month }}">{{ archive.year }}年{{ archive.month }}月</a>
+                                        </li>
+                                    {% endfor %}
+                                    </ul>                            
+                                </div>
+                            </div>                
                         </div>
                     </div>
                     <div id="col3">
@@ -203,6 +258,7 @@
         -->
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript">google.load("jquery", "1.2.6");</script>
+        <script type="text/javascript">google.load("jqueryui", "1.5.2");</script>
         <script type="text/javascript" src="/static/js/main.js"></script>
         {% block js %}{% endblock %} 
     </body>
