@@ -26,7 +26,8 @@
         <link rel="stylesheet" type="text/css" href="/static/css/screen/jquery-ui-themeroller.css" />
         <!--[if lte IE 7]>
         <link rel="stylesheet" type="text/css" href="/static/css/patches/patch_my_layout.css" />       
-        <![endif]-->       
+        <![endif]-->
+        <link rel="stylesheet" type="text/css" href="/static/css/dp.SyntaxHighlighter.css" /> 
         {% block css %}{% endblock %}       
     </head>
     <body class="yui-skin-sam">
@@ -156,6 +157,13 @@
         <script type="text/javascript">google.load("jquery", "1.2.6");</script>
         <script type="text/javascript">google.load("jqueryui", "1.5.2");</script>
         <script type="text/javascript" src="/static/js/main.js"></script>
+        <script type="text/javascript" src="/static/js/dp.SyntaxHighlighter.js"></script> 
+        <script type="text/javascript">
+            jQuery("pre > br").each( function() { jQuery(this).replaceWith( "\n" ); } );
+            jQuery("textarea > br").each( function() { jQuery(this).replaceWith( "\n" ); } );
+            dp.SyntaxHighlighter.ClipboardSwf = '/static/flash/clipboard.swf';
+            dp.SyntaxHighlighter.HighlightAll('code');
+        </script>        
         {% block js %}{% endblock %} 
     </body>
 </html>

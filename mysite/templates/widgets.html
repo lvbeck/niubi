@@ -1,49 +1,42 @@
 <div id="widgets" class="ui-accordion-container">
+    {% if user.is_authenticated %}
     <div id="profile" class="block">
         <p class="ui-accordion-header">
             <a href="#profile">档案</a>                          
         </p>
-        <pre name="code" class="python">
-            id = 'Alex'
-            male = True
-            made_in = 中国
-            version = 2.7
-            platform = Deutschland
-            os = Google
-            career = Coder and OTAKU
-            interests = [ Java,
-                Jxta,
-                Python,
-                Django,
-                GAE,
-                Symfony,
-                Drupal,
-                ORM,
-                jQuery,
-                Spaghetti
-            ] 
-        </pre>                                    
-    </div>    
+        {% autoescape off %}
+        {{settings.profile}}
+        {% endautoescape %}
+    </div>
+    {% endif %}
     <div class="block ui-accordion-group">
         <p class="ui-accordion-header">
-            <a href="#meta">登录</a>                          
+            <a href="#admin">管理</a>                          
         </p>
         <div class="ui-accordion-content">                                   
             {% if user.is_authenticated %}
             <p class="account">
-                <a class="account icon" href="https://www.google.com/accounts/ManageAccount" target="_blank">管理</a>
-            </p>                                    
+                <a class="account icon" href="https://www.google.com/accounts/ManageAccount" target="_blank">帐号管理</a>
+            </p>
+            <p>
+                <a class="setting icon" href="/account/setting/">用户设置</a>    
+            </p>
+            {% if is_admin %}
+            <p>
+		<a class="post_add icon" href="/post/add/">添加文章</a>
+            </p>
+            <p>    
+                <a class="category_add icon" href="/category/add/">添加类别</a>
+            </p>
+            {% endif %}                
             <p class="logout">
-                <a class="logout icon" href="/logout/">退出</a>
+                <a class="logout icon" href="/logout/">退出登录</a>
             </p>
             {% else %}
             <p class="login">
                 <a class="login icon" href="/login/">登录</a>
             </p>
             {% endif %}
-            <p class="XFN">
-                <a class="heart icon" href="http://coral33389.spaces.live.com/" rel="sweetheart">XFN</a>
-            </p>
         </div>
     </div>                            
     <div class="block ui-accordion-group">
@@ -104,5 +97,15 @@
             </li>
         {% endfor %}
         </ul>                            
+    </div>
+    <div class="block ui-accordion-group" id="link_block">
+        <p class="ui-accordion-header">
+            <a href="#link">链接</a>
+        </p>
+        <div class="ui-accordion-content">
+            <p class="XFN">
+                <a class="link icon" href="http://coral33389.spaces.live.com/" rel="sweetheart">Coral</a>
+            </p>
+        </div>
     </div>
 </div>

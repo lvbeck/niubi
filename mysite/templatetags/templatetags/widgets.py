@@ -1,6 +1,7 @@
 # -*- coding: utf8 -*-
 from django.template import Library
 from mysite.blog.models import Post, Category, Tag
+from mysite.account.models import UserSettings
 from django.utils.safestring import mark_safe
 
 register = Library()
@@ -10,7 +11,8 @@ register = Library()
 def widgets(context):
     context['categories'] = Category.all().order('-post_count')
     context['tags'] = Tag.all()
-    context['archives'] = Post.getArchives()    
+    context['archives'] = Post.getArchives()
+    context['settings'] = UserSettings.getByCurrentUser()
     return context
 
 """

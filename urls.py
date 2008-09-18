@@ -26,7 +26,9 @@ urlpatterns = patterns('',
     (r'update/$', 'mysite.blog.views.update'),
     (r'^about/$', 'mysite.blog.views.about'),
     (r'^download/$', 'mysite.blog.views.download'),
-
+    
+    (r'^account/setting/$', 'mysite.account.views.setting'),
+    
     (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
     (r'^rss/latest/$', 'mysite.feeds.views.latest_feed_proxy'),
     (r'^rss/hottest/$', 'mysite.feeds.views.hottest_feed_proxy'),    

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}设置{% endblock %}
+{% block content %}
+<div class="block">
+	<h1 class="header">设置</h1>
+	<form name="mainForm" method="post" action="" onsubmit="mainForm.submit();">
+	    {{form.as_p}}
+	    <p>IM 协议：
+		<select id="id_im_protocol" name="im_protocol" value="im_protocol">
+		    <option value="unknown">Unknown or unspecified</option>
+		    <option value="sip">SIP/SIMPLE</option>
+		    <option value="xmpp">XMPP/Jabber</option>
+		    <option value="http://aim.com/">AIM</option>
+		    <option value="http://icq.com/">ICQ</option>
+		    <option value="http://qq.com/">QQ</option>
+		    <option selected="selected" value="http://talk.google.com/">Google Talk</option>
+		    <option value="http://messenger.msn.com/">MSN Messenger</option>
+		    <option value="http://messenger.yahoo.com/">Yahoo Messenger</option>
+		    <option value="http://sametime.com/">Lotus Sametime</option>
+		    <option value="http://gadu-gadu.pl/">Gadu-Gadu</option>
+		</select>
+	    </p>
+	    <p>
+		IM 帐号:
+		<input type="text" id="id_im_address" value="{{im_address}}" name="im_address"/>
+	    </p>
+	    <p>
+		<input type="submit" value="提交"/>
+	    </p>
+	</form>
+</div>
+{% endblock %}

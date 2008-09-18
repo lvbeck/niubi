@@ -216,7 +216,7 @@
    * @section             classifiedlinks
    * @app-yaml-default    disabled
    */
-  a.link { background: transparent url(../../images/icons/16x16/link.png) no-repeat scroll left center; }
+  a.link { background: transparent url(../../images/icons/16x16/link.png) no-repeat scroll left center; padding-bottom:2px; }
   a.edit { background: transparent url(../../images/icons/16x16/pencil.png) no-repeat scroll left center; }
   a.comment { background: transparent url(../../images/icons/16x16/comments.png) no-repeat scroll left center; padding-bottom:2px; }
   a.comment_add { background: transparent url(../../images/icons/16x16/comment_add.png) no-repeat scroll left center;padding-bottom:1px; color:#444;}
@@ -225,16 +225,17 @@
   a.delete { background: transparent url(../../images/icons/16x16/delete.png) no-repeat scroll left center; }
   a.reply { background: transparent url(../../images/icons/16x16/comment.png) no-repeat scroll left center; }
   a.account { background: transparent url(../../images/icons/16x16/status_online.png) no-repeat scroll left center; padding-bottom:3px; }
-  a.post_add { background: transparent url(../../images/icons/16x16/page_add.png) no-repeat scroll left center; padding-bottom:1px; }
+  a.post_add { background: transparent url(../../images/icons/16x16/page_add.png) no-repeat scroll left center; padding-top:2px; padding-bottom:1px; }
   a.category_add { background: transparent url(../../images/icons/16x16/folder_add.png) no-repeat scroll left center; padding-bottom:1px; }
   a.login { background: transparent url(../../images/icons/16x16/key.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px; }
   a.logout { background: transparent url(../../images/icons/16x16/key_go.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px;}
   a.contact { background: transparent url(../../images/icons/16x16/email.png) no-repeat scroll left center; padding-bottom:2px; }
-  a.subscribe{ background: transparent url(../../images/icons/16x16/feed.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px; }  
-  a.world_link{ background: transparent url(../../images/icons/16x16/world_link.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px; }
-  a.sitemap{ background: transparent url(../../images/icons/16x16/sitemap_color.png) no-repeat scroll left center; padding-top:1px; padding-bottom:1px; } 
-  a.sa{ background: transparent url(../../images/icons/16x16/sa.png) no-repeat scroll left center; padding-bottom:2px; } 
-  a.heart{ background: transparent url(../../images/icons/16x16/heart.png) no-repeat scroll left center; }
+  a.subscribe { background: transparent url(../../images/icons/16x16/feed.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px; }  
+  a.world_link { background: transparent url(../../images/icons/16x16/world_link.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px; }
+  a.sitemap { background: transparent url(../../images/icons/16x16/sitemap_color.png) no-repeat scroll left center; padding-top:1px; padding-bottom:1px; } 
+  a.sa { background: transparent url(../../images/icons/16x16/sa.png) no-repeat scroll left center; padding-bottom:2px; } 
+  a.heart { background: transparent url(../../images/icons/16x16/heart.png) no-repeat scroll left center; }
+  a.setting { background: transparent url(../../images/icons/16x16/wrench.png) no-repeat scroll left center; padding-top:2px; padding-bottom:2px; }
   /**
    * Tables | Tabellen
    * (en) Generic classes for table-width and design definition
@@ -277,10 +278,11 @@
   span.icon, a.icon { padding-left: 22px; }
   span.tag { background: transparent url(../../images/icons/16x16/tag_blue.png) no-repeat scroll left center; padding-bottom:2px; }
   span.category { background: transparent url(../../images/icons/16x16/folder.png) no-repeat scroll left center; }
-  div.block p { text-align: center; }
-  input[type="text"]{ height:16px; width:100%; padding:3px 0pt 0pt 5px; }
+  #col1 div.block p { text-align: center; }
+  input[type="text"]{ height:16px; width:75%; padding:3px 0pt 0pt 5px; }
   input[type="text"]:hover{ background-color: #FFFADB; }
-  input[type="textarea"]{ width:100%; } 
+  input[type="textarea"]{ width:100%; }
+  form textarea { width:75%; }
   button, input[type="button"], input[type="submit"]{ 
     border: 1px solid #5A5A5A;
     height: 21px;
@@ -290,5 +292,5 @@
     -moz-border-radius-bottomright: 3px;
     -moz-border-radius-topleft: 3px;
     -moz-border-radius-topright: 3px;
-  }  
+  }
 }

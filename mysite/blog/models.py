@@ -10,7 +10,10 @@ class Category(db.Model):
     
     def __str__(self):
         return self.name
-
+    
+    def get_absolute_url(self) :
+        return '/category/%s/'%self.key().id()
+    
 class Post(search.SearchableModel):
     author = db.UserProperty()
     title = db.TextProperty(required=True, verbose_name=u'标题')
@@ -105,6 +108,9 @@ class Tag(db.Model):
     
     def getPosts(self, min_relevance=0.00):                 
         return [entry.post for entry in PostTag.all().filter('tag =',self).filter('relevance > ',min_relevance).order('-relevance').order('-create_time')]         
+
+    def get_absolute_url(self):
+        return '/tag/%s/'%self.name
     
     def __cmp__(self, other):
         return cmp(self.post_count, other.post_count)  
@@ -152,6 +158,8 @@ class PostTag(db.Model):
     @staticmethod
     def getPosts(tag, min_relevance=0.00):
         if not tag: return []       
-        return [entry.post for entry in PostTag.all().filter('tag =',tag).filter('relevance > ',min_relevance).order('-relevance').order('-create_time')]    
+        return [entry.post for entry in PostTag.all().filter('tag =',tag).filter('relevance > ',min_relevance).order('-relevance').order('-create_time')]
+        
+
     
   
