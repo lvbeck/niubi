@@ -268,6 +268,11 @@
     border-bottom: 1px #eee solid;
   }
   
+  /**
+   * Div, Span and blockquote
+   *
+   * @section content-misc
+   */    
   div.post { padding:10px; }
   div.post, div.block { border: #ddd solid 1px; margin:15px; background: white;}
   div.block p.ui-accordion-header { border-bottom: solid #ddd 1px; text-align:center; }
@@ -279,7 +284,15 @@
   span.tag { background: transparent url(../../images/icons/16x16/tag_blue.png) no-repeat scroll left center; padding-bottom:2px; }
   span.category { background: transparent url(../../images/icons/16x16/folder.png) no-repeat scroll left center; }
   #col1 div.block p { text-align: center; }
-  input[type="text"]{ height:16px; width:75%; padding:3px 0pt 0pt 5px; }
+
+  /**
+   * Form and Inputs
+   *
+   * @section content-misc
+   */  
+  form { padding:10px; }
+  form[name="search"]{ padding:0; }
+  input[type="text"]{ height:16px; width:85%; padding:3px 0pt 0pt 5px; }
   input[type="text"]:hover{ background-color: #FFFADB; }
   input[type="textarea"]{ width:100%; }
   form textarea { width:75%; }

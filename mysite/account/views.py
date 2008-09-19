@@ -27,21 +27,29 @@ def logout(request):
 @login_required
 def setting(request):
     settings = UserSettings.getByCurrentUser()
-    im_protocol = '' # settings.im.protocol
-    im_address = '' # settings.im.address    
+    im_protocol = settings.im.protocol if settings.im is not None else ''
+    im_address = settings.im.address  if settings.im is not None else ''  
     if request.method == 'GET':
         form = UserSettingsForm({'firstname':settings.firstname,
                                  'lastname':settings.lastname,
                                  'gender':settings.gender,
                                  'profile': settings.profile,
-                                 'language': settings.language})
+                                 'language': settings.language,
+                                 'birthdate':settings.birthdate,
+                                 'website': settings.website,
+                                 'home_phone': settings.home_phone,
+                                 'work_phone':settings.work_phone,
+                                 'mobile':settings.mobile,
+                                 'fax':settings.fax,
+                                 'address':settings.address
+                                 })
     if request.method == 'POST':
         form = UserSettingsForm(request.POST)
         logging.getLogger().debug(form)
         if form.is_valid():
             modified_settings = form.save(commit=False)
-            settings.firstname = modified_settings.firstname
-            settings.lastname = modified_settings.lastname                    
+            settings.lastname = modified_settings.lastname
+            settings.firstname = modified_settings.firstname            
             settings.gender = modified_settings.gender
             settings.profile = modified_settings.profile
             settings.language = modified_settings.language
@@ -56,4 +64,4 @@ def setting(request):
                 settings.im = db.IM(request.POST['im_protocol'], request.POST['im_address'])
             settings.put()
             return HttpResponseRedirect('/')
-    return render_to_response('account/setting.html', {'im_protocol':im_address,'im_protocol':im_address,'form': form}, context_instance=RequestContext(request))
+    return render_to_response('account/setting.html', {'im_protocol':im_protocol,'im_address':im_address,'form': form}, context_instance=RequestContext(request))

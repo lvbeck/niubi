@@ -6,7 +6,7 @@
 	<form name="mainForm" method="post" action="" onsubmit="mainForm.submit();">
 	    {{form.as_p}}
 	    <p>IM 协议：
-		<select id="id_im_protocol" name="im_protocol" value="im_protocol">
+		<select id="id_im_protocol" name="im_protocol" value="{{im_protocol}}">
 		    <option value="unknown">Unknown or unspecified</option>
 		    <option value="sip">SIP/SIMPLE</option>
 		    <option value="xmpp">XMPP/Jabber</option>
