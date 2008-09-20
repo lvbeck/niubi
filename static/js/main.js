@@ -122,3 +122,31 @@ $(document).ready(function(){
 	changeFirstDay: false
     });
 });
+
+// Call this function when the page has been loaded
+function initialize() {
+    var searchControl = new google.search.SearchControl();
+    // create a drawOptions object
+    var drawOptions = new google.search.DrawOptions();  
+    // tell the searcher to draw itself in tabbed mode
+    drawOptions.setDrawMode(google.search.SearchControl.DRAW_MODE_LINEAR);
+    // create a searcher options object
+    var searchOptions = new google.search.SearcherOptions();
+    // set up for open expansion mode
+    searchOptions.setExpandMode(google.search.SearchControl.EXPAND_MODE_CLOSED);
+    
+    //searchControl.addSearcher(new google.search.LocalSearch(),searchOptions);
+    var siteSearch = new google.search.WebSearch();
+    siteSearch.setUserDefinedLabel("站内");
+    siteSearch.setUserDefinedClassSuffix("siteSearch");
+    siteSearch.setSiteRestriction("www.niubi.de");    
+    searchControl.addSearcher(siteSearch,searchOptions);
+    searchControl.addSearcher(new google.search.WebSearch(),searchOptions);
+    searchControl.addSearcher(new google.search.BlogSearch(),searchOptions);
+    searchControl.addSearcher(new google.search.VideoSearch(),searchOptions);
+    //searchControl.addSearcher(new google.search.NewsSearch(),searchOptions);
+    searchControl.addSearcher(new google.search.ImageSearch(),searchOptions);
+    //searchControl.addSearcher(new google.search.BookSearch(),searchOptions);    
+    searchControl.draw(document.getElementById("searchcontrol"),drawOptions);
+}
+google.setOnLoadCallback(initialize);

@@ -14,8 +14,8 @@
         <!--<link rel="stylesheet" type="text/css" href="/static/css/main.css" />-->
 	<link rel="stylesheet" type="text/css" href="/static/css/core/base.css" />
 	<link rel="stylesheet" type="text/css" href="/static/css/navigation/nav_shinybuttons.css" />
-	<link rel="stylesheet" type="text/css" href="/static/css/screen/basemod_shinybuttons.css" />
-	<link rel="stylesheet" type="text/css" href="/static/css/screen/content.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/screen/basemod_shinybuttons.css" />	
+        <link rel="stylesheet" type="text/css" href="/static/css/screen/content.css" />
 	<link rel="stylesheet" type="text/css" href="/static/css/screen/shinybuttons/lime.css" title="Lime" />
 	<link rel="alternate stylesheet" type="text/css" href="/static/css/screen/shinybuttons/black.css" title="Black" />
 	<link rel="alternate stylesheet" type="text/css" href="/static/css/screen/shinybuttons/silver.css" title="Silver" />
@@ -27,7 +27,8 @@
         <!--[if lte IE 7]>
         <link rel="stylesheet" type="text/css" href="/static/css/patches/patch_my_layout.css" />       
         <![endif]-->
-        <link rel="stylesheet" type="text/css" href="/static/css/dp.SyntaxHighlighter.css" /> 
+        <link rel="stylesheet" type="text/css" href="/static/css/dp.SyntaxHighlighter.css" />
+        <link rel="stylesheet" type="text/css" href="http://www.google.com/uds/css/gsearch.css" type="text/css" />
         {% block css %}{% endblock %}       
     </head>
     <body class="yui-skin-sam">
@@ -85,29 +86,33 @@
                                     <li onclick="setCurrent(this); setActiveStyleSheet('Purple'); return false;" title="Purple"><img src="/static/images/icons/22x21/purple.bmp" alt="Purple" /></li>
                                 </ul>
                             </div>
-                            <!-- SiteSearch Google -->
+                            <!-- SiteSearch Local -->
                             <div id="searchbox" class="box">                              
                                 <form name="search" method="get" action="/search/">
                                     <input type="text" name="q" id="q" maxlength="255" value="搜索关键字" onfocus="$('#q').val('')" />
-                                    <input type="hidden" name="ie" value="utf-8" />
+                                    <input type="submit" name="btnL" id="btnL" value="本地" />
+                                    <!--<input type="hidden" name="ie" value="utf-8" />
                                     <input type="hidden" name="oe" value="utf-8" />
                                     <input type="hidden" name="hl" value="zh-CN" />
-                                    <input type="submit" name="btnL" id="btnL" value="本地" />
                                     <input type="submit" name="btnG" id="btnG" value="Google" onclick="search.action='http://www.google.com/search';" />
                                     <input type="hidden" name="domains" value="niubi.de" />
-                                    <input type="hidden" name="sitesearch" value="niubi.de" />
+                                    <input type="hidden" name="sitesearch" value="niubi.de" />-->
                                 </form>                                
                             </div>
-                            <!-- SiteSearch Google -->
+                            <!-- SiteSearch Local -->
                             <div id="ui-datepicker" class="clearfix block"></div>
                             {% widgets %}
+                            <!-- SiteSearch Google -->
+                            <div id="searchcontrol"></div>
+                            <!-- SiteSearch Google -->
+                             
                         </div>
                     </div>
                     <div id="col3">
                         <div id="col3_content" class="clearfix">
-                            {% block navigator %}{% endblock %}
+                            {% block navigator %}{% endblock %}                           
                             {% block content %}{% endblock %}
-                        </div>
+                        </div>   
                         <!-- IE Column Clearing -->
                         <div id="ie_clearing"> &#160; </div>
                     </div>
@@ -153,7 +158,8 @@
             pageTracker._trackPageview();
         </script>
         -->
-        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAAIIgNazUFk3Vxj8WMSlL4ZxTYqWUNZ0C3G850mTR_MqLmNuL_yRSXv09UTXrOeRNuQL30lwjzrn4S8A"></script>
+        <script type="text/javascript">google.load("search", "1");</script>
         <script type="text/javascript">google.load("jquery", "1.2.6");</script>
         <script type="text/javascript">google.load("jqueryui", "1.5.2");</script>
         <script type="text/javascript" src="/static/js/main.js"></script>

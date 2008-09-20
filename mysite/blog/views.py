@@ -27,7 +27,7 @@ def add_post(request):
             post.category.put()            
             post.category.post_count += 1
             post.category.put()           
-            post.putTags(request.POST['tags'])
+            post.putTags(request.POST['tagsString'])
             post.put()
             return HttpResponseRedirect('/')
     return render_to_response('blog/operate_post.html', {'form': form}, context_instance=RequestContext(request))  
@@ -67,7 +67,7 @@ def edit_post(request, post_id):
                          # 'tags': post.tags, 
                          'category': post.category.key(), 
                          'is_published': post.is_published})
-        tags = ' '.join(map(lambda x:x.name, post.getTags()))
+        tagsString = ' '.join(map(lambda x:x.name, post.getTags()))
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
@@ -81,10 +81,10 @@ def edit_post(request, post_id):
             post.category = modified_post.category                    
             post.content = modified_post.content
             post.is_published = modified_post.is_published
-            post.putTags(request.POST['tags'])
+            post.putTags(request.POST['tagsString'])
             post.put()
             return HttpResponseRedirect('/post/%s/'%post.key().id())  
-    return render_to_response('blog/operate_post.html', {'form': form, 'id':post.key().id, 'tags': tags}, context_instance=RequestContext(request))
+    return render_to_response('blog/operate_post.html', {'form': form, 'id':post.key().id, 'tagsString': tagsString}, context_instance=RequestContext(request))
 
 def print_post (request, post_id):
     post = Post.get_by_id(int(post_id))

@@ -111,7 +111,7 @@
   #footer { border-top: lightgray solid 1px; }
   
   #q {  
-    width: 45%; 
+    width: 75%; 
     background: #fff;
     border: 1px solid #ddd;
     color: #666;
@@ -172,6 +172,8 @@
   .comment_header { padding-top: 20px; height: 15px; }
   .small_font { font-size: 11px; }
   .title > a{ font-size: 1.5em; font-weight: bold; font-family: "Trebuchet MS",Verdana,Arial,sans-serif; padding-top: 15px; }
+  .subtitle, .post_content { font-family: "Trebuchet MS","Lucida Console","Lucida Sans"; }
+  
   /**
    * Hyperlinks
    *
@@ -184,6 +186,9 @@
   a:focus,
   a:hover,
   a:active {color:#182E7A; text-decoration:underline;}
+  
+  .subtitle a, .post_content a { background: transparent url(../../images/bg/dotline.png) repeat-x scroll center bottom; }
+  .subtitle a:focus, a:hover, a:active, .post_content a:focus, a:hover, a:active { background: transparent none repeat scroll 0 0 }
   
   #topnav a { color: #ddd; font-weight: normal; }
   #topnav a:focus, 
@@ -284,7 +289,8 @@
   span.tag { background: transparent url(../../images/icons/16x16/tag_blue.png) no-repeat scroll left center; padding-bottom:2px; }
   span.category { background: transparent url(../../images/icons/16x16/folder.png) no-repeat scroll left center; }
   #col1 div.block p { text-align: center; }
-
+  #searchcontrol .gsc-control { width:100%; }
+  #searchcontrol form { padding:0; width:100%; }
   /**
    * Form and Inputs
    *
