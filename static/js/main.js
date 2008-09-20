@@ -22,13 +22,13 @@ function setActiveStyleSheet(title) {
         }
     }
     for(i=0; (a = document.getElementsByTagName("li")[i]); i++) {
-		if(a.getAttribute("title")) {
-			if(a.getAttribute("title")==title) {
-				a.className = "current";
-			} else {
-				a.className = "";
-			}
-		}
+        if(a.getAttribute("title")) {
+            if(a.getAttribute("title")==title) {
+                    a.className = "current";
+            } else {
+                    a.className = "";
+            }
+        }
     }
 }
 

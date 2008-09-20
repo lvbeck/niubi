@@ -171,7 +171,7 @@
   .action { text-align: right; position:relative; top:-12px; }
   .comment_header { padding-top: 20px; height: 15px; }
   .small_font { font-size: 11px; }
-  .title > a{ font-size: 1.5em; font-weight: bold; font-family: "Trebuchet MS",Verdana,Arial,sans-serif; padding-top: 15px; }
+  .title > a{ font-size: 1.5em; font-weight: bold; font-family: "Trebuchet MS",Verdana,Arial,sans-serif; }
   .subtitle, .post_content { font-family: "Trebuchet MS","Lucida Console","Lucida Sans"; }
   
   /**
