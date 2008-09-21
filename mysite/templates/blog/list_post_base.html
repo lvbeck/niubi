@@ -11,14 +11,14 @@
 
 <!--{% block navigator %}{% endblock %}-->
 <div class="post" id="post_{{post.key.id}}">
-    <div class="post_header"> 
+    <div class="post_header">        
         <div class="title">
             <a href="/post/{{post.key.id}}">
                 {{ post.title }}{% if post.is_published %}{%else%}(未发布){%endif%}
             </a>    
         </div>
             <p/>
-        <div class="subtitle">
+        <div class="subtitle">           
             <span class="tag icon">
                 标签:
                 {% for tag in post.tags %}

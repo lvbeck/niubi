@@ -1,3 +1,5 @@
 User-Agent: *
 Allow: /
 
+Sitemap:http://www.niubi.de/sitemap/
+

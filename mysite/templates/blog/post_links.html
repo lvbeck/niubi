@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    {% for post in posts %}<a href="/post/{{ post.key.id }}/" class="small_font">{{ post.title }}</a>
+    <br/>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from google.appengine.ext.db import djangoforms as forms
-from models import Post
-from models import Comment
+from models import Post, Comment
 from django import newforms
 
 class PostForm(forms.ModelForm):
