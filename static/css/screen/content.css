@@ -91,16 +91,22 @@
   #col3_content { padding: 10px 0 0 0; }
 
   #main { margin: 0 0; }
+	
+  #switches, #searchbox, #friendconnect {
+	text-align: center;
+  }
 
   #switches {
     padding: 0px;
-    margin: 10px 0 10px 0;
-    text-align: center;
+    margin: 10px 0 10px 0;  
   }
   
   #searchbox {
     padding: 0 15px 0 15px;
-    text-align: center;
+  }
+
+  #friendconnect {
+	padding: 0 10px 0 10px;
   }
   
   #paginator {
@@ -173,6 +179,7 @@
   .small_font { font-size: 11px; }
   .title > a{ font-size: 1.5em; font-weight: bold; font-family: "Trebuchet MS",Verdana,Arial,sans-serif; }
   .subtitle, .post_content { font-family: "Trebuchet MS","Lucida Console","Lucida Sans"; }
+  .gadgets-gadget-container { text-align:center; }
   
   /**
    * Hyperlinks
