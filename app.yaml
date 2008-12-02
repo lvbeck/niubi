@@ -22,7 +22,7 @@ handlers:
   static_files: static/html/canvas.html
   upload: static/html/canvas.html
 
-- url: /canvas.html
+- url: /rpc_relay.html
   static_files: static/html/rpc_relay.html
   upload: static/html/rpc_relay.html
   
