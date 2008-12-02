@@ -18,6 +18,14 @@ handlers:
   static_files: static/robots.txt
   upload: static/robots.txt
 
+- url: /canvas.html
+  static_files: static/html/canvas.html
+  upload: static/html/canvas.html
+
+- url: /canvas.html
+  static_files: static/html/rpc_relay.html
+  upload: static/html/rpc_relay.html
+  
 - url: /.*
   script: main.py
 
