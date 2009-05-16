@@ -5,9 +5,6 @@
 {% block meta %}
 <meta name="keyword" content={{ post.tags}}>
 {% endblock %}
-{% block css %}
-<link rel="stylesheet" type="text/css" href="/static/css/dp.SyntaxHighlighter.css" />  
-{% endblock %}
 {% block content%}
 <div class="post">
 	<div class="post_header">
@@ -87,13 +84,4 @@
 		<p></p>
 	</div>
 </div>
-{% endblock %}
-{% block js %}
-<script type="text/javascript" src="/static/js/dp.SyntaxHighlighter.js"></script> 
-<script type="text/javascript">
-	jQuery("pre > br").each( function() { jQuery(this).replaceWith( "\n" ); } );
-    jQuery("textarea > br").each( function() { jQuery(this).replaceWith( "\n" ); } );
-    dp.SyntaxHighlighter.ClipboardSwf = '/static/flash/clipboard.swf';
-    dp.SyntaxHighlighter.HighlightAll('code');
-</script>
 {% endblock %}
