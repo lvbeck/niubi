@@ -74,11 +74,12 @@ class Post(search.SearchableModel):
     @staticmethod
     def getArchives():
         l = []
-        archive = Post.all().order('create_time').get().create_time       
-        while archive < datetime.today():            
-            l.append(archive)
-            archive = Post.getNextMonth(archive)
-        l.reverse()
+        if Post.all().get():
+            archive = Post.all().order('create_time').get().create_time       
+            while archive < datetime.today():            
+                l.append(archive)
+                archive = Post.getNextMonth(archive)
+            l.reverse()
         return l
         
     
