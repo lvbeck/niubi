@@ -19,16 +19,10 @@ App Engine compatible models for the Django authentication framework.
 from django.core import mail
 from django.core.exceptions import ImproperlyConfigured
 from django.db import models
+from django.utils.encoding import smart_str
+import urllib
 
-try:
-  # Django >= 0.97
-  from django.db.models.manager import EmptyManager
-except ImportError:
-  # Django = 0.96
-  from django.db.models.manager import Manager
-  class EmptyManager(Manager):
-    def get_query_set(self):
-      return self.get_empty_query_set()
+from django.db.models.manager import EmptyManager
 
 from google.appengine.api import users
 from google.appengine.ext import db
@@ -53,7 +47,6 @@ class User(BaseModel):
   is_staff = db.BooleanProperty(default=False, required=True)
   is_active = db.BooleanProperty(default=True, required=True)
   is_superuser = db.BooleanProperty(default=False, required=True)
-  is_staff = db.BooleanProperty(default=False, required=True)
   last_login = db.DateTimeProperty(auto_now_add=True, required=True)
   date_joined = db.DateTimeProperty(auto_now_add=True, required=True)
   groups = EmptyManager()

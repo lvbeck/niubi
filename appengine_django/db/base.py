@@ -21,19 +21,12 @@ import os
 
 from appengine_django import appid
 from appengine_django import have_appserver
+from appengine_django.db.creation import DatabaseCreation
 
 
-try:
-  # Django >= 0.97
-  from django.db.backends import BaseDatabaseWrapper
-  from django.db.backends import BaseDatabaseFeatures
-  from django.db.backends import BaseDatabaseOperations
-except ImportError:
-  # Django 0.96
-  from threading import local
-  BaseDatabaseWrapper = local
-  BaseDatabaseFeatures = object
-  BaseDatabaseOperations = object
+from django.db.backends import BaseDatabaseWrapper
+from django.db.backends import BaseDatabaseFeatures
+from django.db.backends import BaseDatabaseOperations
 
 
 def get_datastore_paths():
@@ -94,12 +87,12 @@ class IntegrityError(Exception):
 
 
 class DatabaseFeatures(BaseDatabaseFeatures):
-  """Stub class to provide the feaures member expected by Django 0.97"""
+  """Stub class to provide the feaures member expected by Django"""
   pass
 
 
 class DatabaseOperations(BaseDatabaseOperations):
-  """Stub class to provide the options member expected by Django 0.97"""
+  """Stub class to provide the options member expected by Django"""
   pass
 
 
@@ -111,11 +104,12 @@ class DatabaseWrapper(BaseDatabaseWrapper):
   by the appengine libraries if they have not already been initialised by an
   appserver.
   """
-  features = DatabaseFeatures()
-  ops = DatabaseOperations()
 
   def __init__(self, *args, **kwargs):
     super(DatabaseWrapper, self).__init__(*args, **kwargs)
+    self.features = DatabaseFeatures()
+    self.ops = DatabaseOperations()
+    self.creation = DatabaseCreation(self)
     self.use_test_datastore = kwargs.get("use_test_datastore", False)
     self.test_datastore_inmemory = kwargs.get("test_datastore_inmemory", True)
     if have_appserver:

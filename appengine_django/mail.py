@@ -24,33 +24,15 @@ Multipart / HTML email is not yet supported.
 import logging
 
 from django.core import mail
+from django.core.mail import SMTPConnection
 from django.conf import settings
 
 from google.appengine.api import mail as gmail
-
-try:
-  # Django >= 0.97
-  from django.core.mail import SMTPConnection
-except ImportError:
-  # Django = 0.96
-  SMTPConnection = object
 
 
 class GoogleSMTPConnection(SMTPConnection):
   def __init__(self, host=None, port=None, username=None, password=None,
                use_tls=None, fail_silently=False):
-    if (host):
-      logging.warn("'host' parameter is ignored when running "
-                   "in Google App Engine")
-    if (port):
-      logging.warn("'port' parameter is ignored when running in "
-                   "Google App Engine")
-    if (username):
-      logging.warn("'username' parameter is ignored when running "
-                   "in Google App Engine")
-    if (password):
-      logging.warn("'password' parameter is ignored when running "
-                   "in Google App Engine")
     self.use_tls = (use_tls is not None) and use_tls or settings.EMAIL_USE_TLS
     self.fail_silently = fail_silently
     self.connection = None
@@ -73,6 +55,8 @@ class GoogleSMTPConnection(SMTPConnection):
                                to=email_message.to,
                                subject=email_message.subject,
                                body=email_message.body)
+        if email_message.extra_headers.get('Reply-To', None):
+            e.reply_to = email_message.extra_headers['Reply-To']
         if email_message.bcc:
             e.bcc = list(email_message.bcc)
         #TODO - add support for html messages and attachments...
@@ -82,42 +66,6 @@ class GoogleSMTPConnection(SMTPConnection):
           raise
       return False
     return True
-
-
-#Remove this when 0.96 support is no longer needed.
-def send_mass_mail(datatuple, fail_silently=False, auth_user=None,
-                   auth_password=None):
-    """
-    Given a datatuple of (subject, message, from_email, recipient_list), sends
-    each message to each recipient list. Returns the number of e-mails sent.
-
-    If from_email is None, the DEFAULT_FROM_EMAIL setting is used.
-
-    This implementation for Google App Engine ignores the auth_user and
-    auth_password setting, as these are not needed when using App Engine's
-    default mail API.
-    """
-    if auth_user:
-        logging.warning("auth_user parameter is ignored when running in "
-                        "Google App Engine")
-    if auth_password:
-        logging.warning("auth_password parameter is ignored when running in "
-                        "Google App Engine")
-    num_sent = 0
-    for subject, message, from_email, recipient_list in datatuple:
-        if not recipient_list:
-            continue
-        from_email = from_email or settings.DEFAULT_FROM_EMAIL
-        try:
-          gmail.send_mail(sender=from_email,
-                          to=', '.join(recipient_list),
-                          subject=subject,
-                          body=message)
-          num_sent += 1
-        except:
-          if not fail_silently:
-            raise
-    return num_sent
 
 
 def mail_admins(subject, message, fail_silently=False):

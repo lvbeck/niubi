@@ -21,11 +21,7 @@ import sys
 from appengine_django.db.base import destroy_datastore
 from appengine_django.db.base import get_test_datastore_paths
 
-try:
-  from django.core.management.base import BaseCommand
-except ImportError:
-  # Fake BaseCommand out so imports on django 0.96 don't fail.
-  BaseCommand = object
+from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
@@ -62,6 +58,13 @@ class Command(BaseCommand):
     new_args.extend(['--datastore_path', datastore_path])
     new_args.extend(['--history_path', history_path])
     new_args.extend([os.getcwdu()])
+
+    # Add email settings
+    from django.conf import settings
+    new_args.extend(['--smtp_host', settings.EMAIL_HOST,
+                     '--smtp_port', str(settings.EMAIL_PORT),
+                     '--smtp_user', settings.EMAIL_HOST_USER,
+                     '--smtp_password', settings.EMAIL_HOST_PASSWORD])
 
     # Start the test dev_appserver.
     from google.appengine.tools import dev_appserver_main

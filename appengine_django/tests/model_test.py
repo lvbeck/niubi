@@ -19,9 +19,13 @@
 
 import unittest
 
+from django import VERSION
 from django.db.models import get_models
+from django import forms
 
+from google.appengine.ext.db import djangoforms
 from google.appengine.ext import db
+
 from appengine_django.models import BaseModel
 from appengine_django.models import ModelManager
 from appengine_django.models import ModelOptions
@@ -29,12 +33,7 @@ from appengine_django.models import RegistrationTestModel
 
 
 class TestModelWithProperties(BaseModel):
-  """Test model class for checking property -> Django field setup.
-
-  When using Django 0.96 this model won't appear in the output of get_models()
-  as it is not within the applications models module, it works fine in all
-  other aspects however. Django 0.97 fixes this problem.
-  """
+  """Test model class for checking property -> Django field setup."""
   property1 = db.StringProperty()
   property2 = db.IntegerProperty()
   property3 = db.Reference()
@@ -57,14 +56,15 @@ class ModelTest(unittest.TestCase):
     self.assert_(isinstance(RegistrationTestModel._meta, ModelOptions))
     # Django requires a manager at .objects
     self.assert_(isinstance(RegistrationTestModel.objects, ModelManager))
-    # Django 0.97 also requires ._default_manager.
+    # Django requires ._default_manager.
     self.assert_(hasattr(RegistrationTestModel, "_default_manager"))
 
   def testDjangoModelFields(self):
     """Tests that a combined model class has (faked) Django fields."""
-    self.assertEqual(3, len(TestModelWithProperties._meta.fields))
+    fields = TestModelWithProperties._meta.local_fields
+    self.assertEqual(3, len(fields))
     # Check each fake field has the minimal properties that Django needs.
-    for field in TestModelWithProperties._meta.fields:
+    for field in fields:
       # The Django serialization code looks for rel to determine if the field
       # is a relationship/reference to another model.
       self.assert_(hasattr(field, "rel"))
@@ -89,10 +89,6 @@ class ModelTest(unittest.TestCase):
     # The many_to_many method is called by Django in the serialization code to
     # find m2m relationships. m2m is not supported by the datastore.
     self.assertEqual([], RegistrationTestModel._meta.many_to_many)
-    # The Django 0.96 serialization code relies on the str() representation of
-    # the model options being "app_label.model_name" in lower case.
-    self.assertEqual("appengine_django.registrationtestmodel",
-                     str(RegistrationTestModel._meta))
 
   def testDjangoModelManagerStub(self):
     """Tests that the manager stub acts as Django would expect."""
@@ -108,3 +104,7 @@ class ModelTest(unittest.TestCase):
     self.assert_(pk)
     new_obj = RegistrationTestModel.get(pk)
     self.assertEqual(obj.key(), new_obj.key())
+
+  def testModelFormPatched(self):
+    """Tests that the Django ModelForm is being successfully patched."""
+    self.assertEqual(djangoforms.ModelForm, forms.ModelForm)

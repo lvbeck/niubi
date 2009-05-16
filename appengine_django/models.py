@@ -19,6 +19,7 @@ import types
 
 from google.appengine.ext import db
 
+from django import VERSION
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.fields import Field
 from django.db.models.options import Options
@@ -48,6 +49,7 @@ class ModelOptions(object):
     self.module_name = self.object_name.lower()
     model_module = sys.modules[cls.__module__]
     self.app_label = model_module.__name__.split('.')[-2]
+    self.abstract = False
 
   class pk:
     """Stub the primary key to always be 'key_name'"""
@@ -132,7 +134,8 @@ class PropertiedClassWithDjango(db.PropertiedClass):
       # This metaclass only acts on subclasses of BaseModel.
       return
 
-    cls._meta.fields = [PropertyWrapper(p) for p in cls._properties.values()]
+    fields = [PropertyWrapper(p) for p in cls._properties.values()]
+    cls._meta.local_fields = fields
 
 
 class BaseModel(db.Model):
@@ -153,6 +156,20 @@ class BaseModel(db.Model):
   def _get_pk_val(self):
     """Return the string representation of the model's key"""
     return unicode(self.key())
+
+  def __repr__(self):
+    """Create a string that can be used to construct an equivalent object.
+
+    e.g. eval(repr(obj)) == obj
+    """
+    # First, creates a dictionary of property names and values. Note that
+    # property values, not property objects, has to be passed in to constructor.
+    def _MakeReprTuple(prop_name):
+      prop = getattr(self.__class__, prop_name)
+      return (prop_name, prop.get_value_for_datastore(self))
+
+    d = dict([_MakeReprTuple(prop_name) for prop_name in self.properties()])
+    return "%s(**%s)" % (self.__class__.__name__, repr(d))
 
 
 class RegistrationTestModel(BaseModel):
