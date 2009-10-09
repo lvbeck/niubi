@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from google.appengine.ext.db import djangoforms as forms
 from models import Post, Comment
-from django import newforms
+from django import forms as newforms
 
 class PostForm(forms.ModelForm):
     title = newforms.CharField(label=u'标题', widget = newforms.TextInput)

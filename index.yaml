@@ -29,7 +29,7 @@ indexes:
   - name: create_time
     direction: desc
 
-# Used 2 times in query history.
+# Used 4 times in query history.
 - kind: Post
   properties:
   - name: category
@@ -48,7 +48,7 @@ indexes:
   - name: is_published
   - name: create_time
 
-# Used 8 times in query history.
+# Used 13 times in query history.
 - kind: Post
   properties:
   - name: is_published
@@ -73,7 +73,7 @@ indexes:
   - name: create_time
     direction: desc
 
-# Unused in query history -- copied from input.
+# Used once in query history.
 - kind: PostTag
   properties:
   - name: tag

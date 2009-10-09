@@ -52,6 +52,7 @@ except ImportError:
       from xml.etree import ElementTree
     except ImportError:
       from elementtree import ElementTree
+import atom
 
 
 class AtomService(object):
@@ -63,10 +64,21 @@ class AtomService(object):
   # Default values for members
   port = 80
   ssl = False
-  # Set the override_token to force the AtomService to use this token
+  # Set the current_token to force the AtomService to use this token
   # instead of searching for an appropriate token in the token_store.
-  override_token = None
+  current_token = None
+  auto_store_tokens = True
+  auto_set_current_token = True
 
+  def _get_override_token(self):
+    return self.current_token
+
+  def _set_override_token(self, token):
+    self.current_token = token
+
+  override_token = property(_get_override_token, _set_override_token)
+
+  #@atom.v1_deprecated('Please use atom.client.AtomPubClient instead.')
   def __init__(self, server=None, additional_headers=None, 
       application_name='', http_client=None, token_store=None):
     """Creates a new AtomService client.
@@ -94,6 +106,10 @@ class AtomService(object):
     # If debug is True, the HTTPConnection will display debug information
     self._set_debug(False)
 
+  __init__ = atom.v1_deprecated(
+      'Please use atom.client.AtomPubClient instead.')(
+          __init__)
+
   def _get_debug(self):
     return self.http_client.debug
 
@@ -110,7 +126,10 @@ class AtomService(object):
       base_64_string = base64.encodestring('%s:%s' % (username, password))
       token = BasicAuthToken('Basic %s' % base_64_string.strip(), 
           scopes=[atom.token_store.SCOPE_ALL])
-      self.token_store.add_token(token)
+      if self.auto_set_current_token:
+        self.current_token = token
+      if self.auto_store_tokens:
+        return self.token_store.add_token(token)
       return True
     return False
 
@@ -129,10 +148,14 @@ class AtomService(object):
     """
     self.use_basic_auth(username, password)
 
+  #@atom.v1_deprecated('Please use atom.client.AtomPubClient for requests.')
   def request(self, operation, url, data=None, headers=None, 
       url_params=None):
-    if isinstance(url, str):
-      if not url.startswith('http') and self.ssl:
+    if isinstance(url, (str, unicode)):
+      if url.startswith('http:') and self.ssl:
+        # Force all requests to be https if self.ssl is True.
+        url = atom.url.parse_url('https:' + url[5:])
+      elif not url.startswith('http') and self.ssl: 
         url = atom.url.parse_url('https://%s%s' % (self.server, url))
       elif not url.startswith('http'):
         url = atom.url.parse_url('http://%s%s' % (self.server, url))
@@ -161,6 +184,10 @@ class AtomService(object):
       auth_token = self.token_store.find_token(url)
     return auth_token.perform_request(self.http_client, operation, url, 
         data=data, headers=all_headers)
+
+  request = atom.v1_deprecated(
+      'Please use atom.client.AtomPubClient for requests.')(
+          request)
 
   # CRUD operations
   def Get(self, uri, extra_headers=None, url_params=None, escape_params=True):
@@ -472,7 +499,6 @@ def ProcessUrl(service, url, for_proxy=False):
 
   This method is deprecated, use atom.url.parse_url instead.
   """
-  deprecation('call to deprecated function ProcessUrl')
   if not isinstance(url, atom.url.Url):
     url = atom.url.parse_url(url)
 
@@ -516,7 +542,6 @@ def DictionaryToParamList(url_parameters, escape_params=True):
     A list which contains a string for each key-value pair. The strings are
     ready to be incorporated into a URL by using '&'.join([] + parameter_list)
   """
-  deprecation('call to deprecated function DictionaryToParamList')
   # Choose which function to use when modifying the query and parameters.
   # Use quote_plus when escape_params is true.
   transform_op = [str, urllib.quote_plus][bool(escape_params)]
@@ -555,7 +580,6 @@ def BuildUri(uri, url_params=None, escape_params=True):
     string The URI consisting of the escaped URL parameters appended to the
     initial uri string.
   """
-  deprecation('call to deprecated function BuildUri')
   # Prepare URL parameters for inclusion into the GET request.
   parameter_list = DictionaryToParamList(url_params, escape_params)
 
