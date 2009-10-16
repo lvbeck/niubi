@@ -31,7 +31,7 @@ from appengine_django import django_zip_path
 InstallAppengineHelperForDjango()
 
 # Google App Engine imports.
-from google.appengine.ext.webapp import util
+from google.appengine.ext.webapp.util import run_wsgi_app
 
 # Import the part of Django that we use here.
 import django.core.handlers.wsgi
@@ -45,7 +45,7 @@ def main():
   application = django.core.handlers.wsgi.WSGIHandler()
 
   # Run the WSGI CGI handler with that application.
-  util.run_wsgi_app(application)
+  run_wsgi_app(application)
 
 if __name__ == '__main__':
   main()

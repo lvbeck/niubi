@@ -9,7 +9,8 @@ from django.shortcuts import render_to_response
 from google.appengine.ext import db
 from google.appengine.api import users
 
-from mysite.utils.webutils import login_required, admin_required, is_admin, object_list
+from mysite.utils.http import object_list
+from mysite.utils.http.auth import login_required, admin_required, is_admin
 
 from models import UserSettings
 from forms import UserSettingsForm

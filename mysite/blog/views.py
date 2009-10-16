@@ -9,8 +9,8 @@ from django.shortcuts import render_to_response
 
 from google.appengine.api import users
 from google.appengine.api import mail
-
-from mysite.utils.webutils import login_required, admin_required, is_admin, object_list
+from mysite.utils.http import object_list
+from mysite.utils.http.auth import login_required, admin_required, is_admin
 from models import Post, Comment, Category, Tag
 from forms import PostForm, CommentForm
 
@@ -52,6 +52,7 @@ def add_category(request):
     if request.method == 'POST':
         category = Category()
         category.name = request.POST['name']
+        category.slug = request.POST['slug']
         category.put();   
         return HttpResponseRedirect('/category/add')  
     return render_to_response('blog/add_category.html', context_instance=RequestContext(request))
@@ -67,7 +68,7 @@ def edit_post(request, post_id):
                          # 'tags': post.tags, 
                          'category': post.category.key(), 
                          'is_published': post.is_published})
-        tagsString = ' '.join(map(lambda x:x.name, post.getTags()))
+        tagsString = post.getTagsString()
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():

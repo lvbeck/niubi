@@ -53,3 +53,7 @@ urlpatterns += patterns('mysite.blog.views',
     (r'^search/$', 'search'),  
     (r'^sitemap/$', 'sitemap'),
 )
+
+urlpatterns += patterns('',
+    (r'', include('openidgae.urls')),
+)

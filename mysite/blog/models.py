@@ -5,6 +5,8 @@ from google.appengine.ext import search
 
 class Category(db.Model):
     name = db.StringProperty()
+    slug = db.StringProperty()
+    parent_category = db.SelfReferenceProperty()    
     post_count = db.IntegerProperty(default=0)
     #logo = db.StringProperty()
     
@@ -38,7 +40,10 @@ class Post(search.SearchableModel):
     
     def getTags(self, min_relevance=0.00):                        
         return [entry.tag for entry in PostTag.all().filter('post =',self).filter('relevance > ',min_relevance).order('-relevance').order('-create_time')]
-
+    
+    def getTagsString(self, separator=' ', min_relevance=0.00):
+        return separator.join(map(lambda x:x.name, self.getTags(min_relevance)))
+    
     def get_absolute_url(self) :
         return '/post/%s/'%self.key().id()
     
@@ -162,5 +167,9 @@ class PostTag(db.Model):
         return [entry.post for entry in PostTag.all().filter('tag =',tag).filter('relevance > ',min_relevance).order('-relevance').order('-create_time')]
         
 
+class Logger(db.Model):
+    request = db.TextProperty()
+    response = db.TextProperty()
+    create_time = db.DateTimeProperty(auto_now_add=True)
     
   
