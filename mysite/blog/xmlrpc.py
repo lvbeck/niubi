@@ -44,22 +44,42 @@ def demo_sayHello():
     return 'Hello!'
 
 #-------------------------------------------------------------------------------
+# metaWeblog
+#-------------------------------------------------------------------------------
+def _mw_newPost(blogid, struct, publish):
+    postid = post.key().id()
+    return str(postid)
+    
+@rpc_login_required()
+def metaWeblog_newPost(blogid, struct, publish):
+    # Let _mw_newPost do all of the heavy lifting.
+    return _mw_newPost(blogid,struct,publish)
+    
+#-------------------------------------------------------------------------------
 #  WordPress API
 #-------------------------------------------------------------------------------
 
-@rpc_login_required
+@rpc_login_required()
 def wp_newCategory(blogid,struct):
     name=struct['name']
-    categories=Category.all().filter('name =',name).fetch(1)
+    categories = Category.all().filter('name =',name).fetch(1)
+    categoryid = ''
     if categories and len(categories):
-        return categories[0].key().id()
+        categoryid = categories[0].key().id()
     else:
         category = Category()
         category.name = name
         category.slug = urlencode(name)
-        category.put();   
-        return category.key().id()
-              
+        category.put();
+        categoryid = category.key().id()    
+    return str(categoryid)
+
+@rpc_login_required()
+def wp_newPage(blogid,struct,publish): 
+    struct['post_type'] = 'page'
+    # Let _mw_newPost do all of the heavy lifting.    
+    return(_mw_newPost(blogid,struct,publish))
+        
 dispatcher = PlogXMLRPCDispatcher({
     'demo.sayHello':demo_sayHello,    
     #'blogger.getUsersBlogs' : blogger_getUsersBlogs,
