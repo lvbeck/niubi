@@ -25,9 +25,6 @@ handlers:
 - url: /rpc_relay.html
   static_files: static/html/rpc_relay.html
   upload: static/html/rpc_relay.html
-
-- url: /rpc|/rpc
-  script: mysite/blog/xmlrpc.py
   
 - url: /.*
   script: main.py

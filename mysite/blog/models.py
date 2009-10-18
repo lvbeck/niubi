@@ -167,9 +167,5 @@ class PostTag(db.Model):
         return [entry.post for entry in PostTag.all().filter('tag =',tag).filter('relevance > ',min_relevance).order('-relevance').order('-create_time')]
         
 
-class Logger(db.Model):
-    request = db.TextProperty()
-    response = db.TextProperty()
-    create_time = db.DateTimeProperty(auto_now_add=True)
     
   

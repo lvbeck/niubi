@@ -86,7 +86,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
-#    'django.core.context_processors.media',  # 0.97 only.
+    'django.core.context_processors.media',
     'django.core.context_processors.request',
 )
 
@@ -95,6 +95,13 @@ ROOT_URLCONF = 'urls'
 ROOT_PATH = os.path.dirname(__file__)
 TEMPLATE_DIRS = (
     os.path.join(ROOT_PATH, 'mysite/templates')
+)
+
+XMLRPC_GET_TEMPLATE = 'post-only.html'
+
+XMLRPC_METHODS = (
+    # We list methods to be exposed in the form (<method path>, <xml-rpc name>,)
+    ('mysite.blog.api.sayHello', 'sayHello',),
 )
 
 INSTALLED_APPS = (

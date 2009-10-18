@@ -11,6 +11,7 @@ from google.appengine.api import users
 from google.appengine.api import mail
 from mysite.utils.http import object_list
 from mysite.utils.http.auth import login_required, admin_required, is_admin
+from mysite.utils.http.models import RequestLogger
 from models import Post, Comment, Category, Tag
 from forms import PostForm, CommentForm
 
@@ -255,5 +256,25 @@ def archives(request, year, month):
     posts = Post.getByYM(year, month)
     return object_list(request, queryset=posts, allow_empty=True,
             template_name='blog/list_archives_post.html', extra_context={'is_admin': is_admin(), 'year': year, 'month': month},
-            paginate_by=settings.POST_LIST_PAGE_SIZE)
+            paginate_by=settings.POST_LIST_PAGE_SIZE)    
+
+@admin_required
+def view_log(request):
+    if request.method == 'GET':
+        str = '<html><body><h1>Logger</h1>'
+        for log in RequestLogger.all().order('-create_time').fetch(5,0):
+            str += '<p>date: %s</p>' % log.create_time
+            str += '<h1>Request</h1>'
+            str += '<pre>%s</pre>' % cgi.escape(log.request)
+            str += '<h1>Reponse</h1>'
+            str += '<pre>%s</pre>' % cgi.escape(log.response)
+            str += '<hr />'
+        str += '</body></html>'          
+    return HttpResponse(str)
+
+@admin_required      
+def delete_log(request):
+    for log in RequestLogger.all():
+        log.delete()
+    return HttpResponseRedirect('/rpc/view_log/')    
     

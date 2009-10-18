@@ -52,8 +52,13 @@ urlpatterns += patterns('mysite.blog.views',
     (r'^tag/(?P<tag_name>\w+)/$', 'list_tag_post'),
     (r'^search/$', 'search'),  
     (r'^sitemap/$', 'sitemap'),
+    (r'^log/view/$', 'view_log'),
+    (r'^log/delete/$', 'delete_log'),    
 )
 
+urlpatterns += patterns('django_xmlrpc.views',
+    (r'^xmlrpc/$', 'handle_xmlrpc'),
+)
 urlpatterns += patterns('',
     (r'', include('openidgae.urls')),
 )
