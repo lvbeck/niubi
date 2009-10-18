@@ -13,8 +13,8 @@
 # limitations under the License.
 
 from django.conf.urls.defaults import *
-from mysite.feeds.models import LatestEntries
-from mysite.feeds.models import HottestEntries
+from feeds.models import LatestEntries
+from feeds.models import HottestEntries
 
 feeds = {
     'latest': LatestEntries,
@@ -22,24 +22,24 @@ feeds = {
 }
 
 urlpatterns = patterns('',
-    (r'^$', 'mysite.blog.views.list_post'),
-    (r'update/$', 'mysite.blog.views.update'),
-    (r'^about/$', 'mysite.blog.views.about'),
-    (r'^download/$', 'mysite.blog.views.download'),
+    (r'^$', 'blog.views.list_post'),
+    (r'update/$', 'blog.views.update'),
+    (r'^about/$', 'blog.views.about'),
+    (r'^download/$', 'blog.views.download'),
     
-    (r'^account/setting/$', 'mysite.account.views.setting'),
+    (r'^account/setting/$', 'account.views.setting'),
     
     (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
-    (r'^rss/latest/$', 'mysite.feeds.views.latest_feed_proxy'),
-    (r'^rss/hottest/$', 'mysite.feeds.views.hottest_feed_proxy'),    
+    (r'^rss/latest/$', 'feeds.views.latest_feed_proxy'),
+    (r'^rss/hottest/$', 'feeds.views.hottest_feed_proxy'),    
 )
 
-urlpatterns += patterns('mysite.account.views',    
+urlpatterns += patterns('account.views',    
     (r'^login/$', 'login'),
     (r'^logout/$', 'logout'),
 )
 
-urlpatterns += patterns('mysite.blog.views',
+urlpatterns += patterns('blog.views',
     (r'^post/add/$', 'add_post'),
     (r'^post/list/$', 'list_post'),
     (r'^post/list_all/$', 'list_all_post'),

@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 from django.template import Library
-from mysite.blog.models import Post, Category, Tag
-from mysite.account.models import UserSettings
+from blog.models import Post, Category, Tag
+from account.models import UserSettings
 
 register = Library()
 

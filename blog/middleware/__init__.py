@@ -1,4 +1,4 @@
-from mysite.blog.models import Category, Post
+from blog.models import Category, Post
 
 class InfoMiddleware(object):
   def process_request(self, request):

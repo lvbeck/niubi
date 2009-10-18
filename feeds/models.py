@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib.syndication.feeds import Feed
-from mysite.blog.models import Post
+from blog.models import Post
 
 class LatestEntries(Feed):
     title = u'牛逼最新文章'

@@ -77,7 +77,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
 #    'django.contrib.sessions.middleware.SessionMiddleware',
     'appengine_django.auth.middleware.AuthenticationMiddleware',
-#    'mysite.middleware.InfoMiddleware',
+#    'blog.middleware.InfoMiddleware',
 #    'django.middleware.doc.XViewMiddleware',
     'openidgae.middleware.OpenIDMiddleware',
 )
@@ -94,22 +94,22 @@ ROOT_URLCONF = 'urls'
 
 ROOT_PATH = os.path.dirname(__file__)
 TEMPLATE_DIRS = (
-    os.path.join(ROOT_PATH, 'mysite/templates')
+    os.path.join(ROOT_PATH, 'templates')
 )
 
 XMLRPC_GET_TEMPLATE = 'post-only.html'
 
 XMLRPC_METHODS = (
     # We list methods to be exposed in the form (<method path>, <xml-rpc name>,)
-    ('mysite.blog.api.sayHello', 'sayHello',),
+    ('blog.api.sayHello', 'sayHello',),
 )
 
 INSTALLED_APPS = (
      'appengine_django',
      'django.contrib.auth',
      'django.contrib.markup',
-     'mysite.blog',
-     'mysite.templatetags',
+     'blog',
+     'utils',
      'openidgae',
 #    'django.contrib.contenttypes',
 #    'django.contrib.sessions',
