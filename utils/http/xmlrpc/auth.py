@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import gdata.service
-import gdata.alt.appengine
+from lib.gdata import service
+import lib.gdata.alt 
 
 def login_required(pos=1):
     def _decorate(method):
@@ -8,8 +8,8 @@ def login_required(pos=1):
             # Tell the client that we are running in single user mode, and it should not
             # automatically try to associate the token with the current user then store
             # it in the datastore.        
-            client = gdata.service.GDataService()
-            gdata.alt.appengine.run_on_appengine(client, store_tokens=False, single_user_mode=True)
+            client = service.GDataService()
+            lib.gdata.alt.appengine.run_on_appengine(client, store_tokens=False, single_user_mode=True)
             client.email = args[pos+0]
             client.password = args[pos+1]
             # To request a ClientLogin token you must specify the desired service using

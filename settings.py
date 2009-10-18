@@ -108,12 +108,14 @@ INSTALLED_APPS = (
      'appengine_django',
      'django.contrib.auth',
      'django.contrib.markup',
-     'shared',
-     'blog',
-     'openidgae',
 #    'django.contrib.contenttypes',
 #    'django.contrib.sessions',
-#    'django.contrib.sites',
+#    'django.contrib.sites',     
+     'shared',
+     'blog',
+     'feeds',
+     'django_xmlrpc',         
+#     'openidgae', 
 )
 
 POST_LIST_PAGE_SIZE = 5
