@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import xmlrpclib
-from utils.http.xmlrpc.auth import login_required as login_required
+from lib.xmlrpc.auth import login_required as login_required
 from blog.models import *
 
 def format_date(d):

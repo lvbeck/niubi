@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 from django.template import Library
-from utils.http.auth import is_admin
+from lib.http.auth import is_admin
 from google.appengine.api import users
 from django.utils.safestring import mark_safe
 

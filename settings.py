@@ -16,6 +16,7 @@
 
 from config import *
 import os
+import sys
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -97,6 +98,8 @@ TEMPLATE_DIRS = (
     os.path.join(ROOT_PATH, 'templates')
 )
 
+sys.path.insert(0, os.path.join(ROOT_PATH, "lib"))
+
 XMLRPC_GET_TEMPLATE = 'post-only.html'
 
 XMLRPC_METHODS = (
@@ -115,7 +118,7 @@ INSTALLED_APPS = (
      'blog',
      'feeds',
      'django_xmlrpc',         
-#     'openidgae', 
+     'openidgae', 
 )
 
 POST_LIST_PAGE_SIZE = 5

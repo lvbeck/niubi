@@ -9,8 +9,8 @@ from django.shortcuts import render_to_response
 
 from google.appengine.api import users
 from google.appengine.api import mail
-from utils.http import object_list
-from utils.http.auth import login_required, admin_required, is_admin
+from lib.http import object_list
+from lib.http.auth import login_required, admin_required, is_admin
 from shared.models import RequestLogger
 from models import Post, Comment, Category, Tag
 from forms import PostForm, CommentForm
