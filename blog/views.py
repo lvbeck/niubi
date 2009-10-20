@@ -31,13 +31,13 @@ def add_post(request):
             post.putTags(request.POST['tagsString'])
             post.put()
             return HttpResponseRedirect('/')
-    return render_to_response('blog/operate_post.html', {'form': form}, context_instance=RequestContext(request))  
+    return render_to_response('operate_post.html', {'form': form}, context_instance=RequestContext(request))  
 
 @admin_required
 def list_all_post(request):
     posts = Post.all().order('-create_time');
     return object_list(request, queryset=posts, allow_empty=True,
-            template_name='blog/list_post.html', extra_context={'is_admin': is_admin()},
+            template_name='list_post.html', extra_context={'is_admin': is_admin()},
             paginate_by=settings.POST_LIST_PAGE_SIZE)      
     
 def list_post(request):
@@ -45,7 +45,7 @@ def list_post(request):
     if (not is_admin()):
         posts = posts.filter("is_published", True)  
     return object_list(request, queryset=posts, allow_empty=True,
-            template_name='blog/list_post.html', extra_context={'is_admin': is_admin()},
+            template_name='list_post.html', extra_context={'is_admin': is_admin()},
             paginate_by=settings.POST_LIST_PAGE_SIZE)  
     
 @login_required
@@ -56,7 +56,7 @@ def add_category(request):
         category.slug = request.POST['slug']
         category.put();   
         return HttpResponseRedirect('/category/add')  
-    return render_to_response('blog/add_category.html', context_instance=RequestContext(request))
+    return render_to_response('add_category.html', context_instance=RequestContext(request))
 
 @admin_required
 def edit_post(request, post_id):
@@ -86,7 +86,7 @@ def edit_post(request, post_id):
             post.putTags(request.POST['tagsString'])
             post.put()
             return HttpResponseRedirect('/post/%s/'%post.key().id())  
-    return render_to_response('blog/operate_post.html', {'form': form, 'id':post.key().id, 'tagsString': tagsString}, context_instance=RequestContext(request))
+    return render_to_response('operate_post.html', {'form': form, 'id':post.key().id, 'tagsString': tagsString}, context_instance=RequestContext(request))
 
 def print_post (request, post_id):
     post = Post.get_by_id(int(post_id))
@@ -95,7 +95,7 @@ def print_post (request, post_id):
         raise Http404    
     if not is_admin() and not post.is_published:
         raise Http404
-    return render_to_response('blog/print_post.html', {'post':post}, context_instance=RequestContext(request))
+    return render_to_response('print_post.html', {'post':post}, context_instance=RequestContext(request))
 
 def view_post(request, post_id):
     post = Post.get_by_id(int(post_id))
@@ -143,7 +143,7 @@ def view_post(request, post_id):
     post.read_count = post.read_count + 1
     post.put()
     post.getComments()       
-    return render_to_response('blog/view_post.html', 
+    return render_to_response('view_post.html', 
                               {'post':post}, context_instance=RequestContext(request))
     
 def contains_user(users, user):
@@ -182,7 +182,7 @@ def list_category_post(request, category_id):
     posts = Post.all().filter('category', category).order('-create_time')
 
     return object_list(request, queryset=posts, allow_empty=True,
-            template_name='blog/list_category_post.html', extra_context={'is_admin': is_admin(), 'category': category},
+            template_name='list_category_post.html', extra_context={'is_admin': is_admin(), 'category': category},
             paginate_by=settings.POST_LIST_PAGE_SIZE) 
 
 def list_tag_post(request,tag_name):
@@ -192,7 +192,7 @@ def list_tag_post(request,tag_name):
     # tag.getPosts().order('-create_time')
     tag.post_list = tag.getPosts()
     return object_list(request, queryset=tag.post_list, allow_empty=True,
-            template_name='blog/list_tag_post.html', extra_context={'is_admin': is_admin(), 'tag': tag},
+            template_name='list_tag_post.html', extra_context={'is_admin': is_admin(), 'tag': tag},
             paginate_by=settings.POST_LIST_PAGE_SIZE)     
     
 def search(request):
@@ -201,7 +201,7 @@ def search(request):
         logging.getLogger().info(keywords)
         posts = Post.all().search(keywords).order('-create_time')
         return object_list(request, queryset=posts, allow_empty=True,
-                template_name='blog/search_post.html', extra_context={'keywords': keywords},
+                template_name='search_post.html', extra_context={'keywords': keywords},
                 paginate_by=settings.POST_LIST_PAGE_SIZE)
     else:
         return HttpResponseRedirect('/')
@@ -255,7 +255,7 @@ def archives(request, year, month):
     #return HttpResponse(month, content_type='text/plain')
     posts = Post.getByYM(year, month)
     return object_list(request, queryset=posts, allow_empty=True,
-            template_name='blog/list_archives_post.html', extra_context={'is_admin': is_admin(), 'year': year, 'month': month},
+            template_name='list_archives_post.html', extra_context={'is_admin': is_admin(), 'year': year, 'month': month},
             paginate_by=settings.POST_LIST_PAGE_SIZE)    
 
 @admin_required

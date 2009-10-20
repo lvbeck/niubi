@@ -94,12 +94,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 ROOT_URLCONF = 'urls'
 
 ROOT_PATH = os.path.dirname(__file__)
-TEMPLATE_DIRS = (
-    os.path.join(ROOT_PATH, 'templates')
-)
 
 sys.path.insert(0, os.path.join(ROOT_PATH, "lib"))
 
+TEMPLATE_DIRS = (
+    os.path.join(ROOT_PATH, 'shared/templates')
+)
 XMLRPC_GET_TEMPLATE = 'post-only.html'
 
 XMLRPC_METHODS = (
@@ -115,6 +115,7 @@ INSTALLED_APPS = (
 #    'django.contrib.sessions',
 #    'django.contrib.sites',     
      'shared',
+     'account',
      'blog',
      'feeds',
      'django_xmlrpc',         

@@ -65,4 +65,4 @@ def setting(request):
                 settings.im = db.IM(request.POST['im_protocol'], request.POST['im_address'])
             settings.put()
             return HttpResponseRedirect('/')
-    return render_to_response('account/setting.html', {'im_protocol':im_protocol,'im_address':im_address,'form': form}, context_instance=RequestContext(request))
+    return render_to_response('setting.html', {'im_protocol':im_protocol,'im_address':im_address,'form': form}, context_instance=RequestContext(request))
