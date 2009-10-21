@@ -39,9 +39,6 @@
             <a href="mailto:{{post.author.email}}">{{ post.author.nickname }}</a> 写于 {{ post.create_time|date:"Y-M-d H:i" }}
         </div>    
         <div class="action">
-            {% if is_admin %}
-            <a class="edit icon" href="/post/{{ post.key.id }}/edit/">编辑</a>
-            {% endif %}
             <span>
                 <a class="comment icon" href="/post/{{ post.key.id }}/#comments">评论</a>({{ post.comment_count }})
             </span>

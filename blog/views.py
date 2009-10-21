@@ -1,21 +1,19 @@
 # -*- coding: utf-8 -*-
 import logging
 import settings
-
 from django.http import HttpResponseRedirect, Http404
 from django.http import HttpResponse
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
-
 from google.appengine.api import users
 from google.appengine.api import mail
-from lib.http import object_list
-from lib.http.auth import login_required, admin_required, is_admin
+from http import object_list
+from http.auth import *
 from shared.models import RequestLogger
 from models import Post, Comment, Category, Tag
 from forms import PostForm, CommentForm
 
-@admin_required
+@author_required
 def add_post(request):
     if request.method == 'GET':
         form = PostForm() 
@@ -24,12 +22,11 @@ def add_post(request):
         logging.getLogger().debug(form)
         if form.is_valid():
             post = form.save()
-            post.author = users.get_current_user()
-            post.category.put()            
-            post.category.post_count += 1
-            post.category.put()           
+            post.author = users.get_current_user()                
             post.putTags(request.POST['tagsString'])
             post.put()
+            post.category.post_count += 1
+            post.category.put()                 
             return HttpResponseRedirect('/')
     return render_to_response('operate_post.html', {'form': form}, context_instance=RequestContext(request))  
 
@@ -45,10 +42,10 @@ def list_post(request):
     if (not is_admin()):
         posts = posts.filter("is_published", True)  
     return object_list(request, queryset=posts, allow_empty=True,
-            template_name='list_post.html', extra_context={'is_admin': is_admin()},
+            template_name='list_post.html', extra_context={'is_author': is_author()},
             paginate_by=settings.POST_LIST_PAGE_SIZE)  
     
-@login_required
+@author_required
 def add_category(request):
     if request.method == 'POST':
         category = Category()
@@ -58,7 +55,7 @@ def add_category(request):
         return HttpResponseRedirect('/category/add')  
     return render_to_response('add_category.html', context_instance=RequestContext(request))
 
-@admin_required
+@post_author_required()
 def edit_post(request, post_id):
     post = Post.get_by_id(int(post_id))
     if not post:
@@ -144,7 +141,7 @@ def view_post(request, post_id):
     post.put()
     post.getComments()       
     return render_to_response('view_post.html', 
-                              {'post':post}, context_instance=RequestContext(request))
+                              {'post':post,'is_post_author':is_post_author(post_id)}, context_instance=RequestContext(request))
     
 def contains_user(users, user):
     for u in users:
@@ -182,7 +179,7 @@ def list_category_post(request, category_id):
     posts = Post.all().filter('category', category).order('-create_time')
 
     return object_list(request, queryset=posts, allow_empty=True,
-            template_name='list_category_post.html', extra_context={'is_admin': is_admin(), 'category': category},
+            template_name='list_category_post.html', extra_context={'is_author': is_author(), 'category': category},
             paginate_by=settings.POST_LIST_PAGE_SIZE) 
 
 def list_tag_post(request,tag_name):
@@ -192,7 +189,7 @@ def list_tag_post(request,tag_name):
     # tag.getPosts().order('-create_time')
     tag.post_list = tag.getPosts()
     return object_list(request, queryset=tag.post_list, allow_empty=True,
-            template_name='list_tag_post.html', extra_context={'is_admin': is_admin(), 'tag': tag},
+            template_name='list_tag_post.html', extra_context={'is_author': is_author(), 'is_author': is_author(), 'tag': tag},
             paginate_by=settings.POST_LIST_PAGE_SIZE)     
     
 def search(request):
@@ -255,7 +252,7 @@ def archives(request, year, month):
     #return HttpResponse(month, content_type='text/plain')
     posts = Post.getByYM(year, month)
     return object_list(request, queryset=posts, allow_empty=True,
-            template_name='list_archives_post.html', extra_context={'is_admin': is_admin(), 'year': year, 'month': month},
+            template_name='list_archives_post.html', extra_context={'is_author': is_author(), 'year': year, 'month': month},
             paginate_by=settings.POST_LIST_PAGE_SIZE)    
 
 @admin_required

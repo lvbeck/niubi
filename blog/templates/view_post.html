@@ -36,7 +36,7 @@
 		</div>              
 		<div class="action">
 			<a class="printer icon" href="#" onclick="window.open('/post/{{ post.key.id }}/print/','_blank','toolbar=yes, location=no, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=800, height=600')">打印</a>
-		{% if is_admin %}                  
+		{% if is_post_author %}                  
 			<a class="edit icon" href="/post/{{ post.key.id }}/edit/">编辑</a>                         
 			<a class="delete icon" href="/psot/{{ post.key.id }}/delete/">删除</a>
 		{% endif %}

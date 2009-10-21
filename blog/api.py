@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import xmlrpclib
-from lib.xmlrpc.auth import login_required as login_required
-from blog.models import *
+from lib.xmlrpc.auth import login_required, author_required
+from models import *
 
 def format_date(d):
     if not d: return None
@@ -45,7 +45,7 @@ def _mw_newPost(blogid, struct, publish):
     postid = post.key().id()
     return str(postid)
     
-@login_required()
+@author_required()
 def metaWeblog_newPost(blogid, struct, publish):
     # Let _mw_newPost do all of the heavy lifting.
     return _mw_newPost(blogid,struct,publish)
@@ -54,7 +54,7 @@ def metaWeblog_newPost(blogid, struct, publish):
 #  WordPress API
 #-------------------------------------------------------------------------------
 
-@login_required()
+@author_required()
 def wp_newCategory(blogid,struct):
     name=struct['name']
     categories = Category.all().filter('name =',name).fetch(1)
@@ -69,7 +69,7 @@ def wp_newCategory(blogid,struct):
         categoryid = category.key().id()    
     return str(categoryid)
 
-@login_required()
+@author_required()
 def wp_newPage(blogid,struct,publish): 
     struct['post_type'] = 'page'
     # Let _mw_newPost do all of the heavy lifting.    
