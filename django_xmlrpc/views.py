@@ -64,15 +64,26 @@ def handle_xmlrpc(request):
         if settings.DEBUG:
             print request.raw_post_data
         try:
-            response.write(
-                xmlrpcdispatcher._marshaled_dispatch(request.raw_post_data))
-            if settings.DEBUG:
-                print response
+            response.write(xmlrpcdispatcher._marshaled_dispatch(request.raw_post_data))
+            #if settings.DEBUG: print response
             return response
         except Exception, e:
             return HttpResponseServerError()
     else:
-        return render_to_response(settings.XMLRPC_GET_TEMPLATE)
+        response.write("<b>This is an XML-RPC Service.</b><br>")
+        response.write("You need to invoke it using an XML-RPC Client!<br>")
+        response.write("The following methods are available:<ul>")
+        methods = xmlrpcdispatcher.system_listMethods()
+        for method in methods:
+            sig = xmlrpcdispatcher.system_methodSignature(method)
+            #help = xmlrpcdispatcher.system_methodHelp(method) # does not work because appengine running in sandboxed python
+            help = '[help not supported] '
+            response.write("<li><b>%s</b>: [%s] %s" % (method, sig, help))
+        response.write("</ul>")
+        #response.write('<a href="http://www.djangoproject.com/"> <img src="http://media.djangoproject.com/img/badges/djangomade124x25_grey.gif" border="0" alt="Made with Django." title="Made with Django."></a>')
+        #return render_to_response(settings.XMLRPC_GET_TEMPLATE)
+    response['Content-length'] = str(len(response.content))
+    return response
 
 # Load up any methods that have been registered with the server in settings
 for path, name in settings.XMLRPC_METHODS:

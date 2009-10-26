@@ -18,7 +18,7 @@ from config import *
 import os
 import sys
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 DATABASE_ENGINE = 'appengine'  # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -105,6 +105,7 @@ XMLRPC_GET_TEMPLATE = 'post-only.html'
 XMLRPC_METHODS = (
     # We list methods to be exposed in the form (<method path>, <xml-rpc name>,)
     ('blog.api.sayHello', 'sayHello',),
+    ('blog.api.multiply', 'multiply',),
 )
 
 INSTALLED_APPS = (
