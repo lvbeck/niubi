@@ -58,18 +58,19 @@ def handle_xmlrpc(request):
     request
         The HttpRequest object that carries the XML-RPC call. If this is a
         GET request, nothing will happen (we only accept POST requests)
-    """
-    response = HttpResponse()    
+    """   
     if request.method == "POST":
         if settings.DEBUG:
             print request.raw_post_data
         try:
+            response = HttpResponse(content_type='text/xml')
             response.write(xmlrpcdispatcher._marshaled_dispatch(request.raw_post_data))
             #if settings.DEBUG: print response
             return response
         except Exception, e:
             return HttpResponseServerError()
     else:
+        response = HttpResponse()         
         response.write("<b>This is an XML-RPC Service.</b><br/>")
         response.write("You need to invoke it using an XML-RPC Client!<br/>")
         response.write("The following methods are available:<ul>")
@@ -82,8 +83,8 @@ def handle_xmlrpc(request):
         response.write("</ul>")
         #response.write('<a href="http://www.djangoproject.com/"> <img src="http://media.djangoproject.com/img/badges/djangomade124x25_grey.gif" border="0" alt="Made with Django." title="Made with Django."></a>')
         #return render_to_response(settings.XMLRPC_GET_TEMPLATE)
-    response['Content-length'] = str(len(response.content))
-    return response
+        response['Content-length'] = str(len(response.content))
+        return response
 
 # Load up any methods that have been registered with the server in settings
 for path, name in settings.XMLRPC_METHODS:
