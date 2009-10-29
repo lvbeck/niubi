@@ -104,8 +104,8 @@ XMLRPC_GET_TEMPLATE = 'post-only.html'
 
 XMLRPC_METHODS = (
     # We list methods to be exposed in the form (<method path>, <xml-rpc name>,)
-    ('blog.api.sayHello', 'sayHello',),
-    ('blog.api.multiply', 'multiply',),
+    ('shared.api.multiply', 'demo.multiply',),
+    ('blog.api.xmlrpc.wp_newCategory', 'wp.newCategory')
 )
 
 INSTALLED_APPS = (
@@ -119,7 +119,7 @@ INSTALLED_APPS = (
      'account',
      'blog',
      'feeds',
-     'django_xmlrpc',         
+     'xmlrpc',         
      'openidgae', 
 )
 

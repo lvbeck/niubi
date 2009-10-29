@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import xmlrpclib
-from lib.xmlrpc.auth import login_required, author_required
-from models import *
+from xmlrpc.auth import login_required, author_required
+from blog.models import *
 
 def format_date(d):
     if not d: return None
@@ -32,19 +32,6 @@ def entry_struct(entry):
         struct['dateCreated'] = format_date(entry.create_time)
     return struct
 
-#-------------------------------------------------------------------------------
-#  Test XMLRPC API by saying, "Hello!" to client.
-#-------------------------------------------------------------------------------
-def sayHello():
-    return 'Hello!'
-
-def multiply(a, b):
-    """
-    Multiplication is fun!
-    Takes two arguments, which are multiplied together.
-    Returns the result of the multiplication!
-    """
-    return a*b
 #-------------------------------------------------------------------------------
 # metaWeblog
 #-------------------------------------------------------------------------------
@@ -81,5 +68,3 @@ def wp_newPage(blogid,struct,publish):
     struct['post_type'] = 'page'
     # Let _mw_newPost do all of the heavy lifting.    
     return(_mw_newPost(blogid,struct,publish))
-
-

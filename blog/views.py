@@ -7,9 +7,9 @@ from django.template.context import RequestContext
 from django.shortcuts import render_to_response
 from google.appengine.api import users
 from google.appengine.api import mail
-from http import object_list
-from http.auth import *
+from shared.auth import *
 from shared.models import RequestLogger
+from shared.views import object_list
 from models import Post, Comment, Category, Tag
 from forms import PostForm, CommentForm
 

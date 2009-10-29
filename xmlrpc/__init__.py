@@ -1,5 +1,5 @@
 """
-__init__ module for the django_xmlrpc package
+__init__ module for the xmlrpc package
 
 New BSD License
 ===============

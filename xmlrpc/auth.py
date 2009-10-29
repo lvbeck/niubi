@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import gdata.service
-import gdata.alt.appengine
+import lib.gdata.service
+import lib.gdata.alt.appengine
 import settings
 
 def login_required(pos=1):

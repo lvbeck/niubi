@@ -56,7 +56,7 @@ urlpatterns += patterns('blog.views',
     (r'^log/delete/$', 'delete_log'),    
 )
 
-urlpatterns += patterns('django_xmlrpc.views',
+urlpatterns += patterns('xmlrpc.views',
     (r'^xmlrpc/$', 'handle_xmlrpc'),
 )
 urlpatterns += patterns('',

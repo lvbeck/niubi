@@ -59,7 +59,7 @@ def handle_xmlrpc(request):
         The HttpRequest object that carries the XML-RPC call. If this is a
         GET request, nothing will happen (we only accept POST requests)
     """
-    response = HttpResponse()
+    response = HttpResponse()    
     if request.method == "POST":
         if settings.DEBUG:
             print request.raw_post_data
@@ -70,15 +70,15 @@ def handle_xmlrpc(request):
         except Exception, e:
             return HttpResponseServerError()
     else:
-        response.write("<b>This is an XML-RPC Service.</b><br>")
-        response.write("You need to invoke it using an XML-RPC Client!<br>")
+        response.write("<b>This is an XML-RPC Service.</b><br/>")
+        response.write("You need to invoke it using an XML-RPC Client!<br/>")
         response.write("The following methods are available:<ul>")
         methods = xmlrpcdispatcher.system_listMethods()
         for method in methods:
             sig = xmlrpcdispatcher.system_methodSignature(method)
             #help = xmlrpcdispatcher.system_methodHelp(method) # does not work because appengine running in sandboxed python
             help = '[help not supported] '
-            response.write("<li><b>%s</b>: [%s] %s" % (method, sig, help))
+            response.write("<li><b>%s</b>: [%s] %s</li>" % (method, sig, help))
         response.write("</ul>")
         #response.write('<a href="http://www.djangoproject.com/"> <img src="http://media.djangoproject.com/img/badges/djangomade124x25_grey.gif" border="0" alt="Made with Django." title="Made with Django."></a>')
         #return render_to_response(settings.XMLRPC_GET_TEMPLATE)
