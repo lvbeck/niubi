@@ -18,7 +18,7 @@ from config import *
 import os
 import sys
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 DATABASE_ENGINE = 'appengine'  # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -112,9 +112,10 @@ INSTALLED_APPS = (
      'appengine_django',
      'django.contrib.auth',
      'django.contrib.markup',
-#    'django.contrib.contenttypes',
-#    'django.contrib.sessions',
-#    'django.contrib.sites',     
+     'django.contrib.sitemaps',
+#     'django.contrib.contenttypes',
+#     'django.contrib.sessions',
+#     'django.contrib.sites',  # does not work on GAE   
      'shared',
      'account',
      'blog',

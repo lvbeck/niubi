@@ -2,8 +2,20 @@
 from datetime import datetime
 from google.appengine.ext import db
 from google.appengine.ext import search
+from django.contrib.sitemaps import ping_google
 
-class Category(db.Model):
+class SitemapModel(db.Model):    
+    def put(self):
+        result = super(SitemapModel, self).put()
+        try:
+            ping_google()
+        except Exception:
+            # Bare 'except' because we could get a variety
+            # of HTTP-related exceptions.
+            pass
+        return result    
+    
+class Category(SitemapModel):
     name = db.StringProperty()
     slug = db.StringProperty()
     parent_category = db.SelfReferenceProperty()    
@@ -65,6 +77,14 @@ class Post(search.SearchableModel):
                 tag.post_count = tag.countPosts()
                 tag.put()
         Tag.generateCloud()
+
+    def put(self):
+        result = super(Post, self).put()
+        try:
+            ping_google()
+        except Exception:
+            pass
+        return result
     
     @staticmethod
     def getNextMonth(d):
@@ -86,7 +106,6 @@ class Post(search.SearchableModel):
                 archive = Post.getNextMonth(archive)
             l.reverse()
         return l
-        
     
 class Comment(db.Model):
     author = db.UserProperty()
@@ -95,7 +114,7 @@ class Comment(db.Model):
     content = db.StringProperty(multiline=True)
     create_time = db.DateTimeProperty(auto_now_add=True)
   
-class Tag(db.Model):
+class Tag(SitemapModel):
     name = db.StringProperty()     
     post_count = db.IntegerProperty(default=0)
     font_size = db.IntegerProperty(default=0)

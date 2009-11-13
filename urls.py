@@ -13,12 +13,33 @@
 # limitations under the License.
 
 from django.conf.urls.defaults import *
-from feeds.models import LatestEntries
-from feeds.models import HottestEntries
+from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
+from blog.models import Post, Category, Tag
+from feeds.models import LatestEntries, HottestEntries
 
 feeds = {
     'latest': LatestEntries,
     'hottest': HottestEntries,
+}
+
+posts = {
+    'queryset': Post.all().filter('is_published', True),
+    'date_field': 'create_time',
+}
+
+tags = {
+    'queryset': Tag.all().order('-post_count'),
+}
+
+categories = {
+    'queryset': Category.all().order('-post_count'),
+}
+
+sitemaps = {
+    'flatpages': FlatPageSitemap,
+    'blog': GenericSitemap(posts, priority=0.6, changefreq='monthly'),
+    #'tag': GenericSitemap(tags, priority=0.5, changefreq='monthly'),
+    #'category': GenericSitemap(categories, priority=0.4, changefreq='yearly'),   
 }
 
 urlpatterns = patterns('',
@@ -31,7 +52,8 @@ urlpatterns = patterns('',
     
     (r'^feeds/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}),
     (r'^rss/latest/$', 'feeds.views.latest_feed_proxy'),
-    (r'^rss/hottest/$', 'feeds.views.hottest_feed_proxy'),    
+    (r'^rss/hottest/$', 'feeds.views.hottest_feed_proxy'),
+    #(r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),    
 )
 
 urlpatterns += patterns('account.views',    
