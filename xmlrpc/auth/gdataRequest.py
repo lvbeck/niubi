@@ -1,5 +1,5 @@
-import lib.gdata.service
-import lib.gdata.alt.appengine
+import lib.vendor.google.gdata.service
+import lib.vendor.google.gdata.alt.appengine
 import settings
 
 class Client(object):
