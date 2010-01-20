@@ -105,7 +105,7 @@ XMLRPC_GET_TEMPLATE = 'post-only.html'
 XMLRPC_METHODS = (
     # We list methods to be exposed in the form (<method path>, <xml-rpc name>,)
     ('shared.api.multiply', 'demo.multiply',),
-    ('blog.api.xmlrpc.wp_newCategory', 'wp.newCategory')
+    #('blog.api.xmlrpc.wp_newCategory', 'wp.newCategory')
 )
 
 INSTALLED_APPS = (
