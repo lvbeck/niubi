@@ -98,13 +98,13 @@ ROOT_PATH = os.path.dirname(__file__)
 sys.path.insert(0, os.path.join(ROOT_PATH, "lib"))
 
 TEMPLATE_DIRS = (
-    os.path.join(ROOT_PATH, 'shared/templates')
+    os.path.join(ROOT_PATH, 'common/templates')
 )
 XMLRPC_GET_TEMPLATE = 'post-only.html'
 
 XMLRPC_METHODS = (
     # We list methods to be exposed in the form (<method path>, <xml-rpc name>,)
-    ('shared.api.multiply', 'demo.multiply',),
+    ('common.api.multiply', 'demo.multiply',),
     #('blog.api.xmlrpc.wp_newCategory', 'wp.newCategory')
 )
 
@@ -116,7 +116,7 @@ INSTALLED_APPS = (
 #     'django.contrib.contenttypes',
 #     'django.contrib.sessions',
 #     'django.contrib.sites',  # does not work on GAE   
-     'shared',
+     'common',
      'account',
      'blog',
      'feeds',

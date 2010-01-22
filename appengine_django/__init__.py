@@ -56,7 +56,7 @@ sys.path = [PARENT_DIR,] + sys.path
 
 # Look for a zipped copy of Django.
 have_django_zip = False
-django_zip_path = os.path.join(PARENT_DIR, 'django.zip')
+django_zip_path = os.path.join(PARENT_DIR, 'lib/django.zip')
 
 
 # Flags made available this module

@@ -9,8 +9,8 @@ from django.shortcuts import render_to_response
 from google.appengine.ext import db
 from google.appengine.api import users
 
-from shared.views import object_list
-from shared.auth import login_required
+from common.views import object_list
+from common.auth import login_required
 
 from models import UserSettings
 from forms import UserSettingsForm
