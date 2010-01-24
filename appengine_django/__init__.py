@@ -82,6 +82,9 @@ def LoadSdk():
   try:
     from google.appengine.api import apiproxy_stub_map
   except ImportError, e:
+    # Hack to fix reports of import errors on Ubuntu 9.10.
+    if 'google' in sys.modules:
+      del sys.modules['google']
     # Not on the system path. Build a list of alternative paths where it may be.
     # First look within the project for a local copy, then look for where the Mac
     # OS SDK installs it.
@@ -265,7 +268,7 @@ def InstallDjangoModuleReplacements():
     from django.dispatch import errors
     CheckedException = errors.DispatcherKeyError
     def _disconnectSignal():
-      django.dispatch.dispatcher.disconnc(
+      django.dispatch.dispatcher.disconnect(
           django.db._rollback_on_exception,
           django.core.signals.got_request_exception)
   except ImportError:
@@ -296,6 +299,13 @@ def PatchDjangoSerializationModules(settings):
   base_module = "appengine_django"
   settings.SERIALIZATION_MODULES["xml"] = "%s.serializer.xml" % base_module
   python.Deserializer = Deserializer
+  # This must be imported after the Deserializer has been mokey patched above.
+  from django.core.serializers import json
+  from appengine_django.serializer.json import DjangoJSONEncoder
+  json.DjangoJSONEncoder = DjangoJSONEncoder
+  from django.core.serializers import pyyaml
+  from appengine_django.serializer.pyyaml import DjangoSafeDumper
+  pyyaml.DjangoSafeDumper = DjangoSafeDumper
   PatchDeserializedObjectClass()
   DisableModelValidation()
   logging.debug("Installed appengine json and python serialization modules")
