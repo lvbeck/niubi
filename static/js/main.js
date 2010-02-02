@@ -1,3 +1,10 @@
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+try {
+    var pageTracker = _gat._getTracker("UA-10256201-1");
+    pageTracker._trackPageview();
+} catch(err) {}
+
 function setCurrent(elem){
     var i, a;
     for(i=0; (a = elem.parentNode.childNodes[i]); i++){
@@ -83,11 +90,8 @@ window.onunload = function(e) {
     createCookie("style", title, 365);
 }
 
-var cookie = readCookie("style");
-var title = cookie ? cookie : getPreferredStyleSheet();
-setActiveStyleSheet(title);
-$(document).ready(function(){
-    $(".ui-accordion-container").accordion({
+jQuery(document).ready(function(){
+    jQuery(".ui-accordion-container").accordion({
         header: ".ui-accordion-header",
         autoHeight: false,
 	clearStyle: true,
@@ -95,7 +99,7 @@ $(document).ready(function(){
     });
 
     jQuery(function($){
-        $.datepicker.regional['zh-CN'] = {
+        jQuery.datepicker.regional['zh-CN'] = {
                 clearText: '清除', clearStatus: '清除已选日期',
                 closeText: '关闭', closeStatus: '不改变当前选择',
                 prevText: '&#x3c;上月', prevStatus: '显示上月',
@@ -118,13 +122,18 @@ $(document).ready(function(){
         $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
     });
 
-    $('#ui-datepicker').datepicker({
+    jQuery('#ui-datepicker').datepicker({
 	changeFirstDay: false
     });
+    jQuery("textarea > br").each( function() { jQuery(this).replaceWith( "\n" ); } );
+    SyntaxHighlighter.config.bloggerMode = true;
+    SyntaxHighlighter.config.clipboardSwf = "http://alexgorbatchev.com/pub/sh/current/scripts/clipboard.swf";
+    SyntaxHighlighter.all();
+    dp.SyntaxHighlighter.HighlightAll("code");       
 });
 
 // Call this function when the page has been loaded
-function initialize() {
+function initialize() {  
     var searchControl = new google.search.SearchControl();
     // create a drawOptions object
     var drawOptions = new google.search.DrawOptions();  
@@ -139,7 +148,7 @@ function initialize() {
     var siteSearch = new google.search.WebSearch();
     siteSearch.setUserDefinedLabel("站内");
     siteSearch.setUserDefinedClassSuffix("siteSearch");
-    siteSearch.setSiteRestriction("www.niubi.de");    
+    siteSearch.setSiteRestriction(document.location.hostname);    
     searchControl.addSearcher(siteSearch,searchOptions);
     searchControl.addSearcher(new google.search.WebSearch(),searchOptions);
     searchControl.addSearcher(new google.search.BlogSearch(),searchOptions);
@@ -147,6 +156,7 @@ function initialize() {
     //searchControl.addSearcher(new google.search.NewsSearch(),searchOptions);
     searchControl.addSearcher(new google.search.ImageSearch(),searchOptions);
     //searchControl.addSearcher(new google.search.BookSearch(),searchOptions);    
-    searchControl.draw(document.getElementById("searchcontrol"),drawOptions);
+    searchControl.draw(document.getElementById("searchcontrol"),drawOptions); 
 }
+
 google.setOnLoadCallback(initialize);
