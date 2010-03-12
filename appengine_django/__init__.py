@@ -56,7 +56,7 @@ sys.path = [PARENT_DIR,] + sys.path
 
 # Look for a zipped copy of Django.
 have_django_zip = False
-django_zip_path = os.path.join(PARENT_DIR, 'lib/django.zip')
+django_zip_path = os.path.join(PARENT_DIR, 'django.zip')
 
 
 # Flags made available this module
@@ -129,6 +129,7 @@ def LoadSdk():
         SDK_PATH,
         os.path.join(SDK_PATH, 'lib', 'antlr3'),
         os.path.join(SDK_PATH, 'lib', 'django'),
+        os.path.join(SDK_PATH, 'lib', 'ipaddr'),
         os.path.join(SDK_PATH, 'lib', 'webob'),
         os.path.join(SDK_PATH, 'lib', 'yaml', 'lib'),
     ]
